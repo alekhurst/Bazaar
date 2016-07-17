@@ -1,0 +1,16 @@
+{
+  "name": "Bazaar",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "axios": "^0.13.1",
+    "react": "15.2.1",
+    "react-native": "0.29.1",
+    "react-native-google-signin": "^0.6.1",
+    "react-native-scrollable-tab-view": "^0.5.3",
+    "react-native-vector-icons": "^2.0.3"
+  }
+}

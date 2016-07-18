@@ -17,7 +17,9 @@ var userCredentialStore = {
       } else {
         callback(false, {user: null}); // user not signed in, send null user back
       }
-    }).done();
+    })
+    .catch((err) => console.log('Error signing in: ', r))
+    .done();
   },
 
   signOut() {
@@ -46,7 +48,7 @@ var userCredentialStore = {
   },
 
   authenticateAgainstBazaarApi(user, callback) {
-    axios.post(`${serverUrl}/login`, {
+    axios.post(`${serverUrl}/api/v1/login`, {
       id_token: user.idToken,
       email: user.email,
     })
@@ -62,6 +64,7 @@ var userCredentialStore = {
       this.signOut();
       callback(true, {user: null});
     })
+    .done();
   },
 
   currentUser() {

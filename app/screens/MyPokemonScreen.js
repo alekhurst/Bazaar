@@ -3,16 +3,38 @@ import {
   StyleSheet,
   Text,
   Image,
-  View
+  View,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
+import ListingList from 'components/listing/ListingList';
 import {white, primaryColor} from 'hammer/colors';
+import noop from 'hammer/noop';
 
 var MyPokemonScreen = React.createClass({
+  onPressDelete(pokemonName) {
+    Alert.alert(
+      `Delete`,
+      'Are you sure you want to delete this pokemon?',
+      [
+        {text: 'Yes', onPress: () => console.log('Ask me later pressed')},
+        {text: 'No', onPress: () => noop()}
+      ]
+    );
+  },
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Feed Screen</Text>
+        <View style={styles.topBarContainer}>
+          <Text style={styles.myPokemonTitle}>My Pokemon</Text>
+          <TouchableOpacity style={styles.addIcon}>
+            <Icon name='md-add' size={26} color={white} />
+          </TouchableOpacity>
+        </View>
+        <ListingList editMode onPressDelete={this.onPressDelete} />
       </View>
     );
   }
@@ -21,7 +43,24 @@ var MyPokemonScreen = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue'
+  },
+
+  topBarContainer: {
+    height: 43,
+    backgroundColor: primaryColor,
+    justifyContent: 'center',
+  },
+
+  myPokemonTitle: {
+    textAlign: 'center',
+    color: white,
+    fontSize: 20,
+  },
+
+  addIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 8,
   }
 });
 

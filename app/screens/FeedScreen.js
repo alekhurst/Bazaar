@@ -6,35 +6,13 @@ import {
   View,
   TextInput,
 } from 'react-native';
+import Relay from 'react-relay';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import DemoRoute from 'routes/DemoRoute';
 
 import ListingList from 'components/listing/ListingList';
 import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
-
-var FeedScreen = React.createClass({
-  getInitialState() {
-    return {
-      searchText: ""
-    }
-  },
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.topBarContainer}>
-          <TextInput
-            value={this.state.searchText}
-            onChangeText={searchText => this.setState({searchText})}
-            style={styles.searchInput}
-            clearButtonMode='while-editing'
-          />
-          <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
-        </View>
-        <ListingList />
-      </View>
-    );
-  }
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -66,4 +44,63 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FeedScreen;
+var FeedScreen = React.createClass({
+  getInitialState() {
+    return {
+      searchText: ""
+    }
+  },
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.topBarContainer}>
+          <TextInput
+            value={this.state.searchText}
+            onChangeText={searchText => this.setState({searchText})}
+            style={styles.searchInput}
+            clearButtonMode='while-editing'
+          />
+          <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
+        </View>
+        <ListingList />
+      </View>
+    );
+  }
+});
+
+FeedScreen = Relay.createContainer(FeedScreen, {
+  fragments: {
+    user() {
+      return Relay.QL`
+        fragment on User {
+          id,
+          name,
+        }
+      `;
+    },
+  },
+});
+
+var FeedScreenWrapper = React.createClass({
+  render() {
+    return (
+      <Relay.Renderer
+        Container={FeedScreen}
+        environment={Relay.Store}
+        queryConfig={new DemoRoute()}
+        render={({done, error, props}) => {
+          if (props) {
+            return <FeedScreen {...props} />
+          } else if (error) {
+            console.log('Relay error in FeedScreen: ', error)
+          } else {
+            // loading
+          }
+        }}
+      />
+    );
+  },
+});
+
+export default FeedScreenWrapper;

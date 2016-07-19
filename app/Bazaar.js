@@ -1,15 +1,10 @@
 import React from 'react';
 import {View, Text, StatusBar, Platform, Alert, NetInfo} from 'react-native';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+
 import {isEmpty} from 'lodash';
 
-import SplashScreen from 'screens/SplashScreen';
-import FeedScreen from 'screens/FeedScreen';
-import MyPokemonScreen from 'screens/MyPokemonScreen';
-import MeScreen from 'screens/MeScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
-
-import TabBar from 'components/misc/TabBar';
+import AuthenticatedRoot from 'roots/AuthenticatedRoot';
 
 import {primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
@@ -87,19 +82,7 @@ var Bazaar = React.createClass({
     // if (this.state.loggingIn) {
     //   content = <GenericLoadingScreen />
     // } else if (this.state.authenticated) {
-      content = (
-        <ScrollableTabView
-          renderTabBar={() => <TabBar activeTab={0} setAnimationValue={0}/>}
-          tabBarPosition='bottom'
-          initialPage={0}
-          prerenderingSiblingsNumber={2}
-          scrollWithoutAnimation
-        >
-          <FeedScreen />
-          <MyPokemonScreen />
-          <MeScreen />
-        </ScrollableTabView>
-      )
+      content = <AuthenticatedRoot />
     // } else if (!this.state.authenticated) {
     //   content = <SplashScreen onPressSignIn={this.onPressSignIn} />
     // } else {

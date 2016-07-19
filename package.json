@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "clear-dev-cache": "scripts/clear-dev-cache.sh",
+    "start-with-reset": "node node_modules/react-native/local-cli/cli.js start --reset-cache"
   },
   "dependencies": {
     "axios": "^0.13.1",
@@ -11,6 +13,12 @@
     "react-native": "0.29.1",
     "react-native-google-signin": "^0.6.1",
     "react-native-scrollable-tab-view": "^0.5.3",
-    "react-native-vector-icons": "^2.0.3"
+    "react-native-vector-icons": "^2.0.3",
+    "react-relay": "^0.9.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-preset-react-native": "^1.9.0",
+    "babel-relay-plugin": "^0.9.2"
   }
 }

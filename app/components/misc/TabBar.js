@@ -43,10 +43,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
   },
+  
   tabs: {
     height: 45,
     flexDirection: 'row',
-    paddingTop: 10,
+    paddingTop: 14,
     backgroundColor: gray98,
   },
 });

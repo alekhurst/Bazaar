@@ -56,6 +56,7 @@ var userCredentialStore = {
       this.bazaarAccessToken = res.userToken;
       this.bazaarUserId = res.userId;
 
+      console.log('User returned from Bazaar login API: ', res)
       var {bazaarAccessToken, bazaarUserId} = this;
       callback(false, {user: assign({}, res.data, {bazaarAccessToken, bazaarUserId})});
     })

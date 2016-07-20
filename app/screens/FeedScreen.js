@@ -5,14 +5,17 @@ import {
   Image,
   View,
   TextInput,
+  Modal,
 } from 'react-native';
 import Relay from 'react-relay';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import DemoRoute from 'routes/DemoRoute';
 
+import PokemonDetailsScreen from 'screens/PokemonDetailsScreen';
 import ListingList from 'components/listing/ListingList';
 import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import noop from 'hammer/noop';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,8 +50,13 @@ const styles = StyleSheet.create({
 var FeedScreen = React.createClass({
   getInitialState() {
     return {
-      searchText: ""
+      searchText: "",
+      showingPokemonDetails: false,
     }
+  },
+
+  onPressListing(uuid, name) {
+    this.setState({showingPokemonDetails: true})
   },
 
   render() {
@@ -63,7 +71,15 @@ var FeedScreen = React.createClass({
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </View>
-        <ListingList />
+        <ListingList onPressListing={this.onPressListing} />
+        <Modal
+          animationType='slide'
+          transparent={false}
+          visible={this.state.showingPokemonDetails}
+          onRequestClose={() => noop()}
+        >
+          <PokemonDetailsScreen onPressClose={() => this.setState({showingPokemonDetails: false})} />
+        </Modal>
       </View>
     );
   }

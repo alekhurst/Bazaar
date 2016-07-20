@@ -3,7 +3,7 @@ import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
-import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
+// import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import userCredentialStore from 'stores/userCredentialStore';
@@ -15,6 +15,12 @@ import MeScreen from 'screens/MeScreen';
 import TabBar from 'components/misc/TabBar';
 
 const AuthenticatedRoot = React.createClass({
+  getInitialState() {
+    return {
+      currentTabIndex: 0,
+    }
+  },
+
   componentWillMount() {
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer('https://www.zeemee.com/api/graph.json', {
@@ -28,9 +34,7 @@ const AuthenticatedRoot = React.createClass({
       })
     );
 
-    if (__DEV__) {
-       RelayNetworkDebug.init();
-    }
+    // RelayNetworkDebug.init();
   },
 
   render() {

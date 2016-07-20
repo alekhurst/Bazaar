@@ -23,11 +23,15 @@ var ListingListItem = React.createClass({
     onPressDelete: React.PropTypes.func,
   },
 
+  onPressListing() {
+    this.props.onPressListing("uuid", "Zapdos");
+  },
+
   render() {
     var smallDevice = vw(100) <= 320 ? true : false; // iphone 5 or smaller
 
     return (
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={this.onPressListing}>
         <Image
           style={smallDevice ? styles.pokemonThumbnailSmall : styles.pokemonThumbnail}
           source={require('images/zapdos.png')}
@@ -67,7 +71,7 @@ var ListingListItem = React.createClass({
             </TouchableOpacity>
           </View>
         )}
-      </View>
+      </TouchableOpacity>
     );
   }
 });
@@ -81,6 +85,7 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginHorizontal: 10,
     paddingVertical: 5,
+    backgroundColor: white,
   },
 
   pokemonThumbnail: {

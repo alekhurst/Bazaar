@@ -27,6 +27,7 @@ var ListingList = React.createClass({
         {times(10, i => (
           <ListingListItem
             key={i}
+            onPressListing={this.props.onPressListing}
             editMode={this.props.editMode}
             onPressEdit={this.props.onPressEdit}
             onPressDelete={this.props.onPressDelete}

@@ -5,7 +5,7 @@ import {isEmpty} from 'lodash';
 
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import AuthenticatedRoot from 'roots/AuthenticatedRoot';
-
+import StatusBarBackground from 'components/misc/StatusBarBackground';
 import {primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
@@ -68,9 +68,7 @@ var Bazaar = React.createClass({
     return (
       <View style={{flex: 1}}>
         <StatusBar backgroundColor={primaryColor} barStyle="light-content" />
-        {renderIf(Platform.OS === 'ios')(
-          <View style={{height: 20, width: vw(100), backgroundColor: primaryColor}} />
-        )}
+        {renderIf(Platform.OS === 'ios')(<StatusBarBackground />)}
         {content}
       </View>
     )

@@ -5,6 +5,7 @@ import {isEmpty} from 'lodash';
 
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import AuthenticatedRoot from 'roots/AuthenticatedRoot';
+import UnauthenticatedRoot from 'roots/UnauthenticatedRoot';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import {primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
@@ -82,7 +83,7 @@ var Bazaar = React.createClass({
     // } else if (this.state.authenticated) {
       content = <AuthenticatedRoot />
     // } else if (!this.state.authenticated) {
-    //   content = <SplashScreen onPressSignIn={this.onPressSignIn} />
+    //   content = <UnauthenticatedRoot onPressSignIn={this.onPressSignIn} />
     // } else {
     //   console.log('If you\'re here, you have magic powers');
     // }

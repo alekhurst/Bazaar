@@ -6,16 +6,53 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {times} from 'lodash';
 
+import PowerChargeBar from 'components/pokemon/PowerChargeBar';
+import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
-import {white, primaryColor} from 'hammer/colors';
+import {white, gray98, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
+import {vw} from 'hammer/viewPercentages';
 
 var PokemonDetailsScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
         <StatusBarBackground />
-        <TouchableOpacity onPress={this.props.onPressClose} style={{paddingTop: 40}}><Text>back</Text></TouchableOpacity>
+        <NavigationBar>
+          <Text style={styles.title}>Zapdos</Text>
+          <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose}>
+            <Icon name='ios-arrow-back' size={32} color={white} />
+          </TouchableOpacity>
+        </NavigationBar>
+        <View style={styles.topDetailsContainer}>
+          <Text style={styles.cp}>CP <Text style={styles.cpValue}>106</Text></Text>
+          <TouchableOpacity style={styles.wantButton}>
+            <Text style={styles.wantButtonText}>Chat</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.pokemonImageContainer}>
+          <Image source={require('images/zapdos.png')} resizeMode='contain' style={styles.pokemonImage}/>
+        </View>
+        <View style={styles.movesContainer}>
+          {times(2, m => (
+            <View style={styles.move} key={m}>
+              <View style={styles.leftColumnDetails}>
+                <Text style={styles.moveName}>Lava Burst {m}</Text>
+                <View style={styles.secondRowDetails}>
+                  <Text style={styles.moveType}>Fire {m}</Text>
+                  <PowerChargeBar charges={3} style={styles.powerChargeBar}/>
+                </View>
+              </View>
+              <Text style={styles.moveDamage}>45</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.ownedByContainer}>
+          <Icon name='md-person' size={16} color={gainsboro} />
+          <Text style={styles.ownedBy}>asdfsdf</Text>
+        </View>
       </View>
     );
   }
@@ -25,6 +62,122 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: white,
+  },
+
+  backButton: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    left: 10,
+    top: 5,
+  },
+
+  title: {
+    textAlign: 'center',
+    color: white,
+    fontSize: 20,
+    marginTop: 7,
+  },
+
+  topDetailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: vw(100),
+    height: 60,
+  },
+
+  ownedByContainer: {
+    position: 'absolute',
+    left: 10,
+    bottom: 10,
+    flexDirection: 'row',
+  },
+
+  ownedBy: {
+    color: gainsboro,
+    marginLeft: 5,
+  },
+
+  cp: {
+    fontSize: 16,
+    marginTop: 17,
+    color: matterhorn,
+    fontWeight: '700',
+  },
+
+  cpValue: {
+    fontSize: 22,
+  },
+
+  wantButton: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    backgroundColor: primaryBlue,
+    paddingVertical: 10,
+    paddingHorizontal: 22,
+    borderRadius: 5,
+  },
+
+  wantButtonText: {
+    color: white,
+    fontSize: 16,
+  },
+
+  pokemonImageContainer: {
+    width: vw(100),
+    alignItems: 'center',
+  },
+
+  pokemonImage: {
+    height: 180,
+    width: 180,
+  },
+
+  movesContainer: {
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: gray98,
+    width: 280,
+    alignSelf: 'center',
+    borderRadius: 5,
+  },
+
+  move: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 48,
+  },
+
+  leftColumnDetails: {
+    width: 200,
+  },
+
+  moveName: {
+    color: matterhorn,
+    fontSize: 16,
+  },
+
+  secondRowDetails: {
+    flexDirection: 'row',
+  },
+
+  moveType: {
+    color: matterhorn,
+    fontSize: 12,
+  },
+
+  powerChargeBar: {
+    position: 'relative',
+    top: 3,
+    left: 8,
+    width: 90,
+    height: 6,
+  },
+
+  moveDamage: {
+    color: matterhorn,
+    fontSize: 17,
   }
 });
 

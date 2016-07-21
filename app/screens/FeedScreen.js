@@ -12,40 +12,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import DemoRoute from 'routes/DemoRoute';
 
+import NavigationBar from 'components/misc/NavigationBar';
 import PokemonDetailsScreen from 'screens/PokemonDetailsScreen';
 import ListingList from 'components/listing/ListingList';
 import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import noop from 'hammer/noop';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  topBarContainer: {
-    height: 43,
-    backgroundColor: primaryColor,
-  },
-
-  searchInput: {
-    flex: 1,
-    marginTop: 5,
-    marginBottom: 10,
-    marginHorizontal: 10,
-    borderRadius: 5,
-    paddingLeft: 30,
-    paddingTop: 3,
-    backgroundColor: white,
-    color: matterhorn,
-  },
-
-  searchIcon: {
-    position: 'absolute',
-    left: 16,
-    top: 10,
-    backgroundColor: 'transparent',
-  }
-});
 
 var FeedScreen = React.createClass({
   getInitialState() {
@@ -62,7 +33,7 @@ var FeedScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topBarContainer}>
+        <NavigationBar>
           <TextInput
             value={this.state.searchText}
             onChangeText={searchText => this.setState({searchText})}
@@ -70,7 +41,7 @@ var FeedScreen = React.createClass({
             clearButtonMode='while-editing'
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
-        </View>
+        </NavigationBar>
         <ListingList onPressListing={this.onPressListing} />
         <Modal
           animationType='slide'
@@ -117,6 +88,31 @@ var FeedScreenWrapper = React.createClass({
       />
     );
   },
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  searchInput: {
+    flex: 1,
+    marginTop: 5,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    borderRadius: 5,
+    paddingLeft: 30,
+    paddingTop: 3,
+    backgroundColor: white,
+    color: matterhorn,
+  },
+
+  searchIcon: {
+    position: 'absolute',
+    left: 16,
+    top: 10,
+    backgroundColor: 'transparent',
+  }
 });
 
 export default FeedScreenWrapper;

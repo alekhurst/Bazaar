@@ -12,7 +12,7 @@ var MeScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <Text>Feed Screen</Text>
+        <Text>Me Screen</Text>
       </View>
     );
   }
@@ -21,7 +21,6 @@ var MeScreen = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green'
   }
 });
 

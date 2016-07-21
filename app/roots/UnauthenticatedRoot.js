@@ -10,12 +10,12 @@ import {GoogleSigninButton} from 'react-native-google-signin';
 import userCredentialStore from 'stores/userCredentialStore'
 import {white, primaryColor} from 'hammer/colors';
 
-var SplashScreen = React.createClass({
+var UnauthenticatedRoot = React.createClass({
   render() {
     return (
       <View style={styles.container}>
         <Image
-          source={require('images/logo-on-blue.png')}
+          source={require('images/logo.png')}
           resizeMode='contain'
           style={styles.logo}
         />
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SplashScreen;
+export default UnauthenticatedRoot;

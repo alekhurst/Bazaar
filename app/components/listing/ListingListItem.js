@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import DistanceIndicator from 'components/pokemon/DistanceIndicator';
-import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import {white, whiteSmoke, gainsboro, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
 
@@ -59,13 +59,13 @@ var ListingListItem = React.createClass({
           <View style={[styles.editModeRightDetailsContainer, {alignSelf: 'flex-end'}]}>
             <TouchableOpacity
               onPress={this.props.onPressDelete}
-              style={[styles.listingButton, {backgroundColor: '#ff8d8d'}]}
+              style={[styles.listingButton, {backgroundColor: primaryRed}]}
             >
               <Icon name='md-trash' style={styles.listingButtonIcon} size={30} color={white} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={this.props.onPressEdit}
-              style={[styles.listingButton, {backgroundColor: primaryColor, marginLeft: 5}]}
+              style={[styles.listingButton, {backgroundColor: primaryBlue, marginLeft: 5}]}
             >
               <Icon name='md-create' style={styles.listingButtonIcon} size={30} color={white} />
             </TouchableOpacity>
@@ -84,18 +84,20 @@ var styles = StyleSheet.create({
     borderBottomColor: whiteSmoke,
     borderBottomWidth: 1,
     marginHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 7,
     backgroundColor: white,
   },
 
   pokemonThumbnail: {
-    width: 65,
-    height: 65,
+    width: 55,
+    height: 55,
+    marginHorizontal: 5,
   },
 
   pokemonThumbnailSmall: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
+    marginHorizontal: 2,
   },
 
   leftDetailsContainer: {
@@ -105,7 +107,7 @@ var styles = StyleSheet.create({
 
   pokemonName: {
     color: matterhorn,
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '500',
   },
 
@@ -145,14 +147,14 @@ var styles = StyleSheet.create({
 
   rightDetailsContainer: {
     flex: 1,
-    paddingTop: 5,
+    paddingTop: 0,
   },
 
   editModeRightDetailsContainer: {
     flexDirection: 'row',
     position: 'absolute',
     right: 0,
-    top: 15,
+    top: 12,
   },
 
   listingButton: {

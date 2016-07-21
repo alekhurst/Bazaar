@@ -8,7 +8,6 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import userCredentialStore from 'stores/userCredentialStore';
 
-import SplashScreen from 'screens/SplashScreen';
 import FeedScreen from 'screens/FeedScreen';
 import MyPokemonScreen from 'screens/MyPokemonScreen';
 import MeScreen from 'screens/MeScreen';

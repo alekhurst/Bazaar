@@ -10,7 +10,7 @@ import {
 import Relay from 'react-relay';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import DemoRoute from 'routes/DemoRoute';
+import ViewerRoute from 'routes/ViewerRoute';
 
 import NavigationBar from 'components/misc/NavigationBar';
 import PokemonDetailsScreen from 'screens/PokemonDetailsScreen';
@@ -58,11 +58,14 @@ var FeedScreen = React.createClass({
 
 FeedScreen = Relay.createContainer(FeedScreen, {
   fragments: {
-    user() {
+    viewer() {
       return Relay.QL`
-        fragment on User {
-          id,
-          name,
+        fragment on Viewer {
+          listings(first: 10) {
+            edges {
+              node
+            }
+          }
         }
       `;
     },
@@ -75,7 +78,7 @@ var FeedScreenWrapper = React.createClass({
       <Relay.Renderer
         Container={FeedScreen}
         environment={Relay.Store}
-        queryConfig={new DemoRoute()}
+        queryConfig={new ViewerRoute()}
         render={({done, error, props}) => {
           if (props) {
             return <FeedScreen {...props} />

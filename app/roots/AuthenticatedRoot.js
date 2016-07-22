@@ -3,7 +3,7 @@ import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
-// import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
+import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import userCredentialStore from 'stores/userCredentialStore';
@@ -12,6 +12,7 @@ import FeedScreen from 'screens/FeedScreen';
 import MyPokemonScreen from 'screens/MyPokemonScreen';
 import MeScreen from 'screens/MeScreen';
 import TabBar from 'components/misc/TabBar';
+import serverUrl from 'hammer/serverUrl';
 
 const AuthenticatedRoot = React.createClass({
   getInitialState() {
@@ -22,18 +23,15 @@ const AuthenticatedRoot = React.createClass({
 
   componentWillMount() {
     Relay.injectNetworkLayer(
-      new Relay.DefaultNetworkLayer('https://www.zeemee.com/api/graph.json', {
+      new Relay.DefaultNetworkLayer(`${serverUrl}/api/v1/graph`, {
         headers: {
-          // 'X-USER-TOKEN': userCredentialStore.bazaarAccessToken,
-          // 'X-USER-ID': userCredentialStore.bazaarUserId,
-          'X-ZeeMee-Application-Details': 'iOS',
-          'X-User-Token': 'Nm8jrVvZcdoPDKMti121',
-          'X-User-Email': 'alek@zeemee.com',
+          'X-User-Token': 'DTKv_PbsVyaRol60nMEnDO2gJbhjgY80DPVQSmUYBJk',
+          'X-User-Email': '123alekhurst@gmail.com',
         },
       })
     );
 
-    // RelayNetworkDebug.init();
+    RelayNetworkDebug.init();
   },
 
   render() {

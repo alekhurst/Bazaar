@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import GoogleIcon from 'react-native-vector-icons/MaterialIcons'
 import {times} from 'lodash';
 
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
@@ -23,7 +24,7 @@ var PokemonDetailsScreen = React.createClass({
         <NavigationBar>
           <Text style={styles.title}>Zapdos</Text>
           <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose}>
-            <Icon name='ios-arrow-back' size={32} color={white} />
+            <IonIcon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>
         <View style={styles.topDetailsContainer}>
@@ -35,13 +36,31 @@ var PokemonDetailsScreen = React.createClass({
         <View style={styles.pokemonImageContainer}>
           <Image source={require('images/zapdos.png')} resizeMode='contain' style={styles.pokemonImage}/>
         </View>
-        <View style={styles.movesContainer}>
+        <View style={styles.lowerDetailsContainer}>
+          <View style={styles.attributesContainer}>
+            <View style={[styles.attribute]}>
+              <Text style={styles.attributeValue}>56</Text>
+              <Text style={styles.attributeTitle}>HP</Text>
+            </View>
+            <View style={[styles.attribute]}>
+              <Text style={styles.attributeValue}>8.03kg</Text>
+              <Text style={styles.attributeTitle}>WEIGHT</Text>
+            </View>
+            <View style={[styles.attribute]}>
+              <Text style={styles.attributeValue}>54.74m</Text>
+              <Text style={styles.attributeTitle}>HEIGHT</Text>
+            </View>
+            <View style={[styles.attribute]}>
+              <Text style={styles.attributeValue}>Fire</Text>
+              <Text style={styles.attributeTitle}>TYPE</Text>
+            </View>
+          </View>
           {times(2, m => (
             <View style={styles.move} key={m}>
               <View style={styles.leftColumnDetails}>
                 <Text style={styles.moveName}>Lava Burst {m}</Text>
                 <View style={styles.secondRowDetails}>
-                  <Text style={styles.moveType}>Fire {m}</Text>
+                  <Text style={styles.moveType}>Fire</Text>
                   <PowerChargeBar charges={3} style={styles.powerChargeBar}/>
                 </View>
               </View>
@@ -49,9 +68,19 @@ var PokemonDetailsScreen = React.createClass({
             </View>
           ))}
         </View>
-        <View style={styles.ownedByContainer}>
-          <Icon name='md-person' size={16} color={gainsboro} />
-          <Text style={styles.ownedBy}>asdfsdf</Text>
+        <View style={styles.footer}>
+          <View style={[styles.footerItem, styles.centered]}>
+            <IonIcon name='md-person' size={16} color={primaryColor} />
+            <Text style={styles.footerItemText}>asdfsdf</Text>
+          </View>
+          <View style={[styles.footerItem, styles.centered]}>
+            <GoogleIcon name='place' size={16} color={primaryColor} />
+            <Text style={styles.footerItemText}>10km away</Text>
+          </View>
+          <View style={[styles.footerItem, styles.centered]}>
+            <GoogleIcon name='access-time' size={16} color={primaryColor} />
+            <Text style={styles.footerItemText}>10m ago</Text>
+          </View>
         </View>
       </View>
     );
@@ -84,18 +113,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: vw(100),
     height: 60,
-  },
-
-  ownedByContainer: {
-    position: 'absolute',
-    left: 10,
-    bottom: 10,
-    flexDirection: 'row',
-  },
-
-  ownedBy: {
-    color: gainsboro,
-    marginLeft: 5,
   },
 
   cp: {
@@ -134,7 +151,7 @@ const styles = StyleSheet.create({
     width: 180,
   },
 
-  movesContainer: {
+  lowerDetailsContainer: {
     padding: 20,
     alignItems: 'center',
     backgroundColor: gray98,
@@ -143,14 +160,37 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 
+  attributesContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    width: 280,
+    marginBottom: 7,
+  },
+
+  attribute: {
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  attributeValue: {
+    color: matterhorn,
+    fontSize: 16,
+  },
+
+  attributeTitle: {
+    color: matterhorn,
+    fontSize: 10,
+  },
+
   move: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 48,
+    flex: 1,
+    marginTop: 8
   },
 
   leftColumnDetails: {
-    width: 200,
+    width: 220,
   },
 
   moveName: {
@@ -164,7 +204,7 @@ const styles = StyleSheet.create({
 
   moveType: {
     color: matterhorn,
-    fontSize: 12,
+    fontSize: 11,
   },
 
   powerChargeBar: {
@@ -178,7 +218,37 @@ const styles = StyleSheet.create({
   moveDamage: {
     color: matterhorn,
     fontSize: 17,
-  }
+  },
+
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    width: vw(100),
+    flexDirection: 'row',
+  },
+
+  footerItem: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: 10,
+  },
+
+  footerItemText: {
+    color: matterhorn,
+    marginLeft: 5,
+  },
+
+  leftJustified: {
+    justifyContent: 'flex-start'
+  },
+
+  rightJustified: {
+    justifyContent: 'flex-end',
+  },
+
+  centered: {
+    justifyContent: 'center',
+  },
 });
 
 export default PokemonDetailsScreen;

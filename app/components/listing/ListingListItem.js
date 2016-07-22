@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import DistanceIndicator from 'components/pokemon/DistanceIndicator';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
@@ -32,9 +33,9 @@ var ListingListItem = React.createClass({
 
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPressListing}>
-        <Image
+        <PokemonImage
           style={smallDevice ? styles.pokemonThumbnailSmall : styles.pokemonThumbnail}
-          source={require('images/zapdos.png')}
+          pokedexNumber={2}
           resizeMode='contain'
         />
         <View style={styles.leftDetailsContainer}>
@@ -89,14 +90,15 @@ var styles = StyleSheet.create({
   },
 
   pokemonThumbnail: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
+    marginVertical: 3,
     marginHorizontal: 5,
   },
 
   pokemonThumbnailSmall: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     marginHorizontal: 2,
   },
 

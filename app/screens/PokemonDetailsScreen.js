@@ -10,6 +10,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons'
 import {times} from 'lodash';
 
+import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
@@ -34,7 +35,7 @@ var PokemonDetailsScreen = React.createClass({
           </TouchableOpacity>
         </View>
         <View style={styles.pokemonImageContainer}>
-          <Image source={require('images/zapdos.png')} resizeMode='contain' style={styles.pokemonImage}/>
+          <PokemonImage pokedexNumber={2} resizeMode='contain' style={styles.pokemonImage}/>
         </View>
         <View style={styles.lowerDetailsContainer}>
           <View style={styles.attributesContainer}>
@@ -69,17 +70,13 @@ var PokemonDetailsScreen = React.createClass({
           ))}
         </View>
         <View style={styles.footer}>
-          <View style={[styles.footerItem, styles.centered]}>
+          <View style={[styles.footerItem, styles.centered, {flex: 1}]}>
             <IonIcon name='md-person' size={16} color={primaryColor} />
-            <Text style={styles.footerItemText}>asdfsdf</Text>
+            <Text style={[styles.footerItemText,  styles.trainerName]}>asdfsdf</Text>
           </View>
-          <View style={[styles.footerItem, styles.centered]}>
+          <View style={[styles.footerItem, styles.centered, {flex: 2.5}]}>
             <GoogleIcon name='place' size={16} color={primaryColor} />
-            <Text style={styles.footerItemText}>10km away</Text>
-          </View>
-          <View style={[styles.footerItem, styles.centered]}>
-            <GoogleIcon name='access-time' size={16} color={primaryColor} />
-            <Text style={styles.footerItemText}>10m ago</Text>
+            <Text style={styles.footerItemText}>10km away (updated 11hr ago)</Text>
           </View>
         </View>
       </View>
@@ -149,6 +146,8 @@ const styles = StyleSheet.create({
   pokemonImage: {
     height: 180,
     width: 180,
+    marginTop: 5,
+    marginBottom: 10,
   },
 
   lowerDetailsContainer: {
@@ -234,7 +233,11 @@ const styles = StyleSheet.create({
   },
 
   footerItemText: {
-    color: matterhorn,
+    color: primaryColor,
+    marginLeft: 2,
+  },
+
+  trainerName: {
     marginLeft: 5,
   },
 

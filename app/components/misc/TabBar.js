@@ -17,7 +17,7 @@ const TabBar = React.createClass({
 
   getInitialState() {
     return {
-      tabs: ['md-list-box', 'md-home', 'md-person']
+      tabs: ['md-list-box', 'md-person', 'md-chatboxes']
     }
   },
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
   },
-  
+
   tabs: {
     height: 45,
     flexDirection: 'row',

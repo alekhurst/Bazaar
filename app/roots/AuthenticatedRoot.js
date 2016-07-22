@@ -10,7 +10,7 @@ import userCredentialStore from 'stores/userCredentialStore';
 
 import FeedScreen from 'screens/FeedScreen';
 import MyPokemonScreen from 'screens/MyPokemonScreen';
-import MeScreen from 'screens/MeScreen';
+import ChatScreen from 'screens/ChatScreen';
 import TabBar from 'components/misc/TabBar';
 import serverUrl from 'hammer/serverUrl';
 
@@ -45,7 +45,7 @@ const AuthenticatedRoot = React.createClass({
       >
         <FeedScreen />
         <MyPokemonScreen />
-        <MeScreen />
+        <ChatScreen />
       </ScrollableTabView>
     )
   },

@@ -8,11 +8,11 @@ import {
 
 import {white, primaryColor} from 'hammer/colors';
 
-var MeScreen = React.createClass({
+var ChatScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <Text>Me Screen</Text>
+        <Text>Chat Screen</Text>
       </View>
     );
   }
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MeScreen;
+export default ChatScreen;

@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Modal,
+  Alert,
 } from 'react-native';
 import Relay from 'react-relay';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -21,7 +22,27 @@ import noop from 'hammer/noop';
 
 var FeedScreen = React.createClass({
   getInitialState() {
-    return { searchText: "" }
+    return {
+      searchText: "",
+      refreshing: false,
+    }
+  },
+
+  onRefresh() {
+    this.setState({refreshing: true})
+    this.props.relay.forceFetch({}, ({ready, done, error}) => {
+      if(error) {
+        Alert.alert(
+          `Feed Refresh Failed`,
+          'Please try again momentarily',
+          [
+            {text: 'OK', onPress: noop},
+          ]
+        );
+      } else if (done) {
+        this.setState({refreshing: false});
+      }
+    });
   },
 
   render() {
@@ -39,6 +60,8 @@ var FeedScreen = React.createClass({
         <ListingList
           listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
           onPressListing={this.onPressListing}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
         />
       </View>
     );

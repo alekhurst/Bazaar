@@ -9,6 +9,8 @@ import {gainsboro} from 'hammer/colors';
 
 var PowerChargeBar = React.createClass({
   render() {
+    if(this.props.charges === 0) return null;
+
     return (
       <View style={[styles.container, this.props.style]}>
         {times(this.props.charges, c => <View style={styles.chargeBarPartition} key={c} />)}

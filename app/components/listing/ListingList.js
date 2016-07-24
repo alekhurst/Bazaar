@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import Relay from 'react-relay';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -18,6 +19,8 @@ import {vw} from 'hammer/viewPercentages';
 var ListingList = React.createClass({
   propTypes: {
     listings: React.PropTypes.array.isRequired,
+    onRefresh: React.PropTypes.func,
+    refreshing: React.PropTypes.bool,
     editMode: React.PropTypes.bool,
     onPressEdit: React.PropTypes.func,
     onPressDelete: React.PropTypes.func,
@@ -27,7 +30,16 @@ var ListingList = React.createClass({
     if (!this.props.listings.length) return null;
 
     return (
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          this.props.onRefresh ?
+            <RefreshControl
+              refreshing={this.props.refreshing}
+              onRefresh={this.props.onRefresh}
+            />
+            : null
+        }
+      >
         {this.props.listings.map((listing, i) => (
           <ListingListItem
             key={i}

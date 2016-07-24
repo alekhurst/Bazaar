@@ -58,7 +58,7 @@ var ListingDetailsInner = React.createClass({
               <Text style={styles.attributeTitle}>HEIGHT</Text>
             </View>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{pokemon.elementTypes.map(t => t + ", ").slice(0, -2)}</Text>
+              <Text style={styles.attributeValue}>{pokemon.elementTypes.join(", ")}</Text>
               <Text style={styles.attributeTitle}>TYPE</Text>
             </View>
           </View>

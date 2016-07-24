@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import MeRoute from 'routes/MeRoute';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import GenericErrorScreen from 'screens/GenericErrorScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import ListingList from 'components/listing/ListingList';
 import {white, primaryColor} from 'hammer/colors';
@@ -78,11 +79,11 @@ var MyPokemonScreenWrapper = React.createClass({
         environment={Relay.Store}
         queryConfig={new MeRoute()}
         render={({done, error, props}) => {
-          if (props) {
+          if (error) {
+            return <GenericErrorScreen />
+          } else if (props) {
             return <MyPokemonScreen {...props} />
-          } else if (error) {
-            console.log('Relay error in MyPokemonScreen: ', error)
-          } else {
+          } else {
             return <GenericLoadingScreen />
           }
         }}

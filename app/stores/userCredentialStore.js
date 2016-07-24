@@ -53,16 +53,17 @@ var userCredentialStore = {
       email: user.email,
     })
     .then(res => {
-      this.bazaarAccessToken = res.userToken;
-      this.bazaarUserId = res.userId;
+      this.bazaarAccessToken = res.data.bazaarAccessToken;
+      this.userId = res.data.id;
+      this.userEmail = res.data.email;
 
       console.log('User returned from Bazaar login API: ', res)
-      var {bazaarAccessToken, bazaarUserId} = this;
-      callback(false, {user: assign({}, res.data, {bazaarAccessToken, bazaarUserId})});
+      var {bazaarAccessToken, userId, userEmail} = this;
+      callback(false, {user: assign({}, res.data, {bazaarAccessToken, userId, userEmail})});
     })
     .catch(err => {
       console.log('Error sending request to Bazaar login API: ', err)
-      this.signOut();
+      // this.signOut();
       callback(true, {user: null});
     })
     .done();
@@ -71,12 +72,13 @@ var userCredentialStore = {
   currentUser() {
     if(GoogleSignin.currentUser().isEmpty) return null;
 
-    var {bazaarAccessToken, bazaarUserId} = this;
-    return assign({}, GoogleSignin.currentUser(), {bazaarAccessToken, bazaarUserId});
+    var {bazaarAccessToken, userId, userEmail} = this;
+    return assign({}, GoogleSignin.currentUser(), {bazaarAccessToken, userId, userEmail});
   },
 
   bazaarAccessToken: null,
   userId: null,
+  userEmail: null,
 }
 
 export default userCredentialStore;

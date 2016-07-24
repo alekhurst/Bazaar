@@ -55,11 +55,13 @@ const AuthenticatedRoot = React.createClass({
   },
 
   componentWillMount() {
+    var {bazaarAccessToken, userEmail} = userCredentialStore.currentUser();
+
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer(`${serverUrl}/api/graph`, {
         headers: {
-          'X-User-Token': 'DTKv_PbsVyaRol60nMEnDO2gJbhjgY80DPVQSmUYBJk',
-          'X-User-Email': '123alekhurst@gmail.com',
+          'X-User-Token': bazaarAccessToken,
+          'X-User-Email': userEmail,
         },
       })
     );

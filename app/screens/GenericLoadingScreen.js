@@ -25,12 +25,13 @@ var GenericLoadingScreen = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
 
   content: {
-    position: 'relative',
+    position: 'absolute',
+    top: vh(30),
+    left: vw(50) - 70,
     alignItems: 'center',
     height: 140,
     width: 140,

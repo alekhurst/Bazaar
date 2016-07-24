@@ -13,6 +13,7 @@ import {times} from 'lodash';
 
 import ListingRoute from 'routes/ListingRoute';
 
+import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
@@ -144,13 +145,13 @@ var ListingDetailsScreenWrapper = React.createClass({
         environment={Relay.Store}
         queryConfig={new ListingRoute({listingId: this.props.listingId})}
         render={({done, error, props}) => {
-          if (props) {
+          if (error) {
+            return <GenericErrorScreen />
+          } else if (props) {
             return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
               <ListingDetailsInner {...props} />
             </ListingDetailsScreen>
-          } else if (error) {
-            console.log('Relay error in ListingDetailsScreen: ', error)
-          } else {
+          } else {
             return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
               <GenericLoadingScreen />
             </ListingDetailsScreen>

@@ -15,6 +15,7 @@ import ViewerRoute from 'routes/ViewerRoute';
 import NavigationBar from 'components/misc/NavigationBar';
 import ListingList from 'components/listing/ListingList';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import GenericErrorScreen from 'screens/GenericErrorScreen';
 import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import noop from 'hammer/noop';
 
@@ -49,7 +50,7 @@ FeedScreen = Relay.createContainer(FeedScreen, {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(first: 10) {
+          listingsSearch(first: 10, radius: 10.0) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -70,11 +71,11 @@ var FeedScreenWrapper = React.createClass({
         environment={Relay.Store}
         queryConfig={new ViewerRoute()}
         render={({done, error, props}) => {
-          if (props) {
+          if (error) {
+            return <GenericErrorScreen />
+          } else if (props) {
             return <FeedScreen {...props} />
-          } else if (error) {
-            console.log('Relay error in FeedScreen: ', error)
-          } else {
+          } else {
             return <GenericLoadingScreen />
           }
         }}

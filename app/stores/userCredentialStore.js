@@ -48,7 +48,7 @@ var userCredentialStore = {
   },
 
   authenticateAgainstBazaarApi(user, callback) {
-    axios.post(`${serverUrl}/api/v1/login`, {
+    axios.post(`${serverUrl}/api/login`, {
       id_token: user.idToken,
       email: user.email,
     })

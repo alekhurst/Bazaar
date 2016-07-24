@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Navigator,
 } from 'react-native';
+import Relay from 'react-relay';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
 
@@ -18,6 +19,10 @@ import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
 
 var ListingListItem = React.createClass({
+  contextTypes: {
+    openListingDetailsScreen: React.PropTypes.func.isRequired
+  },
+
   propTypes: {
     editMode: React.PropTypes.bool,
     onPressEdit: React.PropTypes.func,
@@ -25,29 +30,32 @@ var ListingListItem = React.createClass({
   },
 
   onPressListing() {
-    this.props.onPressListing("uuid", "Zapdos");
+    this.context.openListingDetailsScreen(this.props.listing.id, this.props.listing.pokemon.name)
   },
 
   render() {
     var smallDevice = vw(100) <= 320 ? true : false; // iphone 5 or smaller
 
     return (
-      <TouchableOpacity style={styles.container} onPress={this.onPressListing}>
+      <TouchableOpacity
+        onPress={this.onPressListing}
+        style={styles.container}
+      >
         <PokemonImage
           style={smallDevice ? styles.pokemonThumbnailSmall : styles.pokemonThumbnail}
-          pokedexNumber={3}
+          pokedexNumber={this.props.listing.pokemon.pokedexNumber}
           resizeMode='contain'
         />
         <View style={styles.leftDetailsContainer}>
-          <Text style={styles.pokemonName}>Zapdos</Text>
-          <Text style={styles.cp}>CP 105</Text>
+          <Text style={styles.pokemonName}>{this.props.listing.pokemon.name}</Text>
+          <Text style={styles.cp}>CP {this.props.listing.cp}</Text>
         </View>
         {renderIf(!this.props.editMode)(
           <View style={styles.middleDetailsContainer}>
-            <Text style={styles.moveName}>Lava Burst</Text>
+            <Text style={styles.moveName}>{this.props.listing.moves[0].name}</Text>
             <View style={styles.moveDetailsContainer}>
-              <Text style={styles.power}>45</Text>
-              <PowerChargeBar charges={5} style={styles.powerChargeBar}/>
+              <Text style={styles.power}>{this.props.listing.moves[0].power}</Text>
+              <PowerChargeBar charges={this.props.listing.moves[0].charges} style={styles.powerChargeBar}/>
             </View>
           </View>
         )}
@@ -76,6 +84,28 @@ var ListingListItem = React.createClass({
       </TouchableOpacity>
     );
   }
+});
+
+ListingListItem = Relay.createContainer(ListingListItem, {
+  fragments: {
+    listing() {
+      return Relay.QL`
+        fragment on Listing {
+          id,
+          cp,
+          moves {
+            name,
+            power,
+            charges,
+          },
+          pokemon {
+            name,
+            pokedexNumber,
+          }
+        }
+      `;
+    },
+  },
 });
 
 var styles = StyleSheet.create({

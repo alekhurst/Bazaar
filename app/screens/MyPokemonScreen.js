@@ -8,22 +8,17 @@ import {
   Alert,
   Modal,
 } from 'react-native';
+import Relay from 'react-relay'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import PokemonDetailsScreen from 'screens/PokemonDetailsScreen';
+import MeRoute from 'routes/MeRoute';
+import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import ListingList from 'components/listing/ListingList';
 import {white, primaryColor} from 'hammer/colors';
 import noop from 'hammer/noop';
 
 var MyPokemonScreen = React.createClass({
-  getInitialState() {
-    return {showingPokemonDetails: false}
-  },
-
-  onPressListing(uuid, name) {
-    this.setState({showingPokemonDetails: true})
-  },
-
   onPressDelete(pokemonName) {
     Alert.alert(
       `Delete`,
@@ -44,18 +39,56 @@ var MyPokemonScreen = React.createClass({
             <Icon name='md-add' size={26} color={white} />
           </TouchableOpacity>
         </View>
-        <ListingList editMode onPressDelete={this.onPressDelete} onPressListing={this.onPressListing} />
-        <Modal
-          animationType='slide'
-          transparent={false}
-          visible={this.state.showingPokemonDetails}
-          onRequestClose={() => noop()}
-        >
-          <PokemonDetailsScreen onPressClose={() => this.setState({showingPokemonDetails: false})} />
-        </Modal>
+        <ListingList
+          editMode
+          onPressDelete={this.onPressDelete}
+          onPressListing={this.onPressListing}
+          listings={this.props.me.listings.edges.map(e => e.node)}
+        />
       </View>
     );
   }
+});
+
+MyPokemonScreen = Relay.createContainer(MyPokemonScreen, {
+  fragments: {
+    me() {
+      return Relay.QL`
+        fragment on User {
+          id,
+          listings(first: 10) {
+            edges {
+              node {
+                ${ListingList.getFragment('listings')}
+              }
+            }
+          }
+        }
+      `;
+    },
+  },
+});
+
+
+var MyPokemonScreenWrapper = React.createClass({
+  render() {
+    return (
+      <Relay.Renderer
+        Container={MyPokemonScreen}
+        environment={Relay.Store}
+        queryConfig={new MeRoute()}
+        render={({done, error, props}) => {
+          if (props) {
+            return <MyPokemonScreen {...props} />
+          } else if (error) {
+            console.log('Relay error in MyPokemonScreen: ', error)
+          } else {
+            return <GenericLoadingScreen />
+          }
+        }}
+      />
+    );
+  },
 });
 
 const styles = StyleSheet.create({
@@ -82,4 +115,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MyPokemonScreen;
+export default MyPokemonScreenWrapper;

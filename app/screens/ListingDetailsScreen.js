@@ -6,10 +6,14 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import Relay from 'react-relay';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons'
 import {times} from 'lodash';
 
+import ListingRoute from 'routes/ListingRoute';
+
+import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import NavigationBar from 'components/misc/NavigationBar';
@@ -17,62 +21,63 @@ import StatusBarBackground from 'components/misc/StatusBarBackground';
 import {white, gray98, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 
-var PokemonDetailsScreen = React.createClass({
+var ListingDetailsInner = React.createClass({
   render() {
+    var listing = this.props.listing;
+    var pokemon = this.props.listing.pokemon;
+    var userName = listing.user.pokemonGoName ? listing.user.pokemonGoName : 'anonymous';
+
     return (
       <View style={styles.container}>
-        <StatusBarBackground />
-        <NavigationBar>
-          <Text style={styles.title}>Zapdos</Text>
-          <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose}>
-            <IonIcon name='ios-arrow-back' size={32} color={white} />
-          </TouchableOpacity>
-        </NavigationBar>
         <View style={styles.topDetailsContainer}>
-          <Text style={styles.cp}>CP <Text style={styles.cpValue}>106</Text></Text>
+          <Text style={styles.cp}>CP <Text style={styles.cpValue}>{listing.cp}</Text></Text>
           <TouchableOpacity style={styles.wantButton}>
             <Text style={styles.wantButtonText}>Chat</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.pokemonImageContainer}>
-          <PokemonImage pokedexNumber={2} resizeMode='contain' style={styles.pokemonImage}/>
+          <PokemonImage
+            pokedexNumber={listing.pokemon.pokedexNumber}
+            resizeMode='contain'
+            style={styles.pokemonImage}
+          />
         </View>
         <View style={styles.lowerDetailsContainer}>
           <View style={styles.attributesContainer}>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>56</Text>
+              <Text style={styles.attributeValue}>{listing.hp}</Text>
               <Text style={styles.attributeTitle}>HP</Text>
             </View>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>8.03kg</Text>
+              <Text style={styles.attributeValue}>{listing.weight}kg</Text>
               <Text style={styles.attributeTitle}>WEIGHT</Text>
             </View>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>54.74m</Text>
+              <Text style={styles.attributeValue}>{listing.height}m</Text>
               <Text style={styles.attributeTitle}>HEIGHT</Text>
             </View>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>Fire</Text>
+              <Text style={styles.attributeValue}>{pokemon.elementTypes.map(t => t + ", ").slice(0, -2)}</Text>
               <Text style={styles.attributeTitle}>TYPE</Text>
             </View>
           </View>
-          {times(2, m => (
-            <View style={styles.move} key={m}>
+          {listing.moves.map((move, i) => (
+            <View style={styles.move} key={i}>
               <View style={styles.leftColumnDetails}>
-                <Text style={styles.moveName}>Lava Burst {m}</Text>
+                <Text style={styles.moveName}>{move.name}</Text>
                 <View style={styles.secondRowDetails}>
-                  <Text style={styles.moveType}>Fire</Text>
-                  <PowerChargeBar charges={3} style={styles.powerChargeBar}/>
+                  <Text style={styles.moveType}>{move.elementType}</Text>
+                  <PowerChargeBar charges={move.charges} style={styles.powerChargeBar}/>
                 </View>
               </View>
-              <Text style={styles.moveDamage}>45</Text>
+              <Text style={styles.moveDamage}>{move.power}</Text>
             </View>
           ))}
         </View>
         <View style={styles.footer}>
           <View style={[styles.footerItem, styles.centered, {flex: 1}]}>
             <IonIcon name='md-person' size={16} color={primaryColor} />
-            <Text style={[styles.footerItemText,  styles.trainerName]}>asdfsdf</Text>
+            <Text style={[styles.footerItemText,  styles.trainerName]}>{userName}</Text>
           </View>
           <View style={[styles.footerItem, styles.centered, {flex: 2.5}]}>
             <GoogleIcon name='place' size={16} color={primaryColor} />
@@ -82,6 +87,78 @@ var PokemonDetailsScreen = React.createClass({
       </View>
     );
   }
+});
+
+ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
+  fragments: {
+    listing() {
+      return Relay.QL`
+        fragment on Listing {
+          id,
+          cp,
+          hp,
+          weight,
+          height,
+          moves {
+            name,
+            power,
+            charges,
+            elementType,
+          },
+          pokemon {
+            name,
+            pokedexNumber,
+            elementTypes,
+          },
+          user {
+            pokemonGoName,
+          }
+        }
+      `;
+    },
+  },
+});
+
+ListingDetailsScreen = React.createClass({
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBarBackground />
+        <NavigationBar>
+          <Text style={styles.title}>{this.props.pokemonName}</Text>
+          <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose}>
+            <IonIcon name='ios-arrow-back' size={32} color={white} />
+          </TouchableOpacity>
+        </NavigationBar>
+        {this.props.children}
+      </View>
+    )
+  }
+})
+
+var ListingDetailsScreenWrapper = React.createClass({
+  render() {
+    return (
+      <Relay.Renderer
+        Container={ListingDetailsInner}
+        environment={Relay.Store}
+        queryConfig={new ListingRoute({listingId: this.props.listingId})}
+        render={({done, error, props}) => {
+          if (props) {
+            return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
+              <ListingDetailsInner {...props} />
+            </ListingDetailsScreen>
+          } else if (error) {
+            console.log('Relay error in ListingDetailsScreen: ', error)
+          } else {
+            return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
+              <GenericLoadingScreen />
+            </ListingDetailsScreen>
+          }
+        }}
+      />
+    );
+  },
 });
 
 const styles = StyleSheet.create({
@@ -254,4 +331,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PokemonDetailsScreen;
+export default ListingDetailsScreenWrapper;

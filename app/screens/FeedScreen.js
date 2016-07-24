@@ -13,21 +13,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ViewerRoute from 'routes/ViewerRoute';
 
 import NavigationBar from 'components/misc/NavigationBar';
-import PokemonDetailsScreen from 'screens/PokemonDetailsScreen';
 import ListingList from 'components/listing/ListingList';
+import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import noop from 'hammer/noop';
 
 var FeedScreen = React.createClass({
   getInitialState() {
-    return {
-      searchText: "",
-      showingPokemonDetails: false,
-    }
-  },
-
-  onPressListing(uuid, name) {
-    this.setState({showingPokemonDetails: true})
+    return { searchText: "" }
   },
 
   render() {
@@ -42,15 +35,10 @@ var FeedScreen = React.createClass({
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
-        <ListingList onPressListing={this.onPressListing} />
-        <Modal
-          animationType='slide'
-          transparent={false}
-          visible={this.state.showingPokemonDetails}
-          onRequestClose={() => noop()}
-        >
-          <PokemonDetailsScreen onPressClose={() => this.setState({showingPokemonDetails: false})} />
-        </Modal>
+        <ListingList
+          listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
+          onPressListing={this.onPressListing}
+        />
       </View>
     );
   }
@@ -61,9 +49,11 @@ FeedScreen = Relay.createContainer(FeedScreen, {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listings(first: 10) {
+          listingsSearch(first: 10) {
             edges {
-              node
+              node {
+                ${ListingList.getFragment('listings')}
+              }
             }
           }
         }
@@ -85,7 +75,7 @@ var FeedScreenWrapper = React.createClass({
           } else if (error) {
             console.log('Relay error in FeedScreen: ', error)
           } else {
-            // loading
+            return <GenericLoadingScreen />
           }
         }}
       />

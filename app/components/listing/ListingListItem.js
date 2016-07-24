@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
   Navigator,
 } from 'react-native';
+import {connect} from 'react-redux';
 import Relay from 'react-relay';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
+
+import {openListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 
 import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
@@ -19,10 +22,6 @@ import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
 
 var ListingListItem = React.createClass({
-  contextTypes: {
-    openListingDetailsScreen: React.PropTypes.func.isRequired
-  },
-
   propTypes: {
     editMode: React.PropTypes.bool,
     onPressEdit: React.PropTypes.func,
@@ -30,7 +29,7 @@ var ListingListItem = React.createClass({
   },
 
   onPressListing() {
-    this.context.openListingDetailsScreen(this.props.listing.id, this.props.listing.pokemon.name)
+    this.props.dispatch(openListingDetailsScreen(this.props.listing.id, this.props.listing.pokemon.name))
   },
 
   render() {
@@ -207,4 +206,5 @@ var styles = StyleSheet.create({
   },
 })
 
+ListingListItem = connect()(ListingListItem);
 export default ListingListItem;

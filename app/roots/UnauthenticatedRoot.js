@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import {GoogleSigninButton} from 'react-native-google-signin';
 
-import userCredentialStore from 'stores/userCredentialStore'
 import {white, primaryColor} from 'hammer/colors';
 
 var UnauthenticatedRoot = React.createClass({
@@ -25,7 +24,7 @@ var UnauthenticatedRoot = React.createClass({
           style={styles.signinButton}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Light}
-          onPress={this.props.onPressSignIn}
+          onPress={this.props.onPressLogin}
         />
       </View>
     );

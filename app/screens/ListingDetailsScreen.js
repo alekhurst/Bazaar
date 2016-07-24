@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Relay from 'react-relay';
+import {connect} from 'react-redux';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import GoogleIcon from 'react-native-vector-icons/MaterialIcons'
-import {times} from 'lodash';
+import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
 
 import ListingRoute from 'routes/ListingRoute';
+import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -19,7 +20,7 @@ import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
-import {white, gray98, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
+import {white, gray98, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 
 var ListingDetailsInner = React.createClass({
@@ -143,18 +144,26 @@ var ListingDetailsScreenWrapper = React.createClass({
       <Relay.Renderer
         Container={ListingDetailsInner}
         environment={Relay.Store}
-        queryConfig={new ListingRoute({listingId: this.props.listingId})}
+        queryConfig={new ListingRoute({listingId: this.props.listingDetailsScreen.listingId})}
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
           } else if (props) {
-            return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
-              <ListingDetailsInner {...props} />
-            </ListingDetailsScreen>
+            return (
+              <ListingDetailsScreen
+                pokemonName={this.props.listingDetailsScreen.pokemonName}
+                onPressClose={() => this.props.dispatch(closeListingDetailsScreen())}>
+                <ListingDetailsInner {...props} />
+              </ListingDetailsScreen>
+            )
           } else {
-            return <ListingDetailsScreen pokemonName={this.props.listingPokemonName} onPressClose={this.props.onPressClose}>
-              <GenericLoadingScreen />
-            </ListingDetailsScreen>
+            return (
+              <ListingDetailsScreen
+                pokemonName={this.props.listingDetailsScreen.pokemonName}
+                onPressClose={() => this.props.dispatch(closeListingDetailsScreen())}>
+                <GenericLoadingScreen />
+              </ListingDetailsScreen>
+            )
           }
         }}
       />
@@ -332,4 +341,10 @@ const styles = StyleSheet.create({
   },
 });
 
+
+function mapStateToProps(state) {
+  return {listingDetailsScreen: state.listingDetailsScreen}
+}
+
+ListingDetailsScreenWrapper = connect(mapStateToProps)(ListingDetailsScreenWrapper);
 export default ListingDetailsScreenWrapper;

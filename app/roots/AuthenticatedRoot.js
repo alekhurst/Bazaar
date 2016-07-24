@@ -1,13 +1,12 @@
 import React from 'react';
 import {View, Modal} from 'react-native';
+import {connect} from 'react-redux';
 import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-
-import userCredentialStore from 'stores/userCredentialStore';
 
 import FeedScreen from 'screens/FeedScreen';
 import MyPokemonScreen from 'screens/MyPokemonScreen';
@@ -17,45 +16,12 @@ import TabBar from 'components/misc/TabBar';
 import serverUrl from 'hammer/serverUrl';
 
 const AuthenticatedRoot = React.createClass({
-  childContextTypes: {
-    openListingDetailsScreen: React.PropTypes.func.isRequired,
-    closeListingDetailsScreen: React.PropTypes.func.isRequired,
-  },
-
-  getChildContext() {
-    return {
-      openListingDetailsScreen: this.openListingDetailsScreen,
-      closeListingDetailsScreen: this.closeListingDetailsScreen,
-    }
-  },
-
   getInitialState() {
-    return {
-      currentTabIndex: 0,
-      showingListingDetailsScreen: false,
-      listingId: null,
-      listingPokemonName: null,
-    }
-  },
-
-  openListingDetailsScreen(pokemonId, pokemonName) {
-    this.setState({
-      showingListingDetailsScreen: true,
-      listingId: pokemonId,
-      listingPokemonName: pokemonName,
-    })
-  },
-
-  closeListingDetailsScreen() {
-    this.setState({
-      showingListingDetailsScreen: false,
-      listingId: null,
-      listingPokemonName: null,
-    })
+    return { currentTabIndex: 0 }
   },
 
   componentWillMount() {
-    var {bazaarAccessToken, userEmail} = userCredentialStore.currentUser();
+    var {bazaarAccessToken, userEmail} = this.props.userCredentials;
 
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer(`${serverUrl}/api/graph`, {
@@ -86,14 +52,13 @@ const AuthenticatedRoot = React.createClass({
         <Modal
           animationType='slide'
           transparent={false}
-          visible={this.state.showingListingDetailsScreen}
+          visible={this.props.listingDetailsScreen.visible}
           onRequestClose={() => noop()}
         >
           <ListingDetailsScreen
-            listingId={this.state.listingId}
-            listingPokemonName={this.state.listingPokemonName}
-            onPressClose={this.closeListingDetailsScreen}
-            relay={this.props.relay}
+            listingId={this.props.listingDetailsScreen.listingId}
+            listingPokemonName={this.props.listingDetailsScreen.pokemonName}
+            onPressClose={this.props.listingDetailsScreen.closeListingDetailsScreen}
           />
         </Modal>
       </View>
@@ -101,4 +66,12 @@ const AuthenticatedRoot = React.createClass({
   },
 });
 
+function mapStateToProps(state) {
+  return {
+    userCredentials: state.userCredentials,
+    listingDetailsScreen: state.listingDetailsScreen,
+  }
+}
+
+AuthenticatedRoot = connect(mapStateToProps)(AuthenticatedRoot);
 export default AuthenticatedRoot;

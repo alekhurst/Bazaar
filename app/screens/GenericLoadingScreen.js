@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  ActivityIndicator,
   Image,
   View
 } from 'react-native';
@@ -16,7 +15,6 @@ var GenericLoadingScreen = React.createClass({
           <Image source={require('images/logo-white-background-no-center.png')} style={styles.logo} resizeMode={'contain'} />
           <Image source={require('images/ripple.gif')} style={styles.spinner} resizeMode={'contain'} />
         </View>
-        {/*<ActivityIndicator color={primaryColor} size='small' style={styles.spinner}/>*/}
       </View>
     );
   }

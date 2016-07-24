@@ -10,11 +10,14 @@
   "dependencies": {
     "axios": "^0.13.1",
     "react": "15.2.1",
-    "react-native": "0.29.1",
+    "react-native": "0.30.0",
     "react-native-google-signin": "^0.6.1",
     "react-native-scrollable-tab-view": "^0.5.3",
     "react-native-vector-icons": "^2.0.3",
-    "react-relay": "^0.9.2"
+    "react-redux": "^4.4.5",
+    "react-relay": "^0.9.2",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",

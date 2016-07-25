@@ -35,6 +35,14 @@ var ListingListItem = React.createClass({
   render() {
     var smallDevice = vw(100) <= 320 ? true : false; // iphone 5 or smaller
 
+    var user = this.props.listing.user;
+    var userDistance = Math.round(user.distanceFromMe)
+    if (user.distanceFromMe < 1) {
+      userDistance = '<1';
+    } else if (user.distanceFromMe > 10) {
+      userDistance = '>10';
+    }
+
     return (
       <TouchableOpacity
         onPress={this.onPressListing}
@@ -61,7 +69,7 @@ var ListingListItem = React.createClass({
         {renderIf(!this.props.editMode)(
           <View style={styles.rightDetailsContainer}>
             <GoogleIcon name='place' size={14} color={gainsboro}/>
-            <Text style={styles.distanceText}>8km</Text>
+            <Text style={styles.distanceText}>{userDistance}km</Text>
           </View>
         )}
         {renderIf(this.props.editMode)(
@@ -100,6 +108,9 @@ ListingListItem = Relay.createContainer(ListingListItem, {
           pokemon {
             name,
             pokedexNumber,
+          },
+          user {
+            distanceFromMe
           }
         }
       `;
@@ -183,6 +194,7 @@ var styles = StyleSheet.create({
     right: 0,
     top: 7,
     height: 15,
+    width: 43,
   },
 
   editModeRightDetailsContainer: {

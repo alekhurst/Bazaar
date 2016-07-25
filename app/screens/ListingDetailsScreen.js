@@ -27,7 +27,27 @@ var ListingDetailsInner = React.createClass({
   render() {
     var listing = this.props.listing;
     var pokemon = this.props.listing.pokemon;
-    var userName = listing.user.pokemonGoName ? listing.user.pokemonGoName : 'anonymous';
+    var user = this.props.listing.user;
+
+    var userName = user.pokemonGoName ? user.pokemonGoName : 'anonymous';
+    var userDistance = Math.round(user.distanceFromMe)
+    if (user.distanceFromMe < 1) {
+      userDistance = '<1';
+    } else if (user.distanceFromMe > 10) {
+      userDistance = '>10';
+    }
+
+    var locationUpdatedAt = Math.round(((new Date() - new Date(user.locationUpdatedAt)) / 1000) / 60)
+    if (locationUpdatedAt < 1) {
+      locationUpdatedAt = '<1m';
+    } else if (locationUpdatedAt > 60) {
+      locationUpdatedAt = '>1hr';
+    } else {
+      locationUpdatedAt = locationUpdatedAt + 'm';
+    }
+
+    var smallDevice = vw(100) <= 320 ? true : false; // iphone 5 or smaller
+    var bottomTextFontSize = smallDevice ? {fontSize: 12} : {fontSize: 13};
 
     return (
       <View style={styles.container}>
@@ -59,7 +79,7 @@ var ListingDetailsInner = React.createClass({
               <Text style={styles.attributeTitle}>HEIGHT</Text>
             </View>
             <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{pokemon.elementTypes.join(", ")}</Text>
+              <Text style={styles.attributeValue}>{pokemon.elementTypes[0]}</Text>
               <Text style={styles.attributeTitle}>TYPE</Text>
             </View>
           </View>
@@ -77,13 +97,13 @@ var ListingDetailsInner = React.createClass({
           ))}
         </View>
         <View style={styles.footer}>
-          <View style={[styles.footerItem, styles.centered, {flex: 1}]}>
-            <IonIcon name='md-person' size={16} color={primaryColor} />
-            <Text style={[styles.footerItemText,  styles.trainerName]}>{userName}</Text>
+          <View style={{flex: 1, marginHorizontal: 10, marginVertical: 5, flexDirection: 'row', alignItems: 'center'}}>
+            <IonIcon name='md-person' size={smallDevice ? 14 : 16} color={primaryColor}/>
+            <Text style={{color: primaryColor, marginLeft: 5}}>{userName}</Text>
           </View>
-          <View style={[styles.footerItem, styles.centered, {flex: 2.5}]}>
-            <GoogleIcon name='place' size={16} color={primaryColor} />
-            <Text style={styles.footerItemText}>10km away (updated 11hr ago)</Text>
+          <View style={{flex: 1, marginHorizontal: 10, marginVertical: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
+            <GoogleIcon name='place' size={smallDevice ? 14 : 14} color={primaryColor}/>
+            <Text style={{color: primaryColor}}>{userDistance}km away ({locationUpdatedAt} ago)</Text>
           </View>
         </View>
       </View>
@@ -114,6 +134,8 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
           },
           user {
             pokemonGoName,
+            distanceFromMe,
+            locationUpdatedAt,
           }
         }
       `;
@@ -241,7 +263,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     backgroundColor: gray98,
-    width: 280,
+    width: 290,
     alignSelf: 'center',
     borderRadius: 5,
   },
@@ -250,6 +272,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     width: 280,
+    position: 'relative',
+    left: -5,
     marginBottom: 7,
   },
 
@@ -260,7 +284,7 @@ const styles = StyleSheet.create({
 
   attributeValue: {
     color: matterhorn,
-    fontSize: 16,
+    fontSize: 14,
   },
 
   attributeTitle: {
@@ -269,6 +293,8 @@ const styles = StyleSheet.create({
   },
 
   move: {
+    position: 'relative',
+    left: -5,
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
@@ -314,18 +340,19 @@ const styles = StyleSheet.create({
   },
 
   footerItem: {
-    flex: 1,
-    flexDirection: 'row',
-    margin: 10,
-  },
-
-  footerItemText: {
+    position: 'absolute',
+    bottom: 5,
     color: primaryColor,
-    marginLeft: 2,
   },
 
-  trainerName: {
-    marginLeft: 5,
+  leftFooterItem: {
+    left: 10,
+    width: vw(40) - 10,
+  },
+
+  rightFooterItem: {
+    width: vw(60) - 10,
+    right: 10,
   },
 
   leftJustified: {

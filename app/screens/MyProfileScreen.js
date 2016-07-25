@@ -5,11 +5,14 @@ import {
   Image,
   View,
   TouchableOpacity,
-  Alert,
   Modal,
 } from 'react-native';
+import {connect} from 'react-redux';
 import Relay from 'react-relay'
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import {openEditListingScreen} from 'actions/editListingScreenActions';
+import DestroyListingMutation from 'mutations/DestroyListingMutation';
 
 import MeRoute from 'routes/MeRoute';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -17,18 +20,23 @@ import GenericErrorScreen from 'screens/GenericErrorScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import ListingList from 'components/listing/ListingList';
 import {white, primaryColor} from 'hammer/colors';
+import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import noop from 'hammer/noop';
 
-var MyPokemonScreen = React.createClass({
-  onPressDelete(pokemonName) {
-    Alert.alert(
-      `Delete`,
-      'Are you sure you want to delete this pokemon?',
-      [
-        {text: 'Yes', onPress: () => console.log('Ask me later pressed')},
-        {text: 'No', onPress: () => noop()}
-      ]
-    );
+var MyProfileScreen = React.createClass({
+  onPressConfirmDeleteListing(listingId) {
+    var destroyListingInput = {
+      me: this.props.me,
+      listingId,
+    }
+
+    Relay.Store.commitUpdate(
+      new DestroyListingMutation(destroyListingInput),
+      {
+        onSuccess: noop,
+        onFailure: networkRequestFailedAlert,
+      }
+    )
   },
 
   render() {
@@ -36,13 +44,13 @@ var MyPokemonScreen = React.createClass({
       <View style={styles.container}>
         <View style={styles.topBarContainer}>
           <Text style={styles.myPokemonTitle}>My Pokemon</Text>
-          <TouchableOpacity style={styles.addIcon}>
+          <TouchableOpacity style={styles.addIcon} onPress={() => this.props.dispatch(openEditListingScreen())}>
             <Icon name='md-add' size={26} color={white} />
           </TouchableOpacity>
         </View>
         <ListingList
           editMode
-          onPressDelete={this.onPressDelete}
+          onPressConfirmDeleteListing={this.onPressConfirmDeleteListing}
           onPressListing={this.onPressListing}
           listings={this.props.me.listings.edges.map(e => e.node)}
         />
@@ -51,38 +59,40 @@ var MyPokemonScreen = React.createClass({
   }
 });
 
-MyPokemonScreen = Relay.createContainer(MyPokemonScreen, {
+MyProfileScreen = connect()(MyProfileScreen);
+
+MyProfileScreen = Relay.createContainer(MyProfileScreen, {
   fragments: {
     me() {
       return Relay.QL`
         fragment on User {
           id,
-          listings(first: 10) {
+          listings(first: 25) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
               }
             }
           }
+          ${DestroyListingMutation.getFragment('me')}
         }
       `;
     },
   },
 });
 
-
-var MyPokemonScreenWrapper = React.createClass({
+var MyProfileScreenWrapper = React.createClass({
   render() {
     return (
       <Relay.Renderer
-        Container={MyPokemonScreen}
+        Container={MyProfileScreen}
         environment={Relay.Store}
         queryConfig={new MeRoute()}
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
           } else if (props) {
-            return <MyPokemonScreen {...props} />
+            return <MyProfileScreen {...props} />
           } else {
             return <GenericLoadingScreen />
           }
@@ -116,4 +126,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MyPokemonScreenWrapper;
+export default MyProfileScreenWrapper;

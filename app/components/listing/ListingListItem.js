@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Navigator,
+  Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
 import Relay from 'react-relay';
@@ -14,22 +15,38 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
 
 import {openListingDetailsScreen} from 'actions/listingDetailsScreenActions';
+import {openEditListingScreen} from 'actions/editListingScreenActions';
 
 import PokemonImage from 'components/pokemon/PokemonImage';
 import PowerChargeBar from 'components/pokemon/PowerChargeBar';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
+import noop from 'hammer/noop';
 
 var ListingListItem = React.createClass({
   propTypes: {
     editMode: React.PropTypes.bool,
-    onPressEdit: React.PropTypes.func,
-    onPressDelete: React.PropTypes.func,
+    onPressConfirmDeleteListing: React.PropTypes.func
   },
 
   onPressListing() {
     this.props.dispatch(openListingDetailsScreen(this.props.listing.id, this.props.listing.pokemon.name))
+  },
+
+  onPressEdit() {
+    this.props.dispatch(openEditListingScreen(this.props.listing.id))
+  },
+
+  onPressDelete() {
+    Alert.alert(
+      `Delete`,
+      'Are you sure you want to delete this pokemon?',
+      [
+        {text: 'Yes', onPress: () => this.props.onPressConfirmDeleteListing(this.props.listing.id)},
+        {text: 'No', onPress: noop}
+      ]
+    );
   },
 
   render() {
@@ -68,20 +85,19 @@ var ListingListItem = React.createClass({
         )}
         {renderIf(!this.props.editMode)(
           <View style={styles.rightDetailsContainer}>
-            <GoogleIcon name='place' size={14} color={gainsboro}/>
             <Text style={styles.distanceText}>{userDistance}km</Text>
           </View>
         )}
         {renderIf(this.props.editMode)(
           <View style={[styles.editModeRightDetailsContainer, {alignSelf: 'flex-end'}]}>
             <TouchableOpacity
-              onPress={this.props.onPressDelete}
+              onPress={this.onPressDelete}
               style={[styles.listingButton, {backgroundColor: primaryRed}]}
             >
               <IonIcon name='md-trash' style={styles.listingButtonIcon} size={30} color={white} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.props.onPressEdit}
+              onPress={this.onPressEdit}
               style={[styles.listingButton, {backgroundColor: primaryBlue, marginLeft: 5}]}
             >
               <IonIcon name='md-create' style={styles.listingButtonIcon} size={30} color={white} />
@@ -92,6 +108,8 @@ var ListingListItem = React.createClass({
     );
   }
 });
+
+ListingListItem = connect()(ListingListItem);
 
 ListingListItem = Relay.createContainer(ListingListItem, {
   fragments: {
@@ -194,7 +212,7 @@ var styles = StyleSheet.create({
     right: 0,
     top: 7,
     height: 15,
-    width: 43,
+    width: 34,
   },
 
   editModeRightDetailsContainer: {
@@ -218,5 +236,4 @@ var styles = StyleSheet.create({
   },
 })
 
-ListingListItem = connect()(ListingListItem);
 export default ListingListItem;

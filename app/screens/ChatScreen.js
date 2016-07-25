@@ -1,27 +1,14 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
-  Image,
-  View
 } from 'react-native';
 
-import {white, primaryColor} from 'hammer/colors';
-
 var ChatScreen = React.createClass({
-  render() {
+  render: function() {
     return (
-      <View style={styles.container}>
-        <Text>Chat Screen</Text>
-      </View>
+      <Text>hi</Text>
     );
-  }
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
+  },
 });
 
 export default ChatScreen;

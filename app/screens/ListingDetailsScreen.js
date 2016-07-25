@@ -40,10 +40,14 @@ var ListingDetailsInner = React.createClass({
     var locationUpdatedAt = Math.round(((new Date() - new Date(user.locationUpdatedAt)) / 1000) / 60)
     if (locationUpdatedAt < 1) {
       locationUpdatedAt = '<1m';
-    } else if (locationUpdatedAt > 60) {
-      locationUpdatedAt = '>1hr';
-    } else {
+    } else if (locationUpdatedAt < 60){
       locationUpdatedAt = locationUpdatedAt + 'm';
+    } else if (locationUpdatedAt >= 60 && locationUpdatedAt < 1440) {
+      locationUpdatedAt = Math.round(locationUpdatedAt / 60) + 'hr';
+    } else if (locationUpdatedAt >= 1440 && locationUpdatedAt < 10080) {
+      locationUpdatedAt = Math.round(locationUpdatedAt / 1440) + 'd';
+    } else {
+      locationUpdatedAt = '>7d';
     }
 
     var smallDevice = vw(100) <= 320 ? true : false; // iphone 5 or smaller
@@ -193,6 +197,12 @@ var ListingDetailsScreenWrapper = React.createClass({
   },
 });
 
+function mapStateToProps(state) {
+  return {listingDetailsScreen: state.listingDetailsScreen}
+}
+
+ListingDetailsScreenWrapper = connect(mapStateToProps)(ListingDetailsScreenWrapper);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -284,7 +294,8 @@ const styles = StyleSheet.create({
 
   attributeValue: {
     color: matterhorn,
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: '300',
   },
 
   attributeTitle: {
@@ -298,16 +309,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    marginTop: 8
+    marginTop: 10
   },
 
   leftColumnDetails: {
-    width: 220,
+    width: 209,
   },
 
   moveName: {
     color: matterhorn,
     fontSize: 16,
+    fontWeight: '300',
   },
 
   secondRowDetails: {
@@ -329,7 +341,8 @@ const styles = StyleSheet.create({
 
   moveDamage: {
     color: matterhorn,
-    fontSize: 17,
+    fontSize: 18,
+    fontWeight: '300',
   },
 
   footer: {
@@ -368,10 +381,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-function mapStateToProps(state) {
-  return {listingDetailsScreen: state.listingDetailsScreen}
-}
-
-ListingDetailsScreenWrapper = connect(mapStateToProps)(ListingDetailsScreenWrapper);
 export default ListingDetailsScreenWrapper;

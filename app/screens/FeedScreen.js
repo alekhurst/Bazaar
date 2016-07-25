@@ -15,9 +15,12 @@ import ViewerRoute from 'routes/ViewerRoute';
 
 import NavigationBar from 'components/misc/NavigationBar';
 import ListingList from 'components/listing/ListingList';
+import ZeroResultsPlaceholder from 'components/listing/ZeroResultsPlaceholder';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
-import {white, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import renderIf from 'hammer/renderIf';
+import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
 var FeedScreen = React.createClass({
@@ -57,12 +60,21 @@ var FeedScreen = React.createClass({
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
-        <ListingList
-          listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
-          onPressListing={this.onPressListing}
-          refreshing={this.state.refreshing}
-          onRefresh={this.onRefresh}
-        />
+        {renderIf(this.props.viewer.listingsSearch.edges.length === 0)(<ZeroResultsPlaceholder />)}
+        {renderIf(this.props.viewer.listingsSearch.edges.length > 0)(
+          <ListingList
+            listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
+            onPressListing={this.onPressListing}
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          >
+            <View style={styles.resultsHeaderContainer}>
+              <View style={styles.resultesHeaderLine} />
+              <Text style={styles.resultsHeaderText}>Pokemon for trade near you</Text>
+              <View style={styles.resultesHeaderLine} />
+            </View>
+          </ListingList>
+        )}
       </View>
     );
   }
@@ -73,7 +85,7 @@ FeedScreen = Relay.createContainer(FeedScreen, {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(first: 10, radius: 10.0) {
+          listingsSearch(first: 30, radius: 10.0) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -129,6 +141,28 @@ const styles = StyleSheet.create({
     left: 16,
     top: 10,
     backgroundColor: 'transparent',
+  },
+
+  resultsHeaderContainer: {
+    width: vw(100),
+    flexDirection: 'row',
+    paddingTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  resultesHeaderLine: {
+    flex: 1,
+    height: 1,
+    marginHorizontal: 10,
+    backgroundColor: whiteSmoke,
+  },
+
+  resultsHeaderText: {
+    fontSize: 12,
+    color: matterhorn,
+    fontWeight: '300',
+    marginHorizontal: 10,
   }
 });
 

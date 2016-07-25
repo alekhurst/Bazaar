@@ -22,8 +22,6 @@ var ListingList = React.createClass({
     onRefresh: React.PropTypes.func,
     refreshing: React.PropTypes.bool,
     editMode: React.PropTypes.bool,
-    onPressEdit: React.PropTypes.func,
-    onPressDelete: React.PropTypes.func,
   },
 
   render() {
@@ -40,13 +38,13 @@ var ListingList = React.createClass({
             : null
         }
       >
+        {this.props.children}
         {this.props.listings.map((listing, i) => (
           <ListingListItem
             key={i}
             listing={listing}
             editMode={this.props.editMode}
-            onPressEdit={this.props.onPressEdit}
-            onPressDelete={this.props.onPressDelete}
+            onPressConfirmDeleteListing={this.props.onPressConfirmDeleteListing}
           />
         ))}
       </ScrollView>

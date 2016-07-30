@@ -1,9 +1,15 @@
 import React from 'react';
 import {DeviceEventEmitter, AppState, Alert} from 'react-native';
 import Relay from 'react-relay';
+import {connect} from 'react-redux';
 import Location from 'react-native-location';
+import {throttle, get} from 'lodash';
+
+import {setLocation} from 'actions/locationActions';
 
 import MeRoute from 'routes/MeRoute';
+import UpdateMeMutation from 'mutations/UpdateMeMutation';
+import noop from 'hammer/noop';
 
 const AUTHORIZED_WHEN_IN_USE = 'authorizedWhenInUse';
 const AUTHORIZED_ALWAYS = 'authorizedAlways';
@@ -19,12 +25,18 @@ class LocationManager extends React.Component {
   constructor() {
     super();
 
+    // component vars (not states)
     this.subscription = null;
+
+    // bind custom methods
     this.getAuthorization = this.getAuthorization.bind(this);
     this.handleAuthorization = this.handleAuthorization.bind(this);
     this.onAuthorizationDenied = this.onAuthorizationDenied.bind(this);
     this.onAuthorizationSuccess = this.onAuthorizationSuccess.bind(this);
     this.onLocationUpdate = this.onLocationUpdate.bind(this);
+    this.commitUpdateMeMutation = this.commitUpdateMeMutation.bind(this);
+
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 15000);
   }
 
   componentDidMount() {
@@ -35,12 +47,7 @@ class LocationManager extends React.Component {
       }
     });
 
-    Location.requestWhenInUseAuthorization();
-  }
-
-  getAuthorization(callback) {
-    Location.requestWhenInUseAuthorization();
-    Location.getAuthorizationStatus(authorization => callback(authorization));
+    this.handleAuthorization();
   }
 
   handleAuthorization() {
@@ -53,6 +60,11 @@ class LocationManager extends React.Component {
         this.onAuthorizationDenied();
       }
     });
+  }
+
+  getAuthorization(callback) {
+    Location.requestWhenInUseAuthorization();
+    Location.getAuthorizationStatus(authorization => callback(authorization));
   }
 
   onAuthorizationDenied() {
@@ -74,8 +86,7 @@ class LocationManager extends React.Component {
   }
 
   onLocationUpdate(location) {
-    console.log('Previous location: ', this.props.me.location)
-    console.log('New location: ', location)
+    this.throttledCommitUpdateMeMutation(location);
     /* Example location returned
     {
       coords: {
@@ -92,10 +103,40 @@ class LocationManager extends React.Component {
     */
   }
 
+  commitUpdateMeMutation(location) {
+    var {latitude, longitude} = location.coords;
+
+    var updateMeInput = {
+      me: this.props.me,
+      latitude,
+      longitude,
+    }
+
+    Relay.Store.commitUpdate(
+      new UpdateMeMutation(updateMeInput),
+      {
+        onSuccess: () => this.props.dispatch(setLocation(latitude, longitude)),
+        onFailure: this.onMutationFailure,
+      }
+    )
+  }
+
+  onMutationFailure() {
+    Alert.alert(
+      'Location Update Failed',
+      'We had some trouble updating your location. Sorry about that, we\'re looking into it.',
+      [
+        {text: 'OK', onPress: noop},
+      ]
+    );
+  }
+
   render() {
     return null
   }
 };
+
+LocationManager = connect()(LocationManager);
 
 LocationManager = Relay.createContainer(LocationManager, {
   fragments: {
@@ -106,6 +147,8 @@ LocationManager = Relay.createContainer(LocationManager, {
             latitude,
             longitude,
           }
+          displayName,
+          ${UpdateMeMutation.getFragment('me')}
         }
       `;
     },
@@ -129,5 +172,6 @@ class LocationManagerWrapper extends React.Component {
     )
   }
 }
+
 
 export default LocationManagerWrapper;

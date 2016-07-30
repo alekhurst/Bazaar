@@ -17,7 +17,7 @@ import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import PokemonImage from 'components/pokemon/PokemonImage';
-import PowerChargeBar from 'components/pokemon/PowerChargeBar';
+import EnergyBar from 'components/pokemon/EnergyBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import {white, gray98, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
@@ -29,7 +29,7 @@ var ListingDetailsInner = React.createClass({
     var pokemon = this.props.listing.pokemon;
     var user = this.props.listing.user;
 
-    var userName = user.pokemonGoName ? user.pokemonGoName : 'anonymous';
+    var userName = user.displayName ? user.displayName : 'anonymous';
     var userDistance = Math.round(user.distanceFromMe)
     if (user.distanceFromMe < 1) {
       userDistance = '<1';
@@ -93,10 +93,10 @@ var ListingDetailsInner = React.createClass({
                 <Text style={styles.moveName}>{move.name}</Text>
                 <View style={styles.secondRowDetails}>
                   <Text style={styles.moveType}>{move.elementType}</Text>
-                  <PowerChargeBar charges={move.charges} style={styles.powerChargeBar}/>
+                  <EnergyBar energy={move.energy} style={styles.energyBar}/>
                 </View>
               </View>
-              <Text style={styles.moveDamage}>{move.power}</Text>
+              <Text style={styles.moveDamage}>{move.damage}</Text>
             </View>
           ))}
         </View>
@@ -127,8 +127,8 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
           height,
           moves {
             name,
-            power,
-            charges,
+            energy,
+            damage,
             elementType,
           },
           pokemon {
@@ -137,7 +137,7 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
             elementTypes,
           },
           user {
-            pokemonGoName,
+            displayName,
             distanceFromMe,
             locationUpdatedAt,
           }
@@ -305,7 +305,6 @@ const styles = StyleSheet.create({
 
   move: {
     position: 'relative',
-    left: -5,
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
@@ -313,7 +312,9 @@ const styles = StyleSheet.create({
   },
 
   leftColumnDetails: {
-    width: 209,
+    flex: 1,
+    paddingLeft: 0,
+    alignItems: 'flex-start',
   },
 
   moveName: {
@@ -331,7 +332,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
 
-  powerChargeBar: {
+  energyBar: {
     position: 'relative',
     top: 3,
     left: 8,

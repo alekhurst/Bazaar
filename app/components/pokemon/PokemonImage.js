@@ -3,12 +3,12 @@ import {
   Image,
 } from 'react-native';
 
-import Pokemon from 'datasets/pokemon';
+import {pokemonDictionary} from 'datasets/pokemon';
 
 var PokemonImage = React.createClass({
   render() {
     return (
-      <Image style={this.props.style} source={Pokemon[this.props.pokedexNumber].imageUrl} resizeMode={this.props.resizeMode}/>
+      <Image style={this.props.style} source={pokemonDictionary[this.props.pokedexNumber].imageUrl} resizeMode={this.props.resizeMode}/>
     );
   }
 });

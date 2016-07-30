@@ -18,7 +18,7 @@ import {openListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 
 import PokemonImage from 'components/pokemon/PokemonImage';
-import PowerChargeBar from 'components/pokemon/PowerChargeBar';
+import EnergyBar from 'components/pokemon/EnergyBar';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
@@ -76,10 +76,10 @@ var ListingListItem = React.createClass({
         </View>
         {renderIf(!this.props.editMode)(
           <View style={styles.middleDetailsContainer}>
-            <Text style={styles.moveName}>{this.props.listing.moves[0].name}</Text>
+            <Text style={styles.moveName}>{this.props.listing.moves[1].name}</Text>
             <View style={styles.moveDetailsContainer}>
-              <Text style={styles.power}>{this.props.listing.moves[0].power}</Text>
-              <PowerChargeBar charges={this.props.listing.moves[0].charges} style={styles.powerChargeBar}/>
+              <Text style={styles.damage}>{this.props.listing.moves[1].damage}</Text>
+              <EnergyBar energy={this.props.listing.moves[1].energy} style={styles.energyBar}/>
             </View>
           </View>
         )}
@@ -92,15 +92,15 @@ var ListingListItem = React.createClass({
           <View style={[styles.editModeRightDetailsContainer, {alignSelf: 'flex-end'}]}>
             <TouchableOpacity
               onPress={this.onPressDelete}
-              style={[styles.listingButton, {backgroundColor: primaryRed}]}
+              style={styles.listingButton}
             >
-              <IonIcon name='md-trash' style={styles.listingButtonIcon} size={30} color={white} />
+              <IonIcon name='md-trash' style={styles.listingButtonIcon} size={30} color={matterhorn} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={this.onPressEdit}
-              style={[styles.listingButton, {backgroundColor: primaryBlue, marginLeft: 5}]}
+              style={[styles.listingButton, {marginLeft: 5}]}
             >
-              <IonIcon name='md-create' style={styles.listingButtonIcon} size={30} color={white} />
+              <IonIcon name='md-create' style={styles.listingButtonIcon} size={30} color={matterhorn} />
             </TouchableOpacity>
           </View>
         )}
@@ -120,8 +120,8 @@ ListingListItem = Relay.createContainer(ListingListItem, {
           cp,
           moves {
             name,
-            power,
-            charges,
+            damage,
+            energy,
           },
           pokemon {
             name,
@@ -156,8 +156,8 @@ var styles = StyleSheet.create({
   },
 
   pokemonThumbnailSmall: {
-    width: 45,
-    height: 45,
+    width: 42,
+    height: 42,
     marginHorizontal: 2,
   },
 
@@ -193,13 +193,13 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  power: {
+  damage: {
     color: gainsboro,
     fontSize: 14,
     fontWeight: '300',
   },
 
-  powerChargeBar: {
+  energyBar: {
     width: 60,
     height: 5,
     marginLeft: 5,

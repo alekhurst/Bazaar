@@ -9,7 +9,9 @@ import {
   Alert,
 } from 'react-native';
 import Relay from 'react-relay';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {get, isNumber} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
 
@@ -23,6 +25,9 @@ import renderIf from 'hammer/renderIf';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
+const DEFAULT_SEARCH_TEXT = "";
+const DEFAULT_FIRST_N = 25;
+
 var FeedScreen = React.createClass({
   getInitialState() {
     return {
@@ -33,6 +38,7 @@ var FeedScreen = React.createClass({
 
   onRefresh() {
     this.setState({refreshing: true})
+
     this.props.relay.forceFetch({}, ({ready, done, error}) => {
       if(error) {
         Alert.alert(
@@ -42,6 +48,7 @@ var FeedScreen = React.createClass({
             {text: 'OK', onPress: noop},
           ]
         );
+        this.setState({refreshing: false});
       } else if (done) {
         this.setState({refreshing: false});
       }
@@ -49,6 +56,11 @@ var FeedScreen = React.createClass({
   },
 
   render() {
+    var searchResults = get(this.props.viewer, 'listingsSearch.edges.length', null);
+    var latitude = get(this.props, 'location.latitude', null);
+    var longitude = get(this.props, 'location.longitude', null);
+    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
+
     return (
       <View style={styles.container}>
         <NavigationBar>
@@ -60,8 +72,13 @@ var FeedScreen = React.createClass({
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
-        {renderIf(this.props.viewer.listingsSearch.edges.length === 0)(<ZeroResultsPlaceholder />)}
-        {renderIf(this.props.viewer.listingsSearch.edges.length > 0)(
+        {renderIf(!searchResults && (locationIsEmpty || this.state.refreshing))(
+          <GenericLoadingScreen />
+        )}
+        {renderIf(!searchResults && (!locationIsEmpty && !this.state.refreshing))(
+          <ZeroResultsPlaceholder onRefresh={this.onRefresh} />
+        )}
+        {renderIf(searchResults)(
           <ListingList
             listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
             onPressListing={this.onPressListing}
@@ -80,12 +97,23 @@ var FeedScreen = React.createClass({
   }
 });
 
+function mapStateToProps(state) {
+  return {location: state.location}
+}
+
+FeedScreen = connect(mapStateToProps)(FeedScreen);
+
 FeedScreen = Relay.createContainer(FeedScreen, {
+  initialVariables: {
+    searchText: DEFAULT_SEARCH_TEXT,
+    firstN: DEFAULT_FIRST_N,
+  },
+
   fragments: {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(first: 30, radius: 10.0) {
+          listingsSearch(first: $firstN, radius: 10) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -100,6 +128,10 @@ FeedScreen = Relay.createContainer(FeedScreen, {
 
 var FeedScreenWrapper = React.createClass({
   render() {
+    var latitude = get(this.props, 'location.latitude', null);
+    var longitude = get(this.props, 'location.longitude', null);
+    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
+
     return (
       <Relay.Renderer
         Container={FeedScreen}
@@ -108,6 +140,8 @@ var FeedScreenWrapper = React.createClass({
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
+          } else if (locationIsEmpty) {
+            return <GenericLoadingScreen />
           } else if (props) {
             return <FeedScreen {...props} />
           } else {
@@ -118,6 +152,12 @@ var FeedScreenWrapper = React.createClass({
     );
   },
 });
+
+function mapStateToProps(state) {
+  return {location: state.location}
+}
+
+FeedScreenWrapper = connect(mapStateToProps)(FeedScreenWrapper);
 
 const styles = StyleSheet.create({
   container: {

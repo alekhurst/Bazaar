@@ -10,9 +10,12 @@ import {connect} from 'react-redux'
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 import {white, matterhorn, primaryBlue} from 'hammer/colors';
 
-var ZeroResultsPlaceholder = ({dispatch}) => (
+var ZeroResultsPlaceholder = ({dispatch, onRefresh}) => (
   <View style={styles.container}>
     <Text style={styles.infoText}>There are no pokemon for trade in your area :(</Text>
+    <TouchableOpacity onPress={() => onRefresh()}>
+      <Text style={styles.reloadText}>Reload feed</Text>
+    </TouchableOpacity>
     <TouchableOpacity style={styles.createButton} onPress={() => dispatch(openEditListingScreen())}>
       <Text style={styles.createButtonText}>Be the first!</Text>
     </TouchableOpacity>
@@ -32,8 +35,15 @@ var styles = StyleSheet.create({
     width: 160,
     color: matterhorn,
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 30,
     marginTop: -70,
+  },
+
+  reloadText: {
+    width: 160,
+    color: matterhorn,
+    textAlign: 'center',
+    marginBottom: 15
   },
 
   createButton: {

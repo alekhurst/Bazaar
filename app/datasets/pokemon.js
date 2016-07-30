@@ -1,4 +1,6 @@
-export default {
+import {values} from 'lodash';
+
+export const pokemonDictionary = {
   '1': {name: 'Bulbasaur', pokedexNumber: 1, imageUrl: require('images/pokemon/Bulbasaur.png')},
   '2': {name: 'Ivysaur', pokedexNumber: 2, imageUrl: require('images/pokemon/Ivysaur.png')},
   '3': {name: 'Venusaur', pokedexNumber: 3, imageUrl: require('images/pokemon/Venusaur.png')},
@@ -149,5 +151,7 @@ export default {
   '148': {name: 'Dragonair', pokedexNumber: 148, imageUrl: require('images/pokemon/Dragonair.png')},
   '149': {name: 'Dragonite', pokedexNumber: 149, imageUrl: require('images/pokemon/Dragonite.png')},
   '150': {name: 'Mewtwo', pokedexNumber: 150, imageUrl: require('images/pokemon/Mewtwo.png')},
-  '151': {name: 'Mew', pokedexNumber: 151, imageUrl: require('images/pokemon/Mew.png')},
+  // '151': {name: 'Mew', pokedexNumber: 151, imageUrl: require('images/pokemon/Mew.png')},
 }
+
+export const pokemonList = values(pokemonDictionary).map(value => value.name);

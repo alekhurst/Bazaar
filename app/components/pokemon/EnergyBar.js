@@ -7,13 +7,13 @@ import {times} from 'lodash'
 
 import {gainsboro} from 'hammer/colors';
 
-var PowerChargeBar = React.createClass({
+var EnergyBar = React.createClass({
   render() {
-    if(this.props.charges === 0) return null;
+    if(this.props.energy === 0) return null;
 
     return (
       <View style={[styles.container, this.props.style]}>
-        {times(this.props.charges, c => <View style={styles.chargeBarPartition} key={c} />)}
+        {times(this.props.energy, c => <View style={styles.energyBarPartition} key={c} />)}
       </View>
     );
   }
@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  chargeBarPartition: {
+  energyBarPartition: {
     flex: 1,
     borderRadius: 3,
     marginRight: 2,
@@ -32,4 +32,4 @@ var styles = StyleSheet.create({
   },
 })
 
-export default PowerChargeBar;
+export default EnergyBar;

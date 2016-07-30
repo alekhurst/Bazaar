@@ -14,7 +14,7 @@ import ChatScreen from 'screens/ChatScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import EditListingScreen from 'screens/EditListingScreen';
 import TabBar from 'components/misc/TabBar';
-import LocationManager from 'components/misc/LocationManager';
+import LocationManager from 'components/controllers/LocationManager';
 import serverUrl from 'hammer/serverUrl';
 
 const AuthenticatedRoot = React.createClass({

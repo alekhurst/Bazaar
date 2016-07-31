@@ -11,7 +11,7 @@ import {
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {get, isNumber} from 'lodash';
+import {get, isNumber, isEmpty} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
 
@@ -21,25 +21,36 @@ import ZeroResultsPlaceholder from 'components/listing/ZeroResultsPlaceholder';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import renderIf from 'hammer/renderIf';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
 const DEFAULT_SEARCH_TEXT = "";
-const DEFAULT_FIRST_N = 25;
+const DEFAULT_FIRST_N = 9;
 
 var FeedScreen = React.createClass({
   getInitialState() {
     return {
       searchText: "",
-      refreshing: false,
+      pullRefreshing: false,
+      manualRefreshing: false,
+      endReachedFetching: false,
     }
   },
 
-  onRefresh() {
-    this.setState({refreshing: true})
+  onPullToRefresh() {
+    this.setState({pullRefreshing: true})
+    this.onRefresh();
+  },
 
-    this.props.relay.forceFetch({}, ({ready, done, error}) => {
+  onManualRefresh() {
+    this.setState({manualRefreshing: true})
+    this.onRefresh();
+  },
+
+  onRefresh() {
+    this.props.relay.forceFetch({firstN: DEFAULT_FIRST_N}, ({ready, done, error}) => {
       if(error) {
         Alert.alert(
           `Feed Refresh Failed`,
@@ -48,15 +59,47 @@ var FeedScreen = React.createClass({
             {text: 'OK', onPress: noop},
           ]
         );
-        this.setState({refreshing: false});
-      } else if (done) {
-        this.setState({refreshing: false});
+        this.setState({pullRefreshing: false, manualRefreshing: false});
+      } else if (done && ready) {
+        this.setState({pullRefreshing: false, manualRefreshing: false});
       }
     });
   },
 
+  onSubmitSearchQuery() {
+    /**
+     * Very weird behavior with updating this search text... if you change the minimum
+     * length to >= 1, you get 'performUpdateIfNecessary: Unexpected batch number(current 24, pending 23)'.
+     * Waiting for react or relay to fix this one...
+     */
+    if (this.state.searchText.length > 1 || this.state.searchText === "") {
+      this.setState({manualRefreshing: true})
+      this.props.relay.setVariables({searchText: this.state.searchText}, ({done, error}) => {
+        if (done) {
+          this.setState({manualRefreshing: false})
+        } else if (error) {
+          networkRequestFailedAlert();
+        }
+      });
+    }
+  },
+
+  onEndReached() {
+    this.setState({endReachedFetching: true})
+    this.props.relay.setVariables(
+      {firstN: this.props.relay.variables.firstN + DEFAULT_FIRST_N},
+      ({done, error}) => {
+        if (done) {
+          this.setState({endReachedFetching: false})
+        } else if (error) {
+          networkRequestFailedAlert();
+        }
+      }
+    );
+  },
+
   render() {
-    var searchResults = get(this.props.viewer, 'listingsSearch.edges.length', null);
+    var searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
     var latitude = get(this.props, 'location.latitude', null);
     var longitude = get(this.props, 'location.longitude', null);
     var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
@@ -69,21 +112,31 @@ var FeedScreen = React.createClass({
             onChangeText={searchText => this.setState({searchText})}
             style={styles.searchInput}
             clearButtonMode='while-editing'
+            autoCorrect={false}
+            onSubmitEditing={() => this.onSubmitSearchQuery()}
+            returnKeyType='search'
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
-        {renderIf(!searchResults && (locationIsEmpty || this.state.refreshing))(
+        {renderIf(!searchResultsLength && (locationIsEmpty || this.state.manualRefreshing))(
           <GenericLoadingScreen />
         )}
-        {renderIf(!searchResults && (!locationIsEmpty && !this.state.refreshing))(
-          <ZeroResultsPlaceholder onRefresh={this.onRefresh} />
+        {renderIf(!searchResultsLength && (!locationIsEmpty && !this.state.manualRefreshing))(
+          <ZeroResultsPlaceholder
+            onManualRefresh={this.onManualRefresh}
+            searchText={this.props.relay.variables.searchText}
+          />
         )}
-        {renderIf(searchResults)(
+        {renderIf(searchResultsLength)(
           <ListingList
             listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
             onPressListing={this.onPressListing}
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
+            pullRefreshing={this.state.pullRefreshing}
+            onPullToRefresh={this.onPullToRefresh}
+            onEndReached={this.onEndReached}
+            maxResultsShowing={searchResultsLength === this.props.relay.variables.firstN}
+            endReachedFetching={this.state.endReachedFetching}
+            haveScrolledPastFirstPage={searchResultsLength >= DEFAULT_FIRST_N}
           >
             <View style={styles.resultsHeaderContainer}>
               <View style={styles.resultesHeaderLine} />
@@ -113,7 +166,7 @@ FeedScreen = Relay.createContainer(FeedScreen, {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(first: $firstN, radius: 10) {
+          listingsSearch(first: $firstN, q: $searchText, radius: 10) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}

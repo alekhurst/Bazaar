@@ -341,8 +341,9 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     color: white,
-    fontSize: 20,
-    marginTop: 7,
+    fontSize: 16,
+    marginTop: 10,
+    fontWeight: '600',
   },
 
   inputRow: {

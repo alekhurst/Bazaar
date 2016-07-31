@@ -225,7 +225,7 @@ var styles = StyleSheet.create({
   listingButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 45,
+    width: 40,
     height: 45,
     borderRadius: 10,
   },

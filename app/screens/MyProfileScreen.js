@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
   myPokemonTitle: {
     textAlign: 'center',
     color: white,
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: '600'
   },
 
   addIcon: {

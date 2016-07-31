@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StatusBar, Platform, Alert, NetInfo} from 'react-native';
 import {connect} from 'react-redux';
+import Location from 'react-native-location';
 
 import {login, currentUserAsync, signOut} from 'actions/authenticationActions'
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -13,6 +14,7 @@ import renderIf from 'hammer/renderIf';
 var AppRoot = React.createClass({
   componentWillMount() {
     // this.props.dispatch(signOut());
+
     NetInfo.isConnected.addEventListener('change', checkNetworkConnection.bind(this));
 
     function checkNetworkConnection(isConnected) {
@@ -23,6 +25,10 @@ var AppRoot = React.createClass({
         this.props.dispatch(currentUserAsync());
       }
     }
+  },
+
+  componentDidMount() {
+    Location.requestWhenInUseAuthorization();
   },
 
   onPressLogin() {

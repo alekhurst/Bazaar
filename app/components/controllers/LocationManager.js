@@ -29,7 +29,6 @@ class LocationManager extends React.Component {
     this.subscription = null;
 
     // bind custom methods
-    this.getAuthorization = this.getAuthorization.bind(this);
     this.handleAuthorization = this.handleAuthorization.bind(this);
     this.onAuthorizationDenied = this.onAuthorizationDenied.bind(this);
     this.onAuthorizationSuccess = this.onAuthorizationSuccess.bind(this);
@@ -39,19 +38,21 @@ class LocationManager extends React.Component {
     this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 15000);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // check location authorization every we we re-open app
     AppState.addEventListener('change', (currentState) => {
       if (currentState === ACTIVE) {
         this.handleAuthorization();
       }
     });
+  }
 
+  componentDidMount() {
     this.handleAuthorization();
   }
 
   handleAuthorization() {
-    this.getAuthorization((authorization) => {
+    Location.getAuthorizationStatus((authorization) => {
       if (authorization === AUTHORIZED_ALWAYS || authorization === AUTHORIZED_WHEN_IN_USE) {
         if (!this.subscription) {
           this.onAuthorizationSuccess();
@@ -60,11 +61,6 @@ class LocationManager extends React.Component {
         this.onAuthorizationDenied();
       }
     });
-  }
-
-  getAuthorization(callback) {
-    Location.requestWhenInUseAuthorization();
-    Location.getAuthorizationStatus(authorization => callback(authorization));
   }
 
   onAuthorizationDenied() {

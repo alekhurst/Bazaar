@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: white,
   },
 
   resultesHeaderLine: {

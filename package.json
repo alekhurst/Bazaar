@@ -13,6 +13,7 @@
     "react-native": "0.30.0",
     "react-native-google-signin": "^0.6.1",
     "react-native-location": "^0.27.0",
+    "react-native-modal-picker": "0.0.16",
     "react-native-scrollable-tab-view": "^0.5.3",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.4.5",

@@ -27,7 +27,6 @@ var ListingList = React.createClass({
     onEndReached: React.PropTypes.func,
     maxResultsShowing: React.PropTypes.bool,
     endReachedFetching: React.PropTypes.bool,
-    haveScrolledPastFirstPage: React.PropTypes.bool,
   },
 
   onScroll(event) {
@@ -72,7 +71,7 @@ var ListingList = React.createClass({
             <ActivityIndicator size='large' color={matterhorn} animating />
           </View>
         )}
-        {renderIf(!this.props.endReachedFetching && this.props.haveScrolledPastFirstPage)(
+        {renderIf(!this.props.endReachedFetching)(
           <View style={styles.lastItemContent}>
             <Text style={styles.noMoreResults}>That is all.</Text>
           </View>

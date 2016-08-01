@@ -86,7 +86,7 @@ var FeedScreen = React.createClass({
 
   onEndReached() {
     this.setState({endReachedFetching: true})
-    this.props.relay.setVariables(
+    this.props.relay.forceFetch(
       {firstN: this.props.relay.variables.firstN + DEFAULT_FIRST_N},
       ({done, error}) => {
         if (done) {
@@ -136,7 +136,6 @@ var FeedScreen = React.createClass({
             onEndReached={this.onEndReached}
             maxResultsShowing={searchResultsLength === this.props.relay.variables.firstN}
             endReachedFetching={this.state.endReachedFetching}
-            haveScrolledPastFirstPage={searchResultsLength >= DEFAULT_FIRST_N}
           >
             <View style={styles.resultsHeaderContainer}>
               <View style={styles.resultesHeaderLine} />

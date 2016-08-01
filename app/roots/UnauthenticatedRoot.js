@@ -7,14 +7,14 @@ import {
 } from 'react-native';
 import {GoogleSigninButton} from 'react-native-google-signin';
 
-import {white, primaryColor} from 'hammer/colors';
+import {white, gray98, primaryColor, reallyDarkOrange} from 'hammer/colors';
 
 var UnauthenticatedRoot = React.createClass({
   render() {
     return (
       <View style={styles.container}>
         <Image
-          source={require('images/logo.png')}
+          source={require('images/logo300px.png')}
           resizeMode='contain'
           style={styles.logo}
         />
@@ -36,30 +36,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: primaryColor,
+    backgroundColor: gray98,
   },
 
   logo: {
-    width: 180,
-    height: 180,
+    width: 160,
+    height: 160,
   },
 
   title: {
-    color: white,
+    color: primaryColor,
     fontSize: 54,
     fontWeight: '200',
   },
 
   subtitle: {
-    color: white,
-    fontSize: 16,
-    fontWeight: '400',
+    color: primaryColor,
+    fontSize: 17,
+    fontWeight: '300',
   },
 
   signinButton: {
     width: 230,
     height: 48,
-    marginTop: 100,
+    marginTop: 70,
     backgroundColor: 'transparent'
   },
 });

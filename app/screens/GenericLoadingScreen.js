@@ -12,7 +12,7 @@ var GenericLoadingScreen = React.createClass({
     return (
       <View style={[styles.container, this.props.style]} >
         <View style={styles.content}>
-          <Image source={require('images/logo-white-background-no-center.png')} style={styles.logo} resizeMode={'contain'} />
+          <Image source={require('images/logo300px.png')} style={styles.logo} resizeMode={'contain'} />
           <Image source={require('images/ripple.gif')} style={styles.spinner} resizeMode={'contain'} />
         </View>
       </View>

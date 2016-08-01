@@ -185,6 +185,10 @@ var FeedScreenWrapper = React.createClass({
     var longitude = get(this.props, 'location.longitude', null);
     var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
 
+    if (locationIsEmpty) {
+      return <GenericLoadingScreen />
+    }
+
     return (
       <Relay.Renderer
         Container={FeedScreen}
@@ -193,8 +197,6 @@ var FeedScreenWrapper = React.createClass({
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
-          } else if (locationIsEmpty) {
-            return <GenericLoadingScreen />
           } else if (props) {
             return <FeedScreen {...props} />
           } else {

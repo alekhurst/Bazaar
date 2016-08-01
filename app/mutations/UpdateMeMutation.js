@@ -25,10 +25,31 @@ class UpdateMeMutation extends Relay.Mutation {
             latitude,
             longitude,
           },
-          displayName
+          displayName,
+          listings(first: 25) {
+            edges {
+              node {
+                user {
+                  displayName,
+                  location {
+                    latitude,
+                    longitude,
+                  }
+                }
+              }
+            }
+          }
         }
       }
     `;
+  }
+
+  getOptimisticResponse() {
+    return {
+      me: {
+        displayName: this.props.displayName ? this.props.displayName : this.props.me.displayName
+      }
+    }
   }
 
   getConfigs() {
@@ -48,7 +69,8 @@ class UpdateMeMutation extends Relay.Mutation {
           location {
             latitude,
             longitude,
-          }
+          },
+          displayName,
         }
       `;
     },

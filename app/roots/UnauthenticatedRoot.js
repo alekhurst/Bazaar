@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   signinButton: {
     width: 230,
     height: 48,
-    marginTop: 70,
+    marginTop: 80,
     backgroundColor: 'transparent'
   },
 });

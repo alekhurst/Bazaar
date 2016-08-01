@@ -4,8 +4,10 @@ import {
   Image,
   View
 } from 'react-native';
-import {primaryColor} from 'hammer/colors';
+import {white, primaryColor} from 'hammer/colors';
 import {vw, vh} from 'hammer/viewPercentages';
+
+import Spinner from 'react-native-spinkit';
 
 var GenericLoadingScreen = React.createClass({
   render() {
@@ -13,7 +15,7 @@ var GenericLoadingScreen = React.createClass({
       <View style={[styles.container, this.props.style]} >
         <View style={styles.content}>
           <Image source={require('images/logo300px.png')} style={styles.logo} resizeMode={'contain'} />
-          <Image source={require('images/ripple.gif')} style={styles.spinner} resizeMode={'contain'} />
+          <Spinner style={styles.spinner} isVisible size={35} type='Bounce' color='#ffc296'/>
         </View>
       </View>
     );
@@ -42,12 +44,8 @@ var styles = StyleSheet.create({
 
   spinner: {
     position: 'relative',
-    top: -90,
-    left: -1,
-    margin: 0,
-    padding: 0,
-    width: 43,
-    height: 43
+    top: -87,
+    left: 0,
   }
 })
 

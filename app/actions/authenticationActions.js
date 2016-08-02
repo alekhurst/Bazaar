@@ -24,7 +24,7 @@ export const login = () => {
     .catch((err) => {
       // google signin failed
       console.log('Error signing into Google: ', err);
-      dispatch(loginFailure())
+      dispatch(loginError())
     })
     .done();
   }

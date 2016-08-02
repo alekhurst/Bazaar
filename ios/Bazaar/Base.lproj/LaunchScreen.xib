@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="LogoAndName" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-Xd-HTe">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="LogoAndName" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-Xd-HTe">
                     <rect key="frame" x="120" y="86" width="240" height="240"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="240" id="Z2y-eY-w3Q"/>
@@ -21,6 +21,7 @@
             </subviews>
             <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="uWn-Xd-HTe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-40" id="9fA-d1-Kq1"/>
                 <constraint firstItem="uWn-Xd-HTe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="B9z-yl-mHM"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

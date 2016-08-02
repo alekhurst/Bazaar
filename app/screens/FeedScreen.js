@@ -27,7 +27,7 @@ import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
 const DEFAULT_SEARCH_TEXT = "";
-const DEFAULT_FIRST_N = 9;
+const DEFAULT_FIRST_N = 12;
 
 var FeedScreen = React.createClass({
   getInitialState() {

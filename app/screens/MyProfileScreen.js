@@ -52,23 +52,12 @@ var MyProfileScreen = React.createClass({
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
         </View>
-        <ScrollView style={styles.container}>
-          <View style={styles.disableAdsHeaderContainer}>
-            <Text style={styles.disableAdsHeader}>DISABLE ADS</Text>
-          </View>
-          <View style={styles.disableAdsButtonContainer}>
-            <TouchableOpacity style={styles.disableAdsButton} onPress={noop}>
-              <Text style={styles.disableAdsButtonText}>Disable ads for $1.99</Text>
-            </TouchableOpacity>
-            <Text style={styles.nextAdTimer}>Next ad in 1:42</Text>
-          </View>
-          <ListingList
-            editMode
-            onPressConfirmDeleteListing={this.onPressConfirmDeleteListing}
-            onPressListing={this.onPressListing}
-            listings={this.props.me.listings.edges.map(e => e.node)}
-          />
-        </ScrollView>
+        <ListingList
+          editMode
+          onPressConfirmDeleteListing={this.onPressConfirmDeleteListing}
+          onPressListing={this.onPressListing}
+          listings={this.props.me.listings.edges.map(e => e.node)}
+        />
       </View>
     );
   }
@@ -82,7 +71,7 @@ MyProfileScreen = Relay.createContainer(MyProfileScreen, {
       return Relay.QL`
         fragment on User {
           id,
-          listings(first: 25) {
+          listings(first: 30) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -139,49 +128,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 8,
-  },
-
-  disableAdsHeaderContainer: {
-    backgroundColor: gray98,
-    paddingTop: 6,
-  },
-
-  disableAdsHeader: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: matterhorn,
-    marginLeft: 8,
-    marginBottom: 4,
-  },
-
-  disableAdsButtonContainer: {
-    backgroundColor: gray98,
-    paddingBottom: 8,
-    marginBottom: 0
-  },
-
-  disableAdsButton: {
-    flex: 1,
-    flexDirection: 'row',
-    marginHorizontal: 8,
-    paddingVertical: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    backgroundColor: gainsboro
-  },
-
-  disableAdsButtonText: {
-    color: matterhorn,
-    alignSelf: 'center',
-    fontSize: 16,
-  },
-
-  nextAdTimer: {
-    alignSelf: 'center',
-    fontWeight: '300',
-    fontSize: 12,
-    marginTop: 5,
   },
 });
 

@@ -37,16 +37,10 @@ var ListingDetailsInner = React.createClass({
       userDistance = '>10';
     }
 
-    var locationUpdatedAt = Math.round(((new Date() - new Date(user.locationUpdatedAt)) / 1000) / 60)
-    // weird bug where it's defaulting to 7 days when it hasn't been
-    // going to try and catch it next time it happens
-    console.log('logging for potential locationUpdatedAt bug. user.locationUpdatedAt value: ', user.locationUpdatedAt)
-    console.log('logging for potential locationUpdatedAt bug. new Date(user.locationUpdatedAt) value: ', new Date(user.locationUpdatedAt));
-    console.log('logging for potential locationUpdatedAt bug. new Date() value: ', new Date())
-    console.log('logging for potential locationUpdatedAt bug. new Date() - new Date(user.locationUpdatedAt) value: ', new Date() - new Date(user.locationUpdatedAt))
-    console.log('logging for potential locationUpdatedAt bug. ((new Date() - new Date(user.locationUpdatedAt)) / 1000) value: ', ((new Date() - new Date(user.locationUpdatedAt)) / 1000))
-    console.log('logging for potential locationUpdatedAt bug. ((new Date() - new Date(user.locationUpdatedAt)) / 1000) / 60: ', ((new Date() - new Date(user.locationUpdatedAt)) / 1000) / 60)
-    console.log('logging for potential locationUpdatedAt bug. post computation locationUpdatedAt (rounded) value: ', locationUpdatedAt)
+    var currentDateUTC = Date.parse(new Date().toUTCString());
+    var locationUpdatedAtUTC = Date.parse(user.locationUpdatedAt)
+    var locationUpdatedAt = Math.round(((currentDateUTC - locationUpdatedAtUTC) / 1000) / 60)
+
     if (locationUpdatedAt < 1) {
       locationUpdatedAt = '<1m';
     } else if (locationUpdatedAt < 60){

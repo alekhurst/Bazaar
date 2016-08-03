@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
   View,
   Alert,
 } from 'react-native';
@@ -22,7 +23,8 @@ import noop from 'hammer/noop';
 var ChatScreen = React.createClass({
   getInitialState() {
     return {
-      displayName: this.props.me.displayName ? this.props.me.displayName : ""
+      displayName: this.props.me.displayName ? this.props.me.displayName : "",
+      mutatingDisplayName: false
     }
   },
 
@@ -31,28 +33,38 @@ var ChatScreen = React.createClass({
       return;
     }
 
+    if(this.state.displayName.length > 16) {
+      Alert.alert(
+        'Failure',
+        'Your display name is too long',
+        [{text: 'OK', onPress: noop}]
+      );
+      return;
+    }
+
     var updateMeInput = {
       me: this.props.me,
       displayName: this.state.displayName
     }
 
+    this.setState({mutatingDisplayName: true});
     Relay.Store.commitUpdate(
       new UpdateMeMutation(updateMeInput),
       {
-        onSuccess: () => Alert.alert(
-          `Success`,
-          'Your chat display name was successfully updated',
-          [
-            {text: 'OK', onPress: noop},
-          ]
-        ),
+        onSuccess: () => {
+          this.setState({mutatingDisplayName: false});
+          Alert.alert(
+            `Success`,
+            'Your display name was successfully updated',
+            [{text: 'OK', onPress: noop}]
+          )
+        },
         onFailure: () => {
+          this.setState({mutatingDisplayName: false});
           Alert.alert(
             `Failure`,
             'This display name has already been taken',
-            [
-              {text: 'OK', onPress: noop},
-            ]
+            [{text: 'OK', onPress: noop}]
           )
         },
       }
@@ -69,7 +81,7 @@ var ChatScreen = React.createClass({
           </TouchableOpacity>
         </View>
         <View style={styles.displayNameContainer}>
-          <Text style={styles.displayNameHeader}>MY CHAT DISPLAY NAME</Text>
+          <Text style={styles.displayNameHeader}>SET YOUR CHAT DISPLAY NAME</Text>
           <View style={styles.displayNameInputWrapper}>
             <TextInput
               onChangeText={(displayName) => this.setState({displayName})}
@@ -77,8 +89,10 @@ var ChatScreen = React.createClass({
               placeholder="Anonymous"
               value={this.state.displayName}
               style={styles.displayNameTextInput}
+              returnKeyType='done'
               autoCorrect={false}
             />
+            <ActivityIndicator animating={this.state.mutatingDisplayName} size='small' style={styles.mutatingDisplayNameSpinner}/>
           </View>
         </View>
         <ConversationList />
@@ -162,7 +176,7 @@ var styles = StyleSheet.create({
   },
 
   displayNameInputWrapper: {
-    width: vw(65),
+    width: 240,
     alignSelf: 'center',
     borderBottomColor: matterhorn,
     borderBottomWidth: 1,
@@ -177,6 +191,12 @@ var styles = StyleSheet.create({
     fontWeight: '300',
     color: matterhorn,
   },
+
+  mutatingDisplayNameSpinner: {
+    position: 'absolute',
+    right: 0,
+    top: 3,
+  }
 });
 
 export default ChatScreenWrapper;

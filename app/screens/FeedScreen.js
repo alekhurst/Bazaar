@@ -11,7 +11,7 @@ import {
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {get, isNumber, isEmpty} from 'lodash';
+import {get, isNumber, isEmpty, debounce} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
 
@@ -30,6 +30,10 @@ const DEFAULT_SEARCH_TEXT = "";
 const DEFAULT_FIRST_N = 12;
 
 var FeedScreen = React.createClass({
+  componentWillMount() {
+    debouncedOnSubmitSearchQuery = debounce(this.onSubmitSearchQuery, 300);
+  },
+
   getInitialState() {
     return {
       searchText: "",
@@ -64,6 +68,11 @@ var FeedScreen = React.createClass({
         this.setState({pullRefreshing: false, manualRefreshing: false});
       }
     });
+  },
+
+  onChangeSearchText(searchText) {
+    this.setState({searchText});
+    debouncedOnSubmitSearchQuery();
   },
 
   onSubmitSearchQuery() {
@@ -103,47 +112,53 @@ var FeedScreen = React.createClass({
     var latitude = get(this.props, 'location.latitude', null);
     var longitude = get(this.props, 'location.longitude', null);
     var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
+    var content = null;
+
+    if (this.state.manualRefreshing) {
+      content = <GenericLoadingScreen />
+    } else if (locationIsEmpty) {
+      content = <GenericLoadingScreen />
+    } else if (!searchResultsLength) {
+      content = (
+        <ZeroResultsPlaceholder
+          onManualRefresh={this.onManualRefresh}
+          searchText={this.props.relay.variables.searchText}
+        />
+      )
+    } else {
+      content = (
+        <ListingList
+          listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
+          onPressListing={this.onPressListing}
+          pullRefreshing={this.state.pullRefreshing}
+          onPullToRefresh={this.onPullToRefresh}
+          onEndReached={this.onEndReached}
+          maxResultsShowing={searchResultsLength === this.props.relay.variables.firstN}
+          endReachedFetching={this.state.endReachedFetching}
+        >
+          <View style={styles.resultsHeaderContainer}>
+            <View style={styles.resultesHeaderLine} />
+            <Text style={styles.resultsHeaderText}>Pokemon for trade near you</Text>
+            <View style={styles.resultesHeaderLine} />
+          </View>
+        </ListingList>
+      )
+    }
 
     return (
       <View style={styles.container}>
         <NavigationBar>
           <TextInput
             value={this.state.searchText}
-            onChangeText={searchText => this.setState({searchText})}
+            onChangeText={this.onChangeSearchText}
             style={styles.searchInput}
             clearButtonMode='while-editing'
             autoCorrect={false}
-            onSubmitEditing={() => this.onSubmitSearchQuery()}
             returnKeyType='search'
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
-        {renderIf(!searchResultsLength && (locationIsEmpty || this.state.manualRefreshing))(
-          <GenericLoadingScreen />
-        )}
-        {renderIf(!searchResultsLength && (!locationIsEmpty && !this.state.manualRefreshing))(
-          <ZeroResultsPlaceholder
-            onManualRefresh={this.onManualRefresh}
-            searchText={this.props.relay.variables.searchText}
-          />
-        )}
-        {renderIf(searchResultsLength)(
-          <ListingList
-            listings={this.props.viewer.listingsSearch.edges.map((edge) => edge.node)}
-            onPressListing={this.onPressListing}
-            pullRefreshing={this.state.pullRefreshing}
-            onPullToRefresh={this.onPullToRefresh}
-            onEndReached={this.onEndReached}
-            maxResultsShowing={searchResultsLength === this.props.relay.variables.firstN}
-            endReachedFetching={this.state.endReachedFetching}
-          >
-            <View style={styles.resultsHeaderContainer}>
-              <View style={styles.resultesHeaderLine} />
-              <Text style={styles.resultsHeaderText}>Pokemon for trade near you</Text>
-              <View style={styles.resultesHeaderLine} />
-            </View>
-          </ListingList>
-        )}
+        {content}
       </View>
     );
   }

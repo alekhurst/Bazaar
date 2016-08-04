@@ -17,12 +17,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 import DestroyListingMutation from 'mutations/DestroyListingMutation';
 
+import NavigationBar from 'components/misc/NavigationBar';
 import MeRoute from 'routes/MeRoute';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import ListingList from 'components/listing/ListingList';
-import {white, gray98, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import {white, ghost, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import noop from 'hammer/noop';
@@ -46,12 +47,12 @@ var MyProfileScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topBarContainer}>
+        <NavigationBar style={{justifyContent: 'center'}}>
           <Text style={styles.title}>My Listings</Text>
           <TouchableOpacity style={styles.addIcon} onPress={() => this.props.dispatch(openEditListingScreen())}>
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
-        </View>
+        </NavigationBar>
         <ListingList
           editMode
           onPressConfirmDeleteListing={this.onPressConfirmDeleteListing}
@@ -109,12 +110,6 @@ var MyProfileScreenWrapper = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  topBarContainer: {
-    height: 43,
-    backgroundColor: primaryColor,
-    justifyContent: 'center',
   },
 
   title: {

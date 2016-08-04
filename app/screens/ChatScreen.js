@@ -15,8 +15,9 @@ import UpdateMeMutation from 'mutations/UpdateMeMutation';
 
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import NavigationBar from 'components/misc/NavigationBar';
 import ConversationList from 'components/chat/ConversationList';
-import {white, gray98, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
+import {white, ghost, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
@@ -74,12 +75,12 @@ var ChatScreen = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.topBarContainer}>
-          <Text style={styles.title}>Conversations</Text>
+        <NavigationBar style={{justifyContent: 'center'}}>
+          <Text style={styles.title}>Messages</Text>
           <TouchableOpacity style={styles.addIcon} onPress={noop}>
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
-        </View>
+        </NavigationBar>
         <View style={styles.displayNameContainer}>
           <Text style={styles.displayNameHeader}>SET YOUR CHAT DISPLAY NAME</Text>
           <View style={styles.displayNameInputWrapper}>
@@ -140,12 +141,6 @@ var styles = StyleSheet.create({
     flex: 1,
   },
 
-  topBarContainer: {
-    height: 43,
-    backgroundColor: primaryColor,
-    justifyContent: 'center',
-  },
-
   title: {
     textAlign: 'center',
     color: white,
@@ -161,7 +156,7 @@ var styles = StyleSheet.create({
 
   displayNameContainer: {
     marginBottom: 20,
-    backgroundColor: gray98,
+    backgroundColor: ghost,
     paddingBottom: 12,
     marginBottom: 5,
   },

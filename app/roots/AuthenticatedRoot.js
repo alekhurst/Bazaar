@@ -13,6 +13,7 @@ import MyProfileScreen from 'screens/MyProfileScreen';
 import ChatScreen from 'screens/ChatScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import EditListingScreen from 'screens/EditListingScreen';
+import ConversationScreen from 'screens/ConversationScreen';
 import TabBar from 'components/misc/TabBar';
 import LocationManager from 'components/controllers/LocationManager';
 import serverUrl from 'hammer/serverUrl';
@@ -40,6 +41,7 @@ const AuthenticatedRoot = React.createClass({
   },
 
   render() {
+    console.log('this.props.conversationScreen: ', this.props.conversationScreen.visible)
     return (
       <View style={{flex: 1}}>
         <ScrollableTabView
@@ -70,6 +72,14 @@ const AuthenticatedRoot = React.createClass({
         >
           <EditListingScreen />
         </Modal>
+        <Modal
+          animationType='slide'
+          transparent={false}
+          visible={this.props.conversationScreen.visible}
+          onRequestClose={() => noop()}
+        >
+          <ConversationScreen />
+        </Modal>
       </View>
     )
   },
@@ -79,7 +89,8 @@ function mapStateToProps(state) {
   return {
     userCredentials: state.userCredentials,
     listingDetailsScreen: state.listingDetailsScreen,
-    editListingScreen: state.editListingScreen
+    editListingScreen: state.editListingScreen,
+    conversationScreen: state.conversationScreen,
   }
 }
 

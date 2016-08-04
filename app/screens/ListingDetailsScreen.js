@@ -20,7 +20,7 @@ import PokemonImage from 'components/pokemon/PokemonImage';
 import EnergyBar from 'components/pokemon/EnergyBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
-import {white, gray98, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
+import {white, ghost, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 
 var ListingDetailsInner = React.createClass({
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   lowerDetailsContainer: {
     padding: 20,
     alignItems: 'center',
-    backgroundColor: gray98,
+    backgroundColor: ghost,
     width: 290,
     alignSelf: 'center',
     borderRadius: 5,

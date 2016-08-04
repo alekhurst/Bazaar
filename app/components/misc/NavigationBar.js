@@ -7,7 +7,7 @@ import {vw} from 'hammer/viewPercentages';
 var NavigationBar = React.createClass({
   render() {
     return (
-      <View style={{height: 43, width: vw(100), backgroundColor: primaryColor}}>
+      <View style={[{height: 43, width: vw(100), backgroundColor: primaryColor}, this.props.style]}>
         {this.props.children}
       </View>
     )

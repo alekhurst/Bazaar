@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {primaryColor, gray98, gainsboro} from 'hammer/colors';
+import {primaryColor, ghost, gainsboro} from 'hammer/colors';
 
 const TabBar = React.createClass({
   propTypes: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 45,
     flexDirection: 'row',
     paddingTop: 14,
-    backgroundColor: gray98,
+    backgroundColor: ghost,
   },
 });
 

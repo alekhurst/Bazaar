@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {GoogleSigninButton} from 'react-native-google-signin';
 
-import {white, gray98, primaryColor, reallyDarkOrange} from 'hammer/colors';
+import {white, ghost, primaryColor} from 'hammer/colors';
 
 var UnauthenticatedRoot = React.createClass({
   render() {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: gray98,
+    backgroundColor: ghost,
   },
 
   logo: {

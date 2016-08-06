@@ -3,44 +3,72 @@ import {ScrollView, View, Text, TouchableOpacity, StyleSheet} from 'react-native
 import {connect} from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Firebase from 'firebase';
 
 import {closeConversationScreen} from 'actions/chat/conversationScreenActions';
 
 import StatusBarBackground from 'components/misc/StatusBarBackground';
+import GenericLoadingScreen from 'screens/GenericLoadingScreen'
 import NavigationBar from 'components/misc/NavigationBar';
 import {white, whiteSmoke, base, matterhorn} from 'hammer/colors';
+import renderIf from 'hammer/renderIf';
 import noop from 'hammer/noop';
 
 class ConversationScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {messages: []};
+    this.state = {
+      messages: [],
+      loadingMessages: true,
+    };
 
+    this.onMessagesValueChange= this.onMessagesValueChange.bind(this);
     this.onSend = this.onSend.bind(this);
   }
 
   componentWillMount() {
+    this._firebaseMessagesRef = Firebase.database().ref('/messages/alek-jason')
+    this._firebaseMessagesRef.on('value', this.onMessagesValueChange);
+  }
+
+  componentWillUnmount() {
+    this._firebaseMessagesRef.off('value', this.onMessagesValueChange);
+  }
+
+  onMessagesValueChange(snapshot) {
+    var data = snapshot.val();
+    var keys = Object.keys(data);
+    var messages = keys.map((key) => {
+      return {
+        _id: key,
+        text: data[key].text,
+        createdAt: data[key].sentAt,
+        user: {
+          _id: data[key].sender,
+        }
+      }
+    }).reverse();
+
     this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
-          user: {
-            _id: 2,
-            name: 'React Native',
-          },
-        },
-      ],
+      loadingMessages: false,
+      messages
     });
   }
 
   onSend(messages = []) {
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      };
+    if (!messages.length) return;
+    var timestamp = new Date().getTime();
+
+    Firebase.database().ref('/messages/alek-jason').push({
+      sender: messages[0].user._id,
+      sentAt: timestamp,
+      text: messages[0].text
     });
+
+    Firebase.database().ref('/chats/oneToOne/alek-jason').update({
+      lastMessage: messages[0].text,
+      updatedAt: timestamp,
+    })
   }
 
   render() {
@@ -53,19 +81,29 @@ class ConversationScreen extends React.Component {
             <Icon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={this.onSend}
-          user={{
-            _id: 1,
-          }}
-        />
+        {renderIf(this.state.loadingMessages)(
+          <GenericLoadingScreen />
+        )}
+        {renderIf(!this.state.loadingMessages)(
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={this.onSend}
+            renderAvatar={() => null}
+            user={{
+              _id: this.props.userId,
+            }}
+          />
+        )}
       </View>
     )
   }
 }
 
-ConversationScreen = connect()(ConversationScreen);
+function mapStateToProps(state) {
+  return {userId: state.userCredentials.userId}
+}
+
+ConversationScreen = connect(mapStateToProps)(ConversationScreen);
 
 var styles = StyleSheet.create({
   backButton: {

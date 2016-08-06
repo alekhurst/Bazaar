@@ -7,6 +7,7 @@ import Relay, {
 } from 'react-relay';
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import Firebase from 'firebase';
 
 import FeedScreen from 'screens/FeedScreen';
 import MyProfileScreen from 'screens/MyProfileScreen';
@@ -28,6 +29,13 @@ const AuthenticatedRoot = React.createClass({
     // console.log('access token: ', bazaarAccessToken);
     // console.log('user email: ', userEmail);
 
+    Firebase.initializeApp({
+      apiKey: "AIzaSyC907RJrC4ylrAZRNbayrmRnyjTN3C69eM",
+      authDomain: "bazaar-ff292.firebaseapp.com",
+      databaseURL: "https://bazaar-ff292.firebaseio.com",
+      storageBucket: "bazaar-ff292.appspot.com",
+    })
+
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer(`${serverUrl}/api/graph`, {
         headers: {
@@ -41,7 +49,6 @@ const AuthenticatedRoot = React.createClass({
   },
 
   render() {
-    console.log('this.props.conversationScreen: ', this.props.conversationScreen.visible)
     return (
       <View style={{flex: 1}}>
         <ScrollableTabView

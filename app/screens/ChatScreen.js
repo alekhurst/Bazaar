@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Text,
+  ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -9,14 +10,16 @@ import {
   Alert,
 } from 'react-native';
 import Relay from 'react-relay';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
+import Firebase from 'firebase';
+
 import MeRoute from 'routes/MeRoute';
 import UpdateMeMutation from 'mutations/UpdateMeMutation';
 
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import NavigationBar from 'components/misc/NavigationBar';
-import ConversationList from 'components/chat/ConversationList';
+import ChatListRow from 'components/chat/ChatListRow';
 import {white, ghost, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
@@ -25,8 +28,29 @@ var ChatScreen = React.createClass({
   getInitialState() {
     return {
       displayName: this.props.me.displayName ? this.props.me.displayName : "",
-      mutatingDisplayName: false
+      mutatingDisplayName: false,
+      chatIds: [],
+      loadingFirebaseUser: true,
     }
+  },
+
+  componentWillMount() {
+    this._firebaseUserRef = Firebase.database().ref('/users/alek')
+    this._firebaseUserRef.on('value', this.onFirebaseUserValueChange);
+  },
+
+  componentWillUnmount() {
+    this._firebaseUserRef.off('value', this.onFirebaseUserValueChange);
+  },
+
+  onFirebaseUserValueChange(snapshot) {
+    var data = snapshot.val();
+    var keys = Object.keys(data.chats);
+
+    this.setState({
+      loadingFirebaseUser: false,
+      chatIds: keys,
+    })
   },
 
   onFinishEditingDisplayName() {
@@ -96,7 +120,9 @@ var ChatScreen = React.createClass({
             <ActivityIndicator animating={this.state.mutatingDisplayName} size='small' style={styles.mutatingDisplayNameSpinner}/>
           </View>
         </View>
-        <ConversationList />
+        <ScrollView>
+          {this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)}
+        </ScrollView>
       </View>
     );
   },

@@ -30,7 +30,7 @@ import {vw} from 'hammer/viewPercentages';
 import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import noop from 'hammer/noop';
 
-var MyProfileScreen = React.createClass({
+var MeTab = React.createClass({
   onPressConfirmDeleteListing(listingId) {
     var destroyListingInput = {
       me: this.props.me,
@@ -71,9 +71,9 @@ var MyProfileScreen = React.createClass({
   }
 });
 
-MyProfileScreen = connect()(MyProfileScreen);
+MeTab = connect()(MeTab);
 
-MyProfileScreen = Relay.createContainer(MyProfileScreen, {
+MeTab = Relay.createContainer(MeTab, {
   fragments: {
     me() {
       return Relay.QL`
@@ -93,18 +93,18 @@ MyProfileScreen = Relay.createContainer(MyProfileScreen, {
   },
 });
 
-var MyProfileScreenWrapper = React.createClass({
+var MeTabWrapper = React.createClass({
   render() {
     return (
       <Relay.Renderer
-        Container={MyProfileScreen}
+        Container={MeTab}
         environment={Relay.Store}
         queryConfig={new MeRoute()}
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
           } else if (props) {
-            return <MyProfileScreen {...props} />
+            return <MeTab {...props} />
           } else {
             return <GenericLoadingScreen />
           }
@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyProfileScreenWrapper;
+export default MeTabWrapper;

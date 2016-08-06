@@ -29,7 +29,7 @@ import noop from 'hammer/noop';
 const DEFAULT_SEARCH_TEXT = "";
 const DEFAULT_FIRST_N = 12;
 
-var FeedScreen = React.createClass({
+var FeedTab = React.createClass({
   componentWillMount() {
     debouncedOnSubmitSearchQuery = debounce(this.onSubmitSearchQuery, 300);
   },
@@ -168,9 +168,9 @@ function mapStateToProps(state) {
   return {location: state.location}
 }
 
-FeedScreen = connect(mapStateToProps)(FeedScreen);
+FeedTab = connect(mapStateToProps)(FeedTab);
 
-FeedScreen = Relay.createContainer(FeedScreen, {
+FeedTab = Relay.createContainer(FeedTab, {
   initialVariables: {
     searchText: DEFAULT_SEARCH_TEXT,
     firstN: DEFAULT_FIRST_N,
@@ -193,7 +193,7 @@ FeedScreen = Relay.createContainer(FeedScreen, {
   },
 });
 
-var FeedScreenWrapper = React.createClass({
+var FeedTabWrapper = React.createClass({
   render() {
     var latitude = get(this.props, 'location.latitude', null);
     var longitude = get(this.props, 'location.longitude', null);
@@ -205,14 +205,14 @@ var FeedScreenWrapper = React.createClass({
 
     return (
       <Relay.Renderer
-        Container={FeedScreen}
+        Container={FeedTab}
         environment={Relay.Store}
         queryConfig={new ViewerRoute()}
         render={({done, error, props}) => {
           if (error) {
             return <GenericErrorScreen />
           } else if (props) {
-            return <FeedScreen {...props} />
+            return <FeedTab {...props} />
           } else {
             return <GenericLoadingScreen />
           }
@@ -226,7 +226,7 @@ function mapStateToProps(state) {
   return {location: state.location}
 }
 
-FeedScreenWrapper = connect(mapStateToProps)(FeedScreenWrapper);
+FeedTabWrapper = connect(mapStateToProps)(FeedTabWrapper);
 
 const styles = StyleSheet.create({
   container: {
@@ -276,4 +276,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FeedScreenWrapper;
+export default FeedTabWrapper;

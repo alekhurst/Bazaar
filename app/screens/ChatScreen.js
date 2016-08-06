@@ -1,170 +1,134 @@
 import React from 'react';
-import {
-  Text,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  View,
-  Alert,
-} from 'react-native';
-import Relay from 'react-relay';
+import {ScrollView, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {GiftedChat} from 'react-native-gifted-chat';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Firebase from 'firebase';
 
-import MeRoute from 'routes/MeRoute';
-import UpdateMeMutation from 'mutations/UpdateMeMutation';
+import {closeChatScreen} from 'actions/chat/chatScreenActions';
 
-import GenericErrorScreen from 'screens/GenericErrorScreen';
-import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import StatusBarBackground from 'components/misc/StatusBarBackground';
+import GenericLoadingScreen from 'screens/GenericLoadingScreen'
 import NavigationBar from 'components/misc/NavigationBar';
-import ChatListRow from 'components/chat/ChatListRow';
-import {white, ghost, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
-import {vw} from 'hammer/viewPercentages';
+import {white, whiteSmoke, base, matterhorn} from 'hammer/colors';
+import renderIf from 'hammer/renderIf';
 import noop from 'hammer/noop';
 
-var ChatScreen = React.createClass({
-  getInitialState() {
-    return {
-      displayName: this.props.me.displayName ? this.props.me.displayName : "",
-      mutatingDisplayName: false,
-      chatIds: [],
-      loadingFirebaseUser: true,
-    }
-  },
+class ChatScreen extends React.Component {
+  propTypes: {
+    chatId: React.PropTypes.string.isRequired,
+    chatTitle: React.PropTypes.string.isRequired,
+    userId: React.PropTypes.string.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      loadingMessages: true,
+    };
+
+    this.onMessagesValueChange= this.onMessagesValueChange.bind(this);
+    this.onSend = this.onSend.bind(this);
+  }
 
   componentWillMount() {
-    this._firebaseUserRef = Firebase.database().ref('/users/alek')
-    this._firebaseUserRef.on('value', this.onFirebaseUserValueChange);
-  },
+    this._firebaseMessagesRef = Firebase.database().ref(`/messages/${this.props.chatId}`)
+    this._firebaseMessagesRef.on('value', this.onMessagesValueChange);
+  }
 
   componentWillUnmount() {
-    this._firebaseUserRef.off('value', this.onFirebaseUserValueChange);
-  },
+    this._firebaseMessagesRef.off('value', this.onMessagesValueChange);
+  }
 
-  onFirebaseUserValueChange(snapshot) {
+  onMessagesValueChange(snapshot) {
     var data = snapshot.val();
-    var keys = Object.keys(data.chats);
+
+    if (!data) {
+      return this.setState({
+        loadingMessages: false,
+        messages: []
+      });
+    }
+
+    var keys = Object.keys(data)
+
+    var messages = keys.map((key) => {
+      return {
+        _id: key,
+        text: data[key].text,
+        createdAt: data[key].sentAt,
+        user: {
+          _id: data[key].sender,
+        }
+      }
+    }).sort((a, b) => b.createdAt - a.createdAt);
 
     this.setState({
-      loadingFirebaseUser: false,
-      chatIds: keys,
+      loadingMessages: false,
+      messages: messages,
+    });
+  }
+
+  onSend(messages = []) {
+    if (!messages.length) return;
+    var timestamp = new Date().getTime();
+
+    Firebase.database().ref(`/messages/${this.props.chatId}`).push({
+      sender: messages[0].user._id,
+      sentAt: timestamp,
+      text: messages[0].text
+    });
+
+    Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`).update({
+      lastMessage: messages[0].text,
+      updatedAt: timestamp,
     })
-  },
-
-  onFinishEditingDisplayName() {
-    if (this.state.displayName === this.props.me.displayName) {
-      return;
-    }
-
-    if(this.state.displayName.length > 16) {
-      Alert.alert(
-        'Failure',
-        'Your display name is too long',
-        [{text: 'OK', onPress: noop}]
-      );
-      return;
-    }
-
-    var updateMeInput = {
-      me: this.props.me,
-      displayName: this.state.displayName
-    }
-
-    this.setState({mutatingDisplayName: true});
-    Relay.Store.commitUpdate(
-      new UpdateMeMutation(updateMeInput),
-      {
-        onSuccess: () => {
-          this.setState({mutatingDisplayName: false});
-          Alert.alert(
-            `Success`,
-            'Your display name was successfully updated',
-            [{text: 'OK', onPress: noop}]
-          )
-        },
-        onFailure: () => {
-          this.setState({mutatingDisplayName: false});
-          Alert.alert(
-            `Failure`,
-            'This display name has already been taken',
-            [{text: 'OK', onPress: noop}]
-          )
-        },
-      }
-    )
-  },
+  }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
+        <StatusBarBackground />
         <NavigationBar style={{justifyContent: 'center'}}>
-          <Text style={styles.title}>Messages</Text>
-          <TouchableOpacity style={styles.addIcon} onPress={noop}>
-            <Icon name='md-add-circle' size={26} color={white} />
+          <Text style={styles.title}>{this.props.chatTitle}</Text>
+          <TouchableOpacity style={styles.backButton} onPress={() => this.props.dispatch(closeChatScreen())}>
+            <Icon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>
-        <View style={styles.displayNameContainer}>
-          <Text style={styles.displayNameHeader}>SET YOUR CHAT DISPLAY NAME</Text>
-          <View style={styles.displayNameInputWrapper}>
-            <TextInput
-              onChangeText={(displayName) => this.setState({displayName})}
-              onSubmitEditing={() => this.onFinishEditingDisplayName()}
-              placeholder="Anonymous"
-              value={this.state.displayName}
-              style={styles.displayNameTextInput}
-              returnKeyType='done'
-              autoCorrect={false}
-            />
-            <ActivityIndicator animating={this.state.mutatingDisplayName} size='small' style={styles.mutatingDisplayNameSpinner}/>
-          </View>
-        </View>
-        <ScrollView>
-          {this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)}
-        </ScrollView>
+        {renderIf(this.state.loadingMessages)(
+          <GenericLoadingScreen />
+        )}
+        {renderIf(!this.state.loadingMessages)(
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={this.onSend}
+            renderAvatar={() => null}
+            user={{
+              _id: this.props.userId,
+            }}
+          />
+        )}
       </View>
-    );
-  },
-});
+    )
+  }
+}
 
-ChatScreen = Relay.createContainer(ChatScreen, {
-  fragments: {
-    me() {
-      return Relay.QL`
-        fragment on User {
-          displayName,
-          ${UpdateMeMutation.getFragment('me')}
-        }
-      `;
-    },
-  },
-});
+function mapStateToProps(state) {
+  return {
+    userId: state.userCredentials.userId,
+    chatId: state.chatScreen.chatId,
+    chatTitle: state.chatScreen.chatTitle,
+  }
+}
 
-var ChatScreenWrapper = React.createClass({
-  render() {
-    return (
-      <Relay.Renderer
-        Container={ChatScreen}
-        environment={Relay.Store}
-        queryConfig={new MeRoute()}
-        render={({done, error, props}) => {
-          if (error) {
-            return <GenericErrorScreen />
-          } else if (props) {
-            return <ChatScreen {...props} />
-          } else {
-            return <GenericLoadingScreen />
-          }
-        }}
-      />
-    );
-  },
-});
+ChatScreen = connect(mapStateToProps)(ChatScreen);
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  backButton: {
+    position: 'absolute',
+    top: 5,
+    left: 10,
   },
 
   title: {
@@ -173,51 +137,6 @@ var styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600'
   },
+})
 
-  addIcon: {
-    position: 'absolute',
-    right: 10,
-    top: 8,
-  },
-
-  displayNameContainer: {
-    marginBottom: 20,
-    backgroundColor: ghost,
-    paddingBottom: 12,
-    marginBottom: 5,
-  },
-
-  displayNameHeader: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: matterhorn,
-    marginLeft: 8,
-    marginTop: 8,
-    marginBottom: 5,
-  },
-
-  displayNameInputWrapper: {
-    width: 240,
-    alignSelf: 'center',
-    borderBottomColor: matterhorn,
-    borderBottomWidth: 1,
-    marginTop: 5,
-    height: 30,
-  },
-
-  displayNameTextInput: {
-    height: 30,
-    fontSize: 22,
-    textAlign: 'center',
-    fontWeight: '300',
-    color: matterhorn,
-  },
-
-  mutatingDisplayNameSpinner: {
-    position: 'absolute',
-    right: 0,
-    top: 3,
-  }
-});
-
-export default ChatScreenWrapper;
+export default ChatScreen;

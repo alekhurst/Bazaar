@@ -9,12 +9,12 @@ import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Firebase from 'firebase';
 
-import FeedScreen from 'screens/FeedScreen';
-import MyProfileScreen from 'screens/MyProfileScreen';
-import ChatScreen from 'screens/ChatScreen';
+import FeedTab from 'screens/FeedTab';
+import MeTab from 'screens/MeTab';
+import ChatTab from 'screens/ChatTab';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import EditListingScreen from 'screens/EditListingScreen';
-import ConversationScreen from 'screens/ConversationScreen';
+import ChatScreen from 'screens/ChatScreen';
 import TabBar from 'components/misc/TabBar';
 import LocationManager from 'components/controllers/LocationManager';
 import serverUrl from 'hammer/serverUrl';
@@ -42,6 +42,8 @@ const AuthenticatedRoot = React.createClass({
           'X-User-Token': bazaarAccessToken,
           'X-User-Email': userEmail,
         },
+        fetchTimeout: 20000,
+        retryDelays: [5000],
       })
     );
 
@@ -58,9 +60,9 @@ const AuthenticatedRoot = React.createClass({
           prerenderingSiblingsNumber={2}
           scrollWithoutAnimation
         >
-          <FeedScreen />
-          <MyProfileScreen />
-          <ChatScreen />
+          <FeedTab />
+          <MeTab />
+          <ChatTab />
         </ScrollableTabView>
         <LocationManager />
         <Modal
@@ -82,10 +84,10 @@ const AuthenticatedRoot = React.createClass({
         <Modal
           animationType='slide'
           transparent={false}
-          visible={this.props.conversationScreen.visible}
+          visible={this.props.chatScreen.visible}
           onRequestClose={() => noop()}
         >
-          <ConversationScreen />
+          <ChatScreen />
         </Modal>
       </View>
     )
@@ -97,7 +99,7 @@ function mapStateToProps(state) {
     userCredentials: state.userCredentials,
     listingDetailsScreen: state.listingDetailsScreen,
     editListingScreen: state.editListingScreen,
-    conversationScreen: state.conversationScreen,
+    chatScreen: state.chatScreen,
   }
 }
 

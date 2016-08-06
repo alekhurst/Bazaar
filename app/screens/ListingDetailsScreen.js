@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
+import Firebase from 'firebase';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
 
 import ListingRoute from 'routes/ListingRoute';
 import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
+import {openChatScreen} from 'actions/chat/chatScreenActions';
 
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -24,6 +26,28 @@ import {white, ghost, matterhorn, primaryColor, primaryBlue} from 'hammer/colors
 import {vw} from 'hammer/viewPercentages';
 
 var ListingDetailsInner = React.createClass({
+  onPressStartChat() {
+    var otherUser = this.props.listing.user.id;
+    var user = this.props.userId;
+    var newChatId = [otherUser, user].sort().join(':');
+    var newChatTitle = this.props.listing.user.id === this.props.userId ? 'Yourself' : this.props.listing.user.displayName;
+
+    Firebase.database().ref(`/chats/oneToOne/${newChatId}`).set({
+      createdAt: new Date().getTime()
+    })
+
+    Firebase.database().ref(`/users/${otherUser}/chats/${newChatId}`).set(true)
+    Firebase.database().ref(`/users/${user}/chats/${newChatId}`).set(true)
+
+    var firebaseChatMembersDataToSet = {};
+    firebaseChatMembersDataToSet[user] = true;
+    firebaseChatMembersDataToSet[otherUser] = true;
+    Firebase.database().ref(`/chatMembers/${newChatId}`).set(firebaseChatMembersDataToSet)
+
+    this.props.dispatch(closeListingDetailsScreen());
+    this.props.dispatch(openChatScreen(newChatId, newChatTitle));
+  },
+
   render() {
     var listing = this.props.listing;
     var pokemon = this.props.listing.pokemon;
@@ -60,7 +84,7 @@ var ListingDetailsInner = React.createClass({
       <View style={styles.container}>
         <View style={styles.topDetailsContainer}>
           <Text style={styles.cp}>CP <Text style={styles.cpValue}>{listing.cp}</Text></Text>
-          <TouchableOpacity style={styles.wantButton}>
+          <TouchableOpacity style={styles.wantButton} onPress={this.onPressStartChat}>
             <Text style={styles.wantButtonText}>Chat</Text>
           </TouchableOpacity>
         </View>
@@ -118,6 +142,12 @@ var ListingDetailsInner = React.createClass({
   }
 });
 
+function mapStateToPropsInner(state) {
+  return {userId: state.userCredentials.userId}
+}
+
+ListingDetailsInner = connect(mapStateToPropsInner)(ListingDetailsInner);
+
 ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
   fragments: {
     listing() {
@@ -140,6 +170,7 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
             elementTypes,
           },
           user {
+            id,
             displayName,
             distanceFromMe,
             locationUpdatedAt,

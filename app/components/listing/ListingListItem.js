@@ -207,9 +207,8 @@ var styles = StyleSheet.create({
   },
 
   rightDetailsContainer: {
-    flexDirection: 'row',
     position: 'absolute',
-    right: 0,
+    right: 5,
     top: 7,
     height: 15,
     width: 34,
@@ -231,6 +230,7 @@ var styles = StyleSheet.create({
   },
 
   distanceText: {
+    alignSelf: 'flex-end',
     fontSize: 11,
     color: gainsboro
   },

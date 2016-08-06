@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {isEmpty} from 'lodash';
 
 import {openEditListingScreen} from 'actions/editListingScreenActions';

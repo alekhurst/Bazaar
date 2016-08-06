@@ -17,6 +17,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 import DestroyListingMutation from 'mutations/DestroyListingMutation';
 
+import ZeroMyListingsPlaceholder from 'components/listing/ZeroMyListingsPlaceholder';
+import renderIf from 'hammer/renderIf';
 import NavigationBar from 'components/misc/NavigationBar';
 import MeRoute from 'routes/MeRoute';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -59,6 +61,11 @@ var MyProfileScreen = React.createClass({
           onPressListing={this.onPressListing}
           listings={this.props.me.listings.edges.map(e => e.node)}
         />
+        {renderIf(this.props.me.listings.edges.length === 0)(
+          <View>
+            <ZeroMyListingsPlaceholder></ZeroMyListingsPlaceholder>
+          </View>
+        )}
       </View>
     );
   }

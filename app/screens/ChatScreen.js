@@ -10,7 +10,7 @@ import {closeChatScreen} from 'actions/chat/chatScreenActions';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen'
 import NavigationBar from 'components/misc/NavigationBar';
-import {white, whiteSmoke, base, matterhorn} from 'hammer/colors';
+import {white, gainsboro} from 'hammer/colors';
 import renderIf from 'hammer/renderIf';
 import noop from 'hammer/noop';
 
@@ -30,6 +30,7 @@ class ChatScreen extends React.Component {
 
     this.onMessagesValueChange= this.onMessagesValueChange.bind(this);
     this.onSend = this.onSend.bind(this);
+    this.renderAvatar = this.renderAvatar.bind(this);
   }
 
   componentWillMount() {
@@ -86,6 +87,14 @@ class ChatScreen extends React.Component {
     })
   }
 
+  renderAvatar() {
+    return (
+      <View style={[styles.avatar]}>
+        <Text style={styles.avatarText}>{this.props.chatTitle.charAt(0)}</Text>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -103,7 +112,7 @@ class ChatScreen extends React.Component {
           <GiftedChat
             messages={this.state.messages}
             onSend={this.onSend}
-            renderAvatar={() => null}
+            renderAvatar={() => this.renderAvatar()}
             user={{
               _id: this.props.userId,
             }}
@@ -137,6 +146,20 @@ var styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600'
   },
+
+  avatar: {
+    width: 37,
+    height: 37,
+    borderRadius: 18.5,
+    backgroundColor: gainsboro,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  avatarText: {
+    color: white,
+    fontSize: 19,
+  }
 })
 
 export default ChatScreen;

@@ -1,6 +1,7 @@
 function chatScreen(state = {
   visible: false,
-  chatId: null
+  chatId: null,
+  chatTitle: null,
 }, action) {
   switch (action.type) {
     case 'CHANGE_CHAT_SCREEN_VISIBILITY':

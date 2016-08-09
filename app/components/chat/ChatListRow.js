@@ -9,7 +9,8 @@ import UserRoute from 'routes/UserRoute';
 
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
-import {whiteSmoke, base, matterhorn} from 'hammer/colors';
+import {white, whiteSmoke, base, matterhorn} from 'hammer/colors';
+import getColorFromUserId from 'hammer/getColorFromUserId';
 
 class ChatListRow extends React.Component {
   constructor(props) {
@@ -44,11 +45,20 @@ class ChatListRow extends React.Component {
   }
 
   render() {
-    var displayNameToShow = this.props.user.id === this.props.userId ? 'Yourself' : this.props.user.displayName;
+    var displayNameToShow;
+    if (!this.props.user.displayName) {
+      displayNameToShow = 'Anonymous'
+    } else if (this.props.user.id === this.props.userId) {
+      displayNameToShow = 'Yourself';
+    } else { // display name present & it's not me
+      displayNameToShow = this.props.user.displayName
+    }
 
     return (
       <TouchableOpacity style={styles.chatRow} onPress={() => this.props.dispatch(openChatScreen(this.props.chatId, displayNameToShow))}>
-        <View style={styles.circle}/>
+        <View style={[styles.circle, {backgroundColor: getColorFromUserId(this.props.user.id)}]}>
+          <Text style={styles.circleText}>{displayNameToShow.charAt(0)}</Text>
+        </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.name}>{displayNameToShow}</Text>
           <Text style={styles.lastMessage}>{this.state.lastMessage ? this.state.lastMessage : 'loading...'}</Text>
@@ -162,6 +172,13 @@ var styles = StyleSheet.create({
     height: 65,
     backgroundColor: whiteSmoke,
     borderRadius: 32.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  circleText: {
+    color: white,
+    fontSize: 32,
   },
 
   detailsContainer: {

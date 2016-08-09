@@ -30,7 +30,15 @@ var ListingDetailsInner = React.createClass({
     var otherUser = this.props.listing.user.id;
     var user = this.props.userId;
     var newChatId = [otherUser, user].sort().join(':');
-    var newChatTitle = this.props.listing.user.id === this.props.userId ? 'Yourself' : this.props.listing.user.displayName;
+    
+    var newChatTitle;
+    if (!this.props.listing.user.displayName) {
+      newChatTitle = 'Anonymous'
+    } else if (this.props.listing.user.id === this.props.userId) {
+      newChatTitle = 'Yourself';
+    } else { // display name present & it's not me
+      newChatTitle = this.props.listing.user.displayName
+    }
 
     Firebase.database().ref(`/chats/oneToOne/${newChatId}`).set({
       createdAt: new Date().getTime()

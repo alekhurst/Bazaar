@@ -81,10 +81,14 @@ class ChatScreen extends React.Component {
       text: messages[0].text
     });
 
-    Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`).update({
-      lastMessage: messages[0].text,
-      updatedAt: timestamp,
-    })
+    Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
+      [this.props.userId]: timestamp,
+    }, (err) => {
+      Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`).update({
+        lastMessage: messages[0].text,
+        updatedAt: timestamp,
+      })
+    });
   }
 
   renderAvatar() {

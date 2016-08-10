@@ -30,7 +30,7 @@ var ListingDetailsInner = React.createClass({
     var otherUser = this.props.listing.user.id;
     var user = this.props.userId;
     var newChatId = [otherUser, user].sort().join(':');
-    
+
     var newChatTitle;
     if (!this.props.listing.user.displayName) {
       newChatTitle = 'Anonymous'
@@ -72,6 +72,12 @@ var ListingDetailsInner = React.createClass({
     var currentDateUTC = Date.parse(new Date().toUTCString());
     var locationUpdatedAtUTC = Date.parse(user.locationUpdatedAt)
     var locationUpdatedAt = Math.round(((currentDateUTC - locationUpdatedAtUTC) / 1000) / 60)
+
+    // still getting weird >7d bug
+    console.log('currentDateUTC: ', currentDateUTC);
+    console.log('user.locationUpdatedAt: ', locationUpdatedAt);
+    console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
+    console.log('locationUpdatedAt: ', locationUpdatedAt);
 
     if (locationUpdatedAt < 1) {
       locationUpdatedAt = '<1m';

@@ -3,13 +3,18 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import Firebase from 'firebase';
+import {get} from 'lodash';
 
 import {openChatScreen} from 'actions/chat/chatScreenActions';
+import {incrementUnreadCount} from 'actions/chat/unreadCountActions';
+import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
 import UserRoute from 'routes/UserRoute';
 
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
-import {white, whiteSmoke, base, matterhorn} from 'hammer/colors';
+import {white, whiteSmoke, base, matterhorn, primaryColor} from 'hammer/colors';
+import {vw, vh} from 'hammer/viewPercentages';
+import renderIf from 'hammer/renderIf';
 import getColorFromUserId from 'hammer/getColorFromUserId';
 
 class ChatListRow extends React.Component {
@@ -17,10 +22,12 @@ class ChatListRow extends React.Component {
     super(props);
 
     this.onFirebaseChatValueChange = this.onFirebaseChatValueChange.bind(this);
+    this.onPressOpenChat = this.onPressOpenChat.bind(this);
 
     this.state = {
       lastMessage: null,
       updatedAt: null,
+      haveReadLatestMessage: true,
     }
   }
 
@@ -37,11 +44,40 @@ class ChatListRow extends React.Component {
     var data = snapshot.val();
     var lastMessage = data.lastMessage ? data.lastMessage : 'none';
     var updatedAt = data.updatedAt ? data.updatedAt : 'none';
+    var lastChecked = get(data.lastChecked, this.props.userId, null)
+    var haveReadLatestMessage;
+
+    if (updatedAt === 'none') {
+      haveReadLatestMessage = true;
+    } else if (!lastChecked || lastChecked < updatedAt) {
+      haveReadLatestMessage = false;
+    } else {
+      // shouldn't get here, but if you do default to true
+      haveReadLatestMessage = true;
+    }
+
+    if (!haveReadLatestMessage && this.state.haveReadLatestMessage) {
+      // for now only increment the unread count on the first received unread msg
+      this.props.dispatch(incrementUnreadCount())
+    }
 
     this.setState({
+      haveReadLatestMessage,
       lastMessage,
       updatedAt,
     })
+  }
+
+  onPressOpenChat(chatTitle) {
+    if (!this.state.haveReadLatestMessage) {
+      this.props.dispatch(decrementUnreadCount())
+    }
+
+    Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
+      [this.props.userId]: new Date().getTime()
+    });
+
+    this.props.dispatch(openChatScreen(this.props.chatId, chatTitle));
   }
 
   render() {
@@ -55,13 +91,20 @@ class ChatListRow extends React.Component {
     }
 
     return (
-      <TouchableOpacity style={styles.chatRow} onPress={() => this.props.dispatch(openChatScreen(this.props.chatId, displayNameToShow))}>
-        <View style={[styles.circle, {backgroundColor: getColorFromUserId(this.props.user.id)}]}>
-          <Text style={styles.circleText}>{displayNameToShow.charAt(0)}</Text>
+      <TouchableOpacity style={styles.chatRowContainer} onPress={() => this.onPressOpenChat(displayNameToShow)}>
+        <View style={styles.unreadIndicatorContainer}>
+          {renderIf(!this.state.haveReadLatestMessage)(
+            <View style={styles.unreadIndicator} />
+          )}
         </View>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.name}>{displayNameToShow}</Text>
-          <Text style={styles.lastMessage}>{this.state.lastMessage ? this.state.lastMessage : 'loading...'}</Text>
+        <View style={styles.chatRow}>
+          <View style={[styles.circle, {backgroundColor: getColorFromUserId(this.props.user.id)}]}>
+            <Text style={styles.circleText}>{displayNameToShow.charAt(0)}</Text>
+          </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.name} numberOfLines={1}>{displayNameToShow}</Text>
+            <Text style={styles.lastMessage} numberOfLines={2}>{this.state.lastMessage ? this.state.lastMessage : 'loading...'}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     )
@@ -158,20 +201,36 @@ function mapStateToProps(state) {
 ChatListRowWrapper = connect(mapStateToProps)(ChatListRowWrapper);
 
 var styles = StyleSheet.create({
+  chatRowContainer: {
+    flexDirection: 'row',
+  },
+
   chatRow: {
+    flex: 1,
     flexDirection: 'row',
     borderBottomWidth: 1,
     paddingVertical: 10,
-    marginHorizontal: 10,
-    paddingHorizontal: 5,
     borderBottomColor: whiteSmoke,
   },
 
+  unreadIndicatorContainer: {
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  unreadIndicator: {
+    width: 12,
+    height: 12,
+    backgroundColor: primaryColor,
+    borderRadius: 6,
+  },
+
   circle: {
-    width: 65,
-    height: 65,
+    width: 57,
+    height: 57,
     backgroundColor: whiteSmoke,
-    borderRadius: 32.5,
+    borderRadius: 28.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -191,11 +250,13 @@ var styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '600',
     color: matterhorn,
+    width: vw(100) - 120,
   },
 
   lastMessage: {
     color: base,
     fontSize: 13,
+    width: vw(100) - 120,
   }
 })
 

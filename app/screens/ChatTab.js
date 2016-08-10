@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import Relay from 'react-relay';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Firebase from 'firebase';
 import {get} from 'lodash';
@@ -53,7 +54,16 @@ var ChatTab = React.createClass({
       loadingFirebaseUser: false,
       chatIds: keys,
     })
+
+    // keys.map((key) => {
+    //   this._firebaseChatRef = Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`)
+    //   this._firebaseChatRef.on('value', this.onFirebaseChatValueChange.bind(this, key));
+    // })
   },
+
+  // onFirebaseChatValueChange(chatId) {
+  //
+  // },
 
   onFinishEditingDisplayName() {
     if (this.state.displayName === this.props.me.displayName) {
@@ -139,6 +149,12 @@ var ChatTab = React.createClass({
     );
   },
 });
+
+function mapStateToProps(state) {
+  return {unreadCount: state.chat.unreadCount}
+}
+
+ChatTab = connect(mapStateToProps)(ChatTab);
 
 ChatTab = Relay.createContainer(ChatTab, {
   fragments: {

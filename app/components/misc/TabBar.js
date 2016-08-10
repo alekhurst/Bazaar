@@ -5,9 +5,11 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
+import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {primaryColor, ghost, gainsboro} from 'hammer/colors';
+import {primaryColor, primaryRed, white, ghost, gainsboro} from 'hammer/colors';
+import renderIf from 'hammer/renderIf';
 
 const TabBar = React.createClass({
   propTypes: {
@@ -21,20 +23,49 @@ const TabBar = React.createClass({
     }
   },
 
-  render() {
-    return <View style={[styles.tabs, this.props.style]}>
-      {this.state.tabs.map((tab, i) => {
-        return <TouchableHighlight key={i} onPress={() => this.props.goToPage(i)} style={styles.tab} underlayColor='transparent'>
+  renderTabIcon(tab, i) {
+    if (i !== 2) {
+      return (
+        <Icon
+          name={tab}
+          size={30}
+          color={this.props.activeTab === i ? primaryColor : gainsboro}
+        />
+      )
+    } else if (i === 2) {
+      return (
+        <View style={styles.chatTabContainer}>
           <Icon
             name={tab}
             size={30}
             color={this.props.activeTab === i ? primaryColor : gainsboro}
           />
+          {renderIf(this.props.unreadCount)(
+            <View style={styles.unreadCount}>
+              <Text style={styles.unreadCountText}>{this.props.unreadCount}</Text>
+            </View>
+          )}
+        </View>
+      )
+    }
+  },
+
+  render() {
+    return <View style={[styles.tabs, this.props.style]}>
+      {this.state.tabs.map((tab, i) => {
+        return <TouchableHighlight key={i} onPress={() => this.props.goToPage(i)} style={styles.tab} underlayColor='transparent'>
+          {this.renderTabIcon(tab, i)}
         </TouchableHighlight>;
       })}
     </View>;
   },
 });
+
+function mapStateToProps(state) {
+  return {unreadCount: state.chat.unreadCount}
+}
+
+TabBar = connect(mapStateToProps)(TabBar);
 
 const styles = StyleSheet.create({
   tab: {
@@ -50,6 +81,27 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     backgroundColor: ghost,
   },
+
+  chatTabContainer: {
+    flexDirection: 'row'
+  },
+
+  unreadCount: {
+    position: 'absolute',
+    right: -8,
+    top: -1,
+    backgroundColor: primaryRed,
+    paddingHorizontal: 5,
+    height: 15,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  unreadCountText: {
+    color: white,
+    fontSize: 8,
+  }
 });
 
 export default TabBar;

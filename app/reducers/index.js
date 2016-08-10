@@ -4,6 +4,7 @@ import listingDetailsScreen from 'reducers/listingDetailsScreen';
 import editListingScreen from 'reducers/editListingScreen';
 import chatScreen from 'reducers/chatScreen';
 import location from 'reducers/location';
+import chat from 'reducers/chat';
 
 const bazaarStore = combineReducers({
   userCredentials,
@@ -11,6 +12,7 @@ const bazaarStore = combineReducers({
   editListingScreen,
   chatScreen,
   location,
+  chat,
 })
 
 export default bazaarStore;

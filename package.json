@@ -12,6 +12,7 @@
     "firebase": "^3.2.1",
     "react": "15.2.1",
     "react-native": "0.30.0",
+    "react-native-admob": "^1.1.5",
     "react-native-gifted-chat": "0.0.3",
     "react-native-google-signin": "^0.6.1",
     "react-native-location": "^0.27.0",

@@ -30,6 +30,10 @@ var ListingList = React.createClass({
   },
 
   onScroll(event) {
+    if (this.props.onScroll) {
+      this.props.onScroll(event.nativeEvent.contentOffset.y, event.nativeEvent.contentSize.height);
+    }
+    
     if (!this.props.onEndReached) {
       return;
     }

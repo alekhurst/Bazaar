@@ -75,7 +75,7 @@ var ListingDetailsInner = React.createClass({
 
     // still getting weird >7d bug
     console.log('currentDateUTC: ', currentDateUTC);
-    console.log('user.locationUpdatedAt: ', locationUpdatedAt);
+    console.log('user.locationUpdatedAt: ', user.locationUpdatedAt);
     console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
     console.log('locationUpdatedAt: ', locationUpdatedAt);
 

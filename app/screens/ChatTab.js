@@ -54,16 +54,7 @@ var ChatTab = React.createClass({
       loadingFirebaseUser: false,
       chatIds: keys,
     })
-
-    // keys.map((key) => {
-    //   this._firebaseChatRef = Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`)
-    //   this._firebaseChatRef.on('value', this.onFirebaseChatValueChange.bind(this, key));
-    // })
   },
-
-  // onFirebaseChatValueChange(chatId) {
-  //
-  // },
 
   onFinishEditingDisplayName() {
     if (this.state.displayName === this.props.me.displayName) {

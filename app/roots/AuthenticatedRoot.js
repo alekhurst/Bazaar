@@ -17,6 +17,7 @@ import EditListingScreen from 'screens/EditListingScreen';
 import ChatScreen from 'screens/ChatScreen';
 import TabBar from 'components/misc/TabBar';
 import LocationManager from 'components/controllers/LocationManager';
+import AdManager from 'components/controllers/AdManager';
 import serverUrl from 'hammer/serverUrl';
 
 const AuthenticatedRoot = React.createClass({
@@ -65,6 +66,7 @@ const AuthenticatedRoot = React.createClass({
           <ChatTab />
         </ScrollableTabView>
         <LocationManager />
+        <AdManager />
         <Modal
           animationType='slide'
           transparent={false}

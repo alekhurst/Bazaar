@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
+import {AdMobInterstitial} from 'react-native-admob';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {get, isNumber, isEmpty, debounce} from 'lodash';
 
@@ -23,7 +24,7 @@ import GenericErrorScreen from 'screens/GenericErrorScreen';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import renderIf from 'hammer/renderIf';
-import {vw} from 'hammer/viewPercentages';
+import {vw, vh} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
 
 const DEFAULT_SEARCH_TEXT = "";
@@ -40,6 +41,7 @@ var FeedTab = React.createClass({
       pullRefreshing: false,
       manualRefreshing: false,
       endReachedFetching: false,
+      endReachedCount: 0,
     }
   },
 
@@ -63,9 +65,9 @@ var FeedTab = React.createClass({
             {text: 'OK', onPress: noop},
           ]
         );
-        this.setState({pullRefreshing: false, manualRefreshing: false});
+        this.setState({pullRefreshing: false, manualRefreshing: false, endReachedCount: 0});
       } else if (done && ready) {
-        this.setState({pullRefreshing: false, manualRefreshing: false});
+        this.setState({pullRefreshing: false, manualRefreshing: false, endReachedCount: 0});
       }
     });
   },
@@ -93,13 +95,30 @@ var FeedTab = React.createClass({
     }
   },
 
+  onScroll(offset, contentHeight) {
+    if (this.state.endReachedCount !== 0 && this.state.endReachedCount % 2 === 0) {
+      // if we're on a third onEndReached
+      let searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
+      if (offset > contentHeight - (vh(100) + 500)
+        && searchResultsLength === this.props.relay.variables.firstN) {
+        // if we're midway through the most recently loaded listings
+        // && max possible listings are showing
+        this.setState({endReachedCount: 0})
+        AdMobInterstitial.showAd((error) => error && console.log(error));
+      }
+    }
+  },
+
   onEndReached() {
     this.setState({endReachedFetching: true})
     this.props.relay.forceFetch(
       {firstN: this.props.relay.variables.firstN + DEFAULT_FIRST_N},
       ({done, error}) => {
         if (done) {
-          this.setState({endReachedFetching: false})
+          this.setState({
+            endReachedFetching: false,
+            endReachedCount: this.state.endReachedCount + 1,
+          });
         } else if (error) {
           networkRequestFailedAlert();
         }
@@ -132,6 +151,7 @@ var FeedTab = React.createClass({
           onPressListing={this.onPressListing}
           pullRefreshing={this.state.pullRefreshing}
           onPullToRefresh={this.onPullToRefresh}
+          onScroll={this.onScroll}
           onEndReached={this.onEndReached}
           maxResultsShowing={searchResultsLength === this.props.relay.variables.firstN}
           endReachedFetching={this.state.endReachedFetching}

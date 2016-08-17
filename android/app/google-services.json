@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "655586204672",
+    "project_id": "firebase-bazaar"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655586204672:android:3c04303a7dab5a7b",
+        "android_client_info": {
+          "package_name": "com.tubuc.Bazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655586204672-6gvbonuo7en4f9l4o1gmk9nvtmgek711.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tubuc.Bazaar",
+            "certificate_hash": "A7500892D1DA7177D00AC10F43C3134D76C7FB65"
+          }
+        },
+        {
+          "client_id": "655586204672-itvtoo5sfdgud1nfteqnrcavi9irotf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC36DN7R6ROapazut4MCI-mEV69w1kNsJI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

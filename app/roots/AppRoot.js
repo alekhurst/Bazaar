@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StatusBar, Platform, Alert, NetInfo} from 'react-native';
 import {connect} from 'react-redux';
 import Location from 'react-native-location';
+import {GoogleSignin} from 'react-native-google-signin';
 
 import {login, currentUserAsync, signOut} from 'actions/authenticationActions'
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
@@ -22,13 +23,28 @@ var AppRoot = React.createClass({
         this.setState({loggingIn: false});
         Alert.alert('No Internet :(', 'You aren\'t connected to the interwebs');
       } else {
-        this.props.dispatch(currentUserAsync());
+        // begin google signin setup...
+        GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
+          // play services are available. can now configure library
+          GoogleSignin.configure({
+            iosClientId: '655586204672-d0u8gh3a1llp8slh0pcag5vd6j2pc67o.apps.googleusercontent.com',
+            webClientId: '655586204672-itvtoo5sfdgud1nfteqnrcavi9irotf8.apps.googleusercontent.com'
+          }).then(() => {
+            // now we're ready to ask for current user
+            this.props.dispatch(currentUserAsync());
+          });
+        })
+        .catch((err) => {
+          console.log("Play services error", err.code, err.message);
+        })
       }
     }
   },
 
   componentDidMount() {
-    Location.requestWhenInUseAuthorization();
+    if (Platform.OS === 'ios') {
+      Location.requestWhenInUseAuthorization();
+    }
   },
 
   onPressLogin() {

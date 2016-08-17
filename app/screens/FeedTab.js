@@ -215,14 +215,6 @@ FeedTab = Relay.createContainer(FeedTab, {
 
 var FeedTabWrapper = React.createClass({
   render() {
-    var latitude = get(this.props, 'location.latitude', null);
-    var longitude = get(this.props, 'location.longitude', null);
-    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
-
-    if (locationIsEmpty) {
-      return <GenericLoadingScreen />
-    }
-
     return (
       <Relay.Renderer
         Container={FeedTab}

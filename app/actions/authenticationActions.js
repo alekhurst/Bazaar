@@ -1,13 +1,10 @@
 import {GoogleSignin} from 'react-native-google-signin';
+import {Platform} from 'react-native';
 import axios from 'axios';
 import {dispatch} from 'redux-thunk';
 import {assign} from 'lodash';
 
 import serverUrl from 'hammer/serverUrl';
-
-GoogleSignin.configure({
-  iosClientId: '655586204672-d0u8gh3a1llp8slh0pcag5vd6j2pc67o.apps.googleusercontent.com',
-});
 
 /* EXPORTED ACTIONS */
 
@@ -33,8 +30,7 @@ export const login = () => {
 export const currentUserAsync = () => {
   return function(dispatch) {
     dispatch(loggingIn());
-
-    GoogleSignin.currentUserAsync().then(user => {
+    GoogleSignin.currentUserAsync().then((user) => {
       if (user) {
         _authenticateAgainstBazaarApi(user, dispatch);
       } else {

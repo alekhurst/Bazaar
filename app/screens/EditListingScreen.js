@@ -23,6 +23,7 @@ import {pokemonList, pokemonDictionary} from 'datasets/pokemon';
 import {quickMoves, specialMoves} from 'datasets/moves';
 
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
+import GenericErrorScreen from 'screens/GenericErrorScreen';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import NavigationBar from 'components/misc/NavigationBar';
 import {vw} from 'hammer/viewPercentages';
@@ -300,9 +301,9 @@ var EditListingScreenWrapper = React.createClass({
         Container={EditListingScreenInner}
         environment={Relay.Store}
         queryConfig={new MeAndListingRoute({listingId: this.props.listingId})}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return <EditListingScreenInner {...props}/>
           } else {

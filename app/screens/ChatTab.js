@@ -168,9 +168,9 @@ var ChatTabWrapper = React.createClass({
         Container={ChatTab}
         environment={Relay.Store}
         queryConfig={new MeRoute()}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return <ChatTab {...props} />
           } else {

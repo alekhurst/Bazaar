@@ -6,9 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {connect} from 'react-redux';
 
-import {signOut} from 'actions/authenticationActions';
 import {white, matterhorn, primaryBlue} from 'hammer/colors';
 
 var GenericErrorScreen = React.createClass({
@@ -16,7 +14,7 @@ var GenericErrorScreen = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>Oops! There was an error sending your request. Sorry about that, we’re looking into it.</Text>
-        <TouchableOpacity style={styles.reloadButton} onPress={() => this.props.dispatch(signOut())}>
+        <TouchableOpacity style={styles.reloadButton} onPress={this.props.retry}>
           <Text style={styles.reloadButtonText}>Reload</Text>
         </TouchableOpacity>
       </View>
@@ -50,5 +48,4 @@ const styles = StyleSheet.create({
   }
 });
 
-GenericErrorScreen = connect()(GenericErrorScreen);
 export default GenericErrorScreen;

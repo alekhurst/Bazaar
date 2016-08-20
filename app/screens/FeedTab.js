@@ -228,9 +228,9 @@ var FeedTabWrapper = React.createClass({
         Container={FeedTab}
         environment={Relay.Store}
         queryConfig={new ViewerRoute()}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return <FeedTab {...props} />
           } else {

@@ -180,9 +180,9 @@ class ChatListRowWrapper extends React.Component {
         Container={ChatListRow}
         environment={Relay.Store}
         queryConfig={new UserRoute({userId: this.state.otherUserId})}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return <ChatListRow chatId={this.props.chatId} {...props} />
           } else {

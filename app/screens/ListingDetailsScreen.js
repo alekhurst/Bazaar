@@ -219,9 +219,9 @@ var ListingDetailsScreenWrapper = React.createClass({
         Container={ListingDetailsInner}
         environment={Relay.Store}
         queryConfig={new ListingRoute({listingId: this.props.listingDetailsScreen.listingId})}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return (
               <ListingDetailsScreen

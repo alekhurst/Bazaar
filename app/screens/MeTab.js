@@ -100,9 +100,9 @@ var MeTabWrapper = React.createClass({
         Container={MeTab}
         environment={Relay.Store}
         queryConfig={new MeRoute()}
-        render={({done, error, props}) => {
+        render={({done, error, props, retry}) => {
           if (error) {
-            return <GenericErrorScreen />
+            return <GenericErrorScreen retry={retry} />
           } else if (props) {
             return <MeTab {...props} />
           } else {

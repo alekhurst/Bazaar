@@ -99,6 +99,14 @@ var ChatTab = React.createClass({
     )
   },
 
+  showCreateChatAlert() {
+    Alert.alert(
+      `Alert`,
+      'To start a chat with somebody, open their listing from the feed screen',
+      [{text: 'OK', onPress: noop}]
+    )
+  },
+
   render() {
     var chatsContent = null;
 
@@ -114,7 +122,7 @@ var ChatTab = React.createClass({
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>
           <Text style={styles.title}>Messages</Text>
-          <TouchableOpacity style={styles.addIcon} onPress={noop}>
+          <TouchableOpacity style={styles.addIcon} onPress={this.showCreateChatAlert}>
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
         </NavigationBar>

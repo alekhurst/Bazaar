@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {primaryColor, primaryRed, white, ghost, gainsboro} from 'hammer/colors';
 import renderIf from 'hammer/renderIf';
+import F8StyleSheet from 'hammer/F8StyleSheet';
 
 const TabBar = React.createClass({
   propTypes: {
@@ -67,7 +68,7 @@ function mapStateToProps(state) {
 
 TabBar = connect(mapStateToProps)(TabBar);
 
-const styles = StyleSheet.create({
+const styles = F8StyleSheet.create({
   tab: {
     flex: 1,
     alignItems: 'center',
@@ -80,6 +81,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 14,
     backgroundColor: ghost,
+    android: {
+      paddingTop: 5,
+      marginTop: 9,
+    }
   },
 
   chatTabContainer: {

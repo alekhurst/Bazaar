@@ -15,7 +15,8 @@ import renderIf from 'hammer/renderIf';
 var AppRoot = React.createClass({
   componentWillMount() {
     // this.props.dispatch(signOut());
-
+    console.disableYellowBox = true;
+    
     NetInfo.isConnected.addEventListener('change', checkNetworkConnection.bind(this));
 
     function checkNetworkConnection(isConnected) {

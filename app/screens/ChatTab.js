@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   ScrollView,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
@@ -22,6 +21,7 @@ import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import NavigationBar from 'components/misc/NavigationBar';
 import ChatListRow from 'components/chat/ChatListRow';
+import F8StyleSheet from 'hammer/F8StyleSheet';
 import {white, ghost, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
 import renderIf from 'hammer/renderIf';
 import {vw, vh} from 'hammer/viewPercentages';
@@ -118,6 +118,7 @@ var ChatTab = React.createClass({
       chatsContent = this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)
     }
 
+    console.log('this.props.me.displayname: ', this.props.me.displayName);
     return (
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>
@@ -126,21 +127,24 @@ var ChatTab = React.createClass({
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
         </NavigationBar>
-        <View style={styles.displayNameContainer}>
-          <Text style={styles.displayNameHeader}>SET YOUR CHAT DISPLAY NAME</Text>
-          <View style={styles.displayNameInputWrapper}>
-            <TextInput
-              onChangeText={(displayName) => this.setState({displayName})}
-              onSubmitEditing={() => this.onFinishEditingDisplayName()}
-              placeholder="Anonymous"
-              value={this.state.displayName}
-              style={styles.displayNameTextInput}
-              returnKeyType='done'
-              autoCorrect={false}
-            />
-            <ActivityIndicator animating={this.state.mutatingDisplayName} size='small' style={styles.mutatingDisplayNameSpinner}/>
+        {renderIf(!this.props.me.displayName)(
+          <View style={styles.displayNameContainer}>
+            <Text style={styles.displayNameHeader}>SET YOUR CHAT DISPLAY NAME</Text>
+            <View style={styles.displayNameInputWrapper}>
+              <TextInput
+                onChangeText={(displayName) => this.setState({displayName})}
+                onSubmitEditing={() => this.onFinishEditingDisplayName()}
+                placeholder="Anonymous"
+                value={this.state.displayName}
+                style={styles.displayNameTextInput}
+                returnKeyType='done'
+                underlineColorAndroid='transparent'
+                autoCorrect={false}
+              />
+              <ActivityIndicator animating={this.state.mutatingDisplayName} size='small' style={styles.mutatingDisplayNameSpinner}/>
+            </View>
           </View>
-        </View>
+        )}
         <ScrollView>
           {chatsContent}
         </ScrollView>
@@ -190,7 +194,7 @@ var ChatTabWrapper = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
+var styles = F8StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: white,
@@ -230,8 +234,10 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     borderBottomColor: matterhorn,
     borderBottomWidth: 1,
-    marginTop: 5,
     height: 30,
+    ios: {
+      marginTop: 5,
+    },
   },
 
   displayNameTextInput: {
@@ -240,6 +246,9 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '300',
     color: matterhorn,
+    android: {
+      paddingBottom: 0,
+    }
   },
 
   mutatingDisplayNameSpinner: {

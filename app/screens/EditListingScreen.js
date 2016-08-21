@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  Platform,
   View
 } from 'react-native';
 import Relay from 'react-relay';
@@ -22,6 +22,7 @@ import MeAndListingRoute from 'routes/MeAndListingRoute';
 import {pokemonList, pokemonDictionary} from 'datasets/pokemon';
 import {quickMoves, specialMoves} from 'datasets/moves';
 
+import F8StyleSheet from 'hammer/F8StyleSheet';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
@@ -321,7 +322,7 @@ function mapStateToProps(state) {
 
 EditListingScreenWrapper = connect(mapStateToProps)(EditListingScreenWrapper);
 
-const styles = StyleSheet.create({
+const styles = F8StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: white,
@@ -356,11 +357,13 @@ const styles = StyleSheet.create({
   // HACK: Wrap <TextInput> in <View> to get bottomBorderX to display correctly
   textInputWrapper: {
     flex: 1,
+    marginLeft: 10,
     borderBottomColor: matterhorn,
     borderBottomWidth: 1,
-    marginLeft: 10,
-    marginBottom: 5,
-    height: 30,
+    ios: {
+      height: 30,
+      marginBottom: 5,
+    }
   },
 
   modalPickerWrapper: {
@@ -371,8 +374,13 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    height: 30,
-    textAlign: 'center'
+    textAlign: 'center',
+    ios: {
+      height: 30,
+    },
+    android: {
+      paddingBottom: 0,
+    }
   },
 
   errorContainer: {

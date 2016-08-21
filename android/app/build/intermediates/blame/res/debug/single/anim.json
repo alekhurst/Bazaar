@@ -1,7 +1,7 @@
 [
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/catalyst_push_up_out.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/catalyst_push_up_out.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/catalyst_push_up_out.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
@@ -17,7 +17,7 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/fade_out.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/fade_out.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/fade_out.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
@@ -33,11 +33,11 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/slide_down.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/slide_down.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/slide_down.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/slide_up.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/slide_up.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/slide_up.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
@@ -49,11 +49,11 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/fade_in.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/fade_in.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/fade_in.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/catalyst_push_up_in.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/anim/catalyst_push_up_in.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/anim/catalyst_push_up_in.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",

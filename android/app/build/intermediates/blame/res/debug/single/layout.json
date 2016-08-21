@@ -17,7 +17,7 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/fps_view.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/layout/fps_view.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/layout/fps_view.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -29,7 +29,7 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/layout/redbox_view.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/layout/redbox_view.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
@@ -53,7 +53,7 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/redbox_item_frame.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/layout/redbox_item_frame.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/layout/redbox_item_frame.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
@@ -149,7 +149,7 @@
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/redbox_item_title.xml",
-        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/res/layout/redbox_item_title.xml"
+        "source": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/res/layout/redbox_item_title.xml"
     },
     {
         "merged": "/Users/Alek/Developer/Bazaar/android/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",

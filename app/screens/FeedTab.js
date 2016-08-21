@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   Image,
   View,
@@ -12,10 +11,11 @@ import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import {AdMobInterstitial} from 'react-native-admob';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {get, debounce, isNumber} from 'lodash';
+import {get, isNumber, isEmpty, debounce} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
 
+import F8StyleSheet from 'hammer/F8StyleSheet';
 import NavigationBar from 'components/misc/NavigationBar';
 import ListingList from 'components/listing/ListingList';
 import ZeroResultsPlaceholder from 'components/listing/ZeroResultsPlaceholder';
@@ -128,9 +128,14 @@ var FeedTab = React.createClass({
 
   render() {
     var searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
+    var latitude = get(this.props, 'location.latitude', null);
+    var longitude = get(this.props, 'location.longitude', null);
+    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
     var content = null;
 
     if (this.state.manualRefreshing) {
+      content = <GenericLoadingScreen />
+    } else if (locationIsEmpty) {
       content = <GenericLoadingScreen />
     } else if (!searchResultsLength) {
       content = (
@@ -210,14 +215,6 @@ FeedTab = Relay.createContainer(FeedTab, {
 
 var FeedTabWrapper = React.createClass({
   render() {
-    var latitude = get(this.props, 'location.latitude', null);
-    var longitude = get(this.props, 'location.longitude', null);
-    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
-
-    if (locationIsEmpty) {
-      return <GenericLoadingScreen />
-    }
-
     return (
       <Relay.Renderer
         Container={FeedTab}
@@ -243,10 +240,9 @@ function mapStateToProps(state) {
 
 FeedTabWrapper = connect(mapStateToProps)(FeedTabWrapper);
 
-const styles = StyleSheet.create({
+const styles = F8StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: white,
   },
 
   searchInput: {
@@ -256,9 +252,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 5,
     paddingLeft: 30,
-    paddingTop: 3,
     backgroundColor: white,
     color: matterhorn,
+    ios: {
+      paddingTop: 3,
+    },
+    android: {
+      paddingTop: 0,
+      paddingBottom: 0,
+    }
   },
 
   searchIcon: {

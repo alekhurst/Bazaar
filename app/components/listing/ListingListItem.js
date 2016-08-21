@@ -61,6 +61,14 @@ var ListingListItem = React.createClass({
       userDistance = '>10';
     }
 
+    // TODO: figure out the root of this... for now just return null
+    // what's happening is there is only 1 move on a listing that's 
+    // being returned from listing search
+    if (!this.props.listing.moves[1]) {
+      console.log('this.props.losting: ', this.props.listing)
+      return null
+    }
+
     return (
       <TouchableOpacity
         onPress={this.onPressListing}

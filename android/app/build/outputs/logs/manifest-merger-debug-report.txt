@@ -25,17 +25,17 @@ MERGED from [com.google.firebase:firebase-iid:9.4.0] /Users/Alek/Developer/Bazaa
 		ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:6:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:7:5-77
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:11:5-78
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:11:5-78
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:11:5-78
 	android:name
 		ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:7:22-75
 uses-sdk
 ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:9:5-11:41
 MERGED from [Bazaar:react-native-admob:unspecified] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-admob/unspecified/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:imagepipeline:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/AndroidManifest.xml:5:5-7:41
@@ -59,6 +59,7 @@ MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/Alek/Developer/B
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
 MERGED from [com.google.android.gms:play-services-ads:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.4.0/AndroidManifest.xml:19:5-42
 MERGED from [com.google.android.gms:play-services-ads-lite:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.4.0/AndroidManifest.xml:23:5-42
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:18:5-42
@@ -84,7 +85,7 @@ MERGED from [com.google.android.gms:play-services-gass:9.4.0] /Users/Alek/Develo
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [Bazaar:react-native-spinkit:unspecified] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-spinkit/unspecified/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:imagepipeline:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/AndroidManifest.xml:5:5-7:41
@@ -108,9 +109,10 @@ MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/Alek/Developer/B
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
 MERGED from [com.github.ybq:Android-SpinKit:1.0.4] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.github.ybq/Android-SpinKit/1.0.4/AndroidManifest.xml:8:5-10:41
 MERGED from [Bazaar:react-native-vector-icons:unspecified] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-vector-icons/unspecified/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:imagepipeline:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/AndroidManifest.xml:5:5-7:41
@@ -134,10 +136,11 @@ MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/Alek/Developer/B
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
 MERGED from [Bazaar:react-native-google-signin:unspecified] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-google-signin/unspecified/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:imagepipeline:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/AndroidManifest.xml:5:5-7:41
@@ -161,6 +164,7 @@ MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/Alek/Developer/B
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
 MERGED from [com.google.android.gms:play-services-auth:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.4.0/AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-auth-base:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.4.0/AndroidManifest.xml:5:5-43
 MERGED from [com.google.android.gms:play-services-base:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/AndroidManifest.xml:18:5-42
@@ -181,7 +185,7 @@ MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/De
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:imagepipeline:0.11.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/AndroidManifest.xml:5:5-7:41
@@ -205,6 +209,7 @@ MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/Alek/Developer/B
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
 MERGED from [com.google.firebase:firebase-core:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-core/9.4.0/AndroidManifest.xml:4:5-42
 MERGED from [com.google.firebase:firebase-analytics:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.4.0/AndroidManifest.xml:18:5-42
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:18:5-42
@@ -247,7 +252,7 @@ ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:13:22-76
 application
 ADDED from /Users/Alek/Developer/Bazaar/android/app/src/main/AndroidManifest.xml:15:5-32:19
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:13:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -257,6 +262,7 @@ MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
 MERGED from [com.google.android.gms:play-services-ads-lite:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.4.0/AndroidManifest.xml:24:5-32:19
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:20:5-24:19
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -281,7 +287,7 @@ MERGED from [com.google.android.gms:play-services-gass:9.4.0] /Users/Alek/Develo
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:20:5-24:19
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [Bazaar:react-native-spinkit:unspecified] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-spinkit/unspecified/AndroidManifest.xml:11:5-15:19
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:13:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -291,7 +297,8 @@ MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:13:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -301,9 +308,10 @@ MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:13:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -313,6 +321,7 @@ MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
 MERGED from [com.google.android.gms:play-services-auth:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.4.0/AndroidManifest.xml:20:5-32:19
 MERGED from [com.google.android.gms:play-services-base:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:20:5-24:19
@@ -332,7 +341,7 @@ MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/De
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
-MERGED from [com.facebook.react:react-native:0.30.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.30.0/AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.31.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/AndroidManifest.xml:13:5-20
 MERGED from [org.webkit:android-jsc:r174650] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
@@ -342,6 +351,7 @@ MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
 MERGED from [com.google.firebase:firebase-core:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-core/9.4.0/AndroidManifest.xml:5:5-20
 MERGED from [com.google.firebase:firebase-analytics:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.4.0/AndroidManifest.xml:26:5-41:19
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] /Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/AndroidManifest.xml:20:5-24:19

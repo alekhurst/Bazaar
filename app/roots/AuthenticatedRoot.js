@@ -8,7 +8,6 @@ import Relay, {
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Firebase from 'firebase';
-import {get, isNumber} from 'lodash';
 
 import FeedTab from 'screens/FeedTab';
 import MeTab from 'screens/MeTab';
@@ -54,21 +53,6 @@ const AuthenticatedRoot = React.createClass({
   },
 
   render() {
-    var latitude = get(this.props, 'location.latitude', null);
-    var longitude = get(this.props, 'location.longitude', null);
-    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
-
-    console.log('location is empty, rendering loading screen')
-    if (locationIsEmpty) {
-      return (
-        <View style={{flex: 1}}>
-          <GenericLoadingScreen />
-          <LocationManager />
-        </View>
-      )
-    }
-
-    console.log('location exists, rendering app')
     return (
       <View style={{flex: 1}}>
         <LocationManager />
@@ -116,7 +100,6 @@ const AuthenticatedRoot = React.createClass({
 function mapStateToProps(state) {
   return {
     userCredentials: state.userCredentials,
-    location: state.location,
     listingDetailsScreen: state.listingDetailsScreen,
     editListingScreen: state.editListingScreen,
     chatScreen: state.chatScreen,

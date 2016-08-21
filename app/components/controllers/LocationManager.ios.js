@@ -101,7 +101,7 @@ class LocationManager extends React.Component {
 
   commitUpdateMeMutation(location) {
     var {latitude, longitude} = location.coords;
-    console.log('UPDATING LOCATION')
+
     var updateMeInput = {
       me: this.props.me,
       latitude,
@@ -151,7 +151,6 @@ LocationManager = Relay.createContainer(LocationManager, {
   },
 });
 
-
 class LocationManagerWrapper extends React.Component {
   render() {
     return (
@@ -168,6 +167,5 @@ class LocationManagerWrapper extends React.Component {
     )
   }
 }
-
 
 export default LocationManagerWrapper;

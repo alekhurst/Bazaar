@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import Relay from 'react-relay';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
+import {get} from 'lodash';
 
 import {openListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import {openEditListingScreen} from 'actions/editListingScreenActions';

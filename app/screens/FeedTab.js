@@ -12,7 +12,7 @@ import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import {AdMobInterstitial} from 'react-native-admob';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {get, isNumber, isEmpty, debounce} from 'lodash';
+import {get, debounce, isNumber} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
 
@@ -128,14 +128,9 @@ var FeedTab = React.createClass({
 
   render() {
     var searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
-    var latitude = get(this.props, 'location.latitude', null);
-    var longitude = get(this.props, 'location.longitude', null);
-    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
     var content = null;
 
     if (this.state.manualRefreshing) {
-      content = <GenericLoadingScreen />
-    } else if (locationIsEmpty) {
       content = <GenericLoadingScreen />
     } else if (!searchResultsLength) {
       content = (
@@ -215,6 +210,14 @@ FeedTab = Relay.createContainer(FeedTab, {
 
 var FeedTabWrapper = React.createClass({
   render() {
+    var latitude = get(this.props, 'location.latitude', null);
+    var longitude = get(this.props, 'location.longitude', null);
+    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
+
+    if (locationIsEmpty) {
+      return <GenericLoadingScreen />
+    }
+
     return (
       <Relay.Renderer
         Container={FeedTab}
@@ -243,6 +246,7 @@ FeedTabWrapper = connect(mapStateToProps)(FeedTabWrapper);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: white,
   },
 
   searchInput: {

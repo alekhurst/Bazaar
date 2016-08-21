@@ -79,6 +79,11 @@ var ListingDetailsInner = React.createClass({
     console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
     console.log('locationUpdatedAt: ', locationUpdatedAt);
 
+    alert(`currentDateUTC: ${currentDateUTC}\n
+      user.locationUpdatedAt: ${user.locationUpdatedAt}\n
+      locationUpdatedAtUTC: ${locationUpdatedAtUTC}\n
+      locationUpdatedAt: ${locationUpdatedAt}`)
+
     if (locationUpdatedAt < 1) {
       locationUpdatedAt = '<1m';
     } else if (locationUpdatedAt < 60){

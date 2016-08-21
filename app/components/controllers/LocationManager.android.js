@@ -13,6 +13,11 @@ import noop from 'hammer/noop';
 class LocationManager extends React.Component {
   constructor(props) {
     super(props)
+
+    this.onLocationUpdate = this.onLocationUpdate.bind(this);
+    this.commitUpdateMeMutation = this.commitUpdateMeMutation.bind(this);
+
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 60000);
   }
 
   componentDidMount() {
@@ -34,7 +39,7 @@ class LocationManager extends React.Component {
   }
 
   onLocationUpdate(location) {
-    this.commitUpdateMeMutation(location)
+    this.throttledCommitUpdateMeMutation(location)
   }
 
   commitUpdateMeMutation(location) {

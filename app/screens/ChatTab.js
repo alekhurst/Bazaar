@@ -118,7 +118,6 @@ var ChatTab = React.createClass({
       chatsContent = this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)
     }
 
-    console.log('this.props.me.displayname: ', this.props.me.displayName);
     return (
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>

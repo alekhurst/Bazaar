@@ -82,8 +82,9 @@ const styles = F8StyleSheet.create({
     paddingTop: 14,
     backgroundColor: ghost,
     android: {
-      paddingTop: 5,
-      marginTop: 9,
+      paddingTop: 3,
+      marginTop: 11,
+      paddingHorizontal: 10,
     }
   },
 
@@ -100,7 +101,12 @@ const styles = F8StyleSheet.create({
     height: 15,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    android: {
+      position: 'relative',
+      right: 5,
+      top: 1,
+    }
   },
 
   unreadCountText: {

@@ -61,6 +61,10 @@ var ChatTab = React.createClass({
       return;
     }
 
+    if (this.state.displayName === '') {
+      return;
+    }
+
     if(this.state.displayName.length > 16) {
       Alert.alert(
         'Failure',
@@ -83,7 +87,7 @@ var ChatTab = React.createClass({
           this.setState({mutatingDisplayName: false});
           Alert.alert(
             `Success`,
-            'Your display name was successfully updated',
+            'Your display name was successfully set',
             [{text: 'OK', onPress: noop}]
           )
         },

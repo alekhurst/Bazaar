@@ -49,8 +49,6 @@ var EditListingScreenInner = React.createClass({
         hp: '',
         quickMove: '',
         specialMove: '',
-        height: '',
-        weight: '',
       }
     }
 
@@ -62,8 +60,6 @@ var EditListingScreenInner = React.createClass({
       hp: String(this.props.listing.hp),
       quickMove: this.props.listing.moves[0].name,
       specialMove: this.props.listing.moves[1].name,
-      height: String(this.props.listing.height),
-      weight: String(this.props.listing.weight),
     }
   },
 
@@ -81,8 +77,6 @@ var EditListingScreenInner = React.createClass({
       moves: [this.state.quickMove, this.state.specialMove],
       cp: Number(Number(this.state.cp).toFixed()),
       hp: Number(Number(this.state.hp).toFixed()),
-      weight: Number(Number(this.state.weight).toFixed(2)),
-      height: Number(Number(this.state.height).toFixed(2)),
     }
 
     if (!this.props.listing) {
@@ -98,23 +92,17 @@ var EditListingScreenInner = React.createClass({
       || isEmpty(this.state.hp)
       || isEmpty(this.state.quickMove)
       || isEmpty(this.state.specialMove)
-      || isEmpty(this.state.height)
-      || isEmpty(this.state.weight)
     ) {
       this.setState({errorMessage: 'No fields can be left empty'})
       return false;
     }
 
-    if(Number.isNaN(this.state.cp)
-      || Number.isNaN(this.state.hp)
-      || Number.isNaN(this.state.weight)
-      || Number.isNaN(this.state.weight)
+    if(Number.isNaN(Number(this.state.cp))
+      || Number.isNaN(Number(this.state.hp))
       || Number(this.state.cp) > 9999
       || Number(this.state.hp) > 9999
-      || Number(this.state.weight) > 9999
-      || Number(this.state.height) > 9999
     ) {
-      this.setState({errorMessage: 'Invalid values'})
+      this.setState({errorMessage: 'Invalid cp/hp input values'})
       return false;
     }
 
@@ -214,24 +202,6 @@ var EditListingScreenInner = React.createClass({
               keyboardType='numeric'
             />
           </View>
-          <View style={styles.textInputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={(height) => this.setState({height})}
-              placeholder="Height"
-              value={this.state.height}
-              keyboardType='numeric'
-            />
-          </View>
-          <View style={styles.textInputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={(weight) => this.setState({weight})}
-              placeholder="Weight"
-              value={this.state.weight}
-              keyboardType='numeric'
-            />
-          </View>
         </View>
         {renderIf(!isEmpty(this.state.errorMessage))(
           <View style={styles.errorContainer}>
@@ -261,8 +231,6 @@ EditListingScreenInner = Relay.createContainer(EditListingScreenInner, {
           id,
           cp,
           hp,
-          height,
-          weight,
           pokemon {
             name,
           },

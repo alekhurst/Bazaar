@@ -144,6 +144,12 @@ var ChatTab = React.createClass({
             </View>
           </View>
         )}
+        {renderIf(this.props.me.displayName)(
+          <View style={styles.displayNameContainer}>
+            <Text style={styles.displayNameHeader}>YOUR CHAT DISPLAY NAME</Text>
+            <Text>{this.props.me.displayName}</Text>
+          </View>
+        )}
         <ScrollView>
           {chatsContent}
         </ScrollView>

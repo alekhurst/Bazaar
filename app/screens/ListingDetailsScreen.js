@@ -69,6 +69,7 @@ var ListingDetailsInner = React.createClass({
       userDistance = '>10';
     }
 
+    debugger;
     var currentDateUTC = Date.parse(new Date().toUTCString());
     var locationUpdatedAtUTC = Date.parse(user.locationUpdatedAt)
     var locationUpdatedAt = Math.round(((currentDateUTC - locationUpdatedAtUTC) / 1000) / 60)
@@ -79,10 +80,10 @@ var ListingDetailsInner = React.createClass({
     console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
     console.log('locationUpdatedAt: ', locationUpdatedAt);
 
-    alert(`currentDateUTC: ${currentDateUTC}\n
-      user.locationUpdatedAt: ${user.locationUpdatedAt}\n
-      locationUpdatedAtUTC: ${locationUpdatedAtUTC}\n
-      locationUpdatedAt: ${locationUpdatedAt}`)
+    // alert(`currentDateUTC: ${currentDateUTC}\n
+    //   user.locationUpdatedAt: ${user.locationUpdatedAt}\n
+    //   locationUpdatedAtUTC: ${locationUpdatedAtUTC}\n
+    //   locationUpdatedAt: ${locationUpdatedAt}`)
 
     if (locationUpdatedAt < 1) {
       locationUpdatedAt = '<1m';
@@ -102,7 +103,6 @@ var ListingDetailsInner = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.topDetailsContainer}>
-          <Text style={styles.cp}>CP <Text style={styles.cpValue}>{listing.cp}</Text></Text>
           <TouchableOpacity style={styles.wantButton} onPress={this.onPressStartChat}>
             <Text style={styles.wantButtonText}>Chat</Text>
           </TouchableOpacity>
@@ -117,16 +117,12 @@ var ListingDetailsInner = React.createClass({
         <View style={styles.lowerDetailsContainer}>
           <View style={styles.attributesContainer}>
             <View style={[styles.attribute]}>
+              <Text style={styles.attributeValue}>{listing.cp}</Text>
+              <Text style={styles.attributeTitle}>CP</Text>
+            </View>
+            <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{listing.hp}</Text>
               <Text style={styles.attributeTitle}>HP</Text>
-            </View>
-            <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{listing.weight}kg</Text>
-              <Text style={styles.attributeTitle}>WEIGHT</Text>
-            </View>
-            <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{listing.height}m</Text>
-              <Text style={styles.attributeTitle}>HEIGHT</Text>
             </View>
             <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{pokemon.elementTypes[0]}</Text>
@@ -175,8 +171,6 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
           id,
           cp,
           hp,
-          weight,
-          height,
           moves {
             name,
             energy,
@@ -327,7 +321,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     backgroundColor: ghost,
-    width: 290,
+    width: 220,
     alignSelf: 'center',
     borderRadius: 5,
   },
@@ -335,7 +329,7 @@ const styles = StyleSheet.create({
   attributesContainer: {
     flexDirection: 'row',
     flex: 1,
-    width: 280,
+    width: 200,
     position: 'relative',
     left: -5,
     marginBottom: 7,

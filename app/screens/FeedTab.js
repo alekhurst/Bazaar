@@ -243,6 +243,7 @@ FeedTabWrapper = connect(mapStateToProps)(FeedTabWrapper);
 const styles = F8StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: white,
   },
 
   searchInput: {

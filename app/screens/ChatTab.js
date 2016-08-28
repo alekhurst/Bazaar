@@ -147,7 +147,7 @@ var ChatTab = React.createClass({
         {renderIf(this.props.me.displayName)(
           <View style={styles.displayNameContainer}>
             <Text style={styles.displayNameHeader}>YOUR CHAT DISPLAY NAME</Text>
-            <Text>{this.props.me.displayName}</Text>
+            <Text style={styles.displayName}>{this.props.me.displayName}</Text>
           </View>
         )}
         <ScrollView>
@@ -254,6 +254,13 @@ var styles = F8StyleSheet.create({
     android: {
       paddingBottom: 0,
     }
+  },
+
+  displayName: {
+    fontSize: 22,
+    color: matterhorn,
+    fontWeight: '300',
+    textAlign: 'center'
   },
 
   mutatingDisplayNameSpinner: {

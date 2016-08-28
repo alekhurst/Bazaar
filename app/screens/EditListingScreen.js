@@ -191,6 +191,7 @@ var EditListingScreenInner = React.createClass({
               placeholder="CP"
               value={this.state.cp}
               keyboardType='numeric'
+              underlineColorAndroid='transparent'
             />
           </View>
           <View style={styles.textInputWrapper}>
@@ -200,6 +201,7 @@ var EditListingScreenInner = React.createClass({
               placeholder="HP"
               value={this.state.hp}
               keyboardType='numeric'
+              underlineColorAndroid='transparent'
             />
           </View>
         </View>

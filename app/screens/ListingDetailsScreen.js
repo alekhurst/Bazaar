@@ -75,10 +75,10 @@ var ListingDetailsInner = React.createClass({
     var locationUpdatedAt = Math.round(((currentDateUTC - locationUpdatedAtUTC) / 1000) / 60)
 
     // still getting weird >7d bug
-    console.log('currentDateUTC: ', currentDateUTC);
-    console.log('user.locationUpdatedAt: ', user.locationUpdatedAt);
-    console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
-    console.log('locationUpdatedAt: ', locationUpdatedAt);
+    // console.log('currentDateUTC: ', currentDateUTC);
+    // console.log('user.locationUpdatedAt: ', user.locationUpdatedAt);
+    // console.log('locationUpdatedAtUTC: ', locationUpdatedAtUTC);
+    // console.log('locationUpdatedAt: ', locationUpdatedAt);
 
     // alert(`currentDateUTC: ${currentDateUTC}\n
     //   user.locationUpdatedAt: ${user.locationUpdatedAt}\n

@@ -56,6 +56,9 @@ var FeedTab = React.createClass({
   },
 
   onRefresh() {
+    this.setState({endReachedCount: 0}); // for edge case: accumulated enough
+     // endReaches for endReachedCount % 2 === 0. Now pulling to refresh, and it
+     // will another ad (when it shouldn't) if we don't do this
     this.props.relay.forceFetch({firstN: DEFAULT_FIRST_N}, ({ready, done, error}) => {
       if(error) {
         Alert.alert(

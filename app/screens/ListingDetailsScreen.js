@@ -69,7 +69,6 @@ var ListingDetailsInner = React.createClass({
       userDistance = '>10';
     }
 
-    debugger;
     var currentDateUTC = Date.parse(new Date().toUTCString());
     var locationUpdatedAtUTC = Date.parse(user.locationUpdatedAt)
     var locationUpdatedAt = Math.round(((currentDateUTC - locationUpdatedAtUTC) / 1000) / 60)

@@ -32,12 +32,12 @@ const AuthenticatedRoot = React.createClass({
     // console.log('access token: ', bazaarAccessToken);
     // console.log('user email: ', userEmail);
 
-    Firebase.initializeApp({
-      apiKey: "AIzaSyC907RJrC4ylrAZRNbayrmRnyjTN3C69eM",
-      authDomain: "bazaar-ff292.firebaseapp.com",
-      databaseURL: "https://bazaar-ff292.firebaseio.com",
-      storageBucket: "bazaar-ff292.appspot.com",
-    })
+    var config = {
+      apiKey: "AIzaSyBC9CfCfZ4Br-P-XK27QTLv2hfQGMTOVqc",
+      authDomain: "fir-bazaar.firebaseapp.com",
+      databaseURL: "https://fir-bazaar.firebaseio.com",
+      storageBucket: "firebase-bazaar.appspot.com",
+    };
 
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer(`${serverUrl}/api/graph`, {

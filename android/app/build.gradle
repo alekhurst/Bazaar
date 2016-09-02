@@ -82,6 +82,22 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        // The Fabric Gradle plugin uses an open ended version to react
+        // quickly to Android tooling updates
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'io.fabric'
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
 android {
     signingConfigs {
         debug {
@@ -139,6 +155,9 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile(project(':react-native-google-signin')) {
         exclude group: "com.google.android.gms" // very important
+    }
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
     }
     compile 'com.google.android.gms:play-services-auth:9.4.0'
     // should be at least 9.0.0

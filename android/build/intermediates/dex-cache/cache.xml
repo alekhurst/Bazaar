@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics-core/2.3.8/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.0.1_e36e4365f6f5bb34968d298ccb1ce97e77d1732e.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_e0486022ee22a042b19a72c166ad40d78bd536c6.jar" />
+        sha1="c9ef45dcbd082cd63aac09a5e2cd443adb5df837">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-core-2.3.8_11c4fa5a29f18d3955bb286bb8c3c2d3f2a15b7e.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/jars/classes.jar"
@@ -21,20 +14,6 @@
         revision="23.0.1"
         sha1="8505ca79a0abc3ef116f9c197b7d721ee2453066">
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.31.0_186b2865cf289306d105599755bd01b3ea005f18.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.4.0_2a2bfd8bbc2216447448db349fd026ff7620f9dc.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-admob/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8e42947189bb702ed3fb922d5caccd8182630b18">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-admob-unspecified_29ae0e352c1cfcfeb67302708109ff4241bb1a72.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
@@ -51,25 +30,11 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_40c92c4ed4ebad26828408b7ef7956c3e6bd2015.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/jars/classes.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-admob/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.4.0_6c642ec3ac8d587c03825a06be1a7c479e07f17d.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_61194591c8405ad2c770766ed03798483e68f690.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.4.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4348dd26d83b56c2058b768222c3271bce911724">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-9.4.0_b3644eb0108c0bd83efcffb961a66d26bb10c557.jar" />
+        sha1="e4d72d71583be67b83a82d600e0cba9ea6d43cfc">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-admob-unspecified_29ae0e352c1cfcfeb67302708109ff4241bb1a72.jar" />
     </item>
     <item
         jar="/Users/Alek/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
@@ -86,18 +51,11 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_c9944ff45bad9cb1346b03f23513b60313900e1e.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.4.0/jars/classes.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/crashlytics/2.5.5/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-9.4.0_0dba7b5b37e065cb8c7176de341a5523dea3a7f2.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="98786c1770b531b9194fb6448b2a2692c64074b6">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-0.11.0_a9608c625eeca2cd872f0f85a239bf034a01420e.jar" />
+        sha1="611605b6b640c1558f9bdea41de8ff837ab68ca8">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-crashlytics-2.5.5_12da3b9d72ae7bab859e4dbfbf6529b2252874f1.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.4.0/jars/classes.jar"
@@ -105,6 +63,13 @@
         revision="23.0.1"
         sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-9.4.0_dec21f1a1c4a3bfe7fd191fe4bd7914228e52f27.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98786c1770b531b9194fb6448b2a2692c64074b6">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-0.11.0_a9608c625eeca2cd872f0f85a239bf034a01420e.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.4.0/jars/classes.jar"
@@ -121,13 +86,6 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-0.11.0_c17711f86dad308e15f3d8eaccc67289acf9010e.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.11.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1137942adeb03984c1311b662363dd38fc238fd3">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-0.11.0_b5bf71bd50602bd8a9e0c458cbf4d9690a97c1cd.jar" />
-    </item>
-    <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.4.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -135,11 +93,11 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-lite-9.4.0_af419f77476531c48158cdfc6d095b23400e6605.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.4.0/jars/classes.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.3.10/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-9.4.0_6361c4e43c4688c9ed675d411d6506353e7f32d6.jar" />
+        sha1="a5db9a2dd46d84285ef737f65030b74b6e8ee2a4">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/io.fabric.sdk.android-fabric-1.3.10_00eef47e2ac1048156a2b402cd25a11fcd3b1875.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.github.ybq/Android-SpinKit/1.0.4/jars/classes.jar"
@@ -170,18 +128,11 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-impl-9.4.0_976bd3c45135cff61ad44627320eca0ed8f74ad3.jar" />
     </item>
     <item
-        jar="/Users/Alek/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/answers/1.3.6/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_c3a6b01bd22ac79642b7569abe878f9f0cfa2ac5.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.4.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-9.4.0_cd99e804493bd58c69a97eec7cdcaa807d81ab80.jar" />
+        sha1="9af3b9b8114e685291aa00e6572b0a9131244956">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-answers-1.3.6_289fb37a7eb386acfa384a36dbebe1a239963047.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/jars/libs/infer-annotations-1.5.jar"
@@ -194,7 +145,7 @@
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-google-signin/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="7bbc08c6fe2e6d67b9bef08906e41908110e265f">
+        sha1="d0812c6d5de8ba3dc8b86ef4e52a25926c34f19d">
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-google-signin-unspecified_b65a916a8e1461e9d3f0d54397daac3a71cf0185.jar" />
     </item>
     <item
@@ -203,6 +154,125 @@
         revision="23.0.1"
         sha1="d31aadf33187c37a7cd63dc1b769f8c6e33f78c3">
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-0.11.0_80cb056a92b6fd2e8dc41cd7d86e63e21d20926a.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_79d095a35b99da1b58967247f9d3aa674a0b2d32.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/library-2.4.0_77c64ca2e9c06f19c406214ca48d8bdd36b7d9ca.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3341b66c54367e777a0647e2db96c045329bfeab">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-0.11.0_8333bcea6b222e815948836c74f8063562ea7f2f.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-spinkit/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a7592c5908698d5ced3b0a80e958ad773d20b081">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-spinkit-unspecified_ce325873a73f2fe28d025971d45682233b2ebf52.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gass-9.4.0_ccb30d2b137cf9de8f1f68f4494b7570a0a8f305.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.0.1_e36e4365f6f5bb34968d298ccb1ce97e77d1732e.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_e0486022ee22a042b19a72c166ad40d78bd536c6.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.4.0_2a2bfd8bbc2216447448db349fd026ff7620f9dc.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.4.0_6c642ec3ac8d587c03825a06be1a7c479e07f17d.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_61194591c8405ad2c770766ed03798483e68f690.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4348dd26d83b56c2058b768222c3271bce911724">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-9.4.0_b3644eb0108c0bd83efcffb961a66d26bb10c557.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-9.4.0_0dba7b5b37e065cb8c7176de341a5523dea3a7f2.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1137942adeb03984c1311b662363dd38fc238fd3">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-0.11.0_b5bf71bd50602bd8a9e0c458cbf4d9690a97c1cd.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-9.4.0_6361c4e43c4688c9ed675d411d6506353e7f32d6.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-fabric/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9936743a988ba3e58ff7ee500d38022ecf698e7f">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-fabric-unspecified_72e7648a1b4fb13e9e797d1fc5466350c32d34cb.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_c3a6b01bd22ac79642b7569abe878f9f0cfa2ac5.jar" />
+    </item>
+    <item
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="58c9f5ee817fdb8b658fd7455fadfb74119f7ee9">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-9.4.0_cd99e804493bd58c69a97eec7cdcaa807d81ab80.jar" />
     </item>
     <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/0.11.0/jars/classes.jar"
@@ -233,27 +303,6 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.3_bb0cb7dda641a9fbdf7eafdc51c3dbca922a1656.jar" />
     </item>
     <item
-        jar="/Users/Alek/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_79d095a35b99da1b58967247f9d3aa674a0b2d32.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/library-2.4.0_77c64ca2e9c06f19c406214ca48d8bdd36b7d9ca.jar" />
-    </item>
-    <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3341b66c54367e777a0647e2db96c045329bfeab">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-0.11.0_8333bcea6b222e815948836c74f8063562ea7f2f.jar" />
-    </item>
-    <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.4.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -261,25 +310,18 @@
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-clearcut-9.4.0_9dfb36826d6073b47933b2a99ccb63751e0b5837.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-spinkit/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4779433af843dcf39043a9bc53e8b046468408a4">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-spinkit-unspecified_ce325873a73f2fe28d025971d45682233b2ebf52.jar" />
-    </item>
-    <item
         jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/Bazaar/react-native-vector-icons/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="8f8c51a1e0e4ad39b5c3d5c1441662a7aafd9f8d">
+        sha1="1498d7da8b14b9bf0aa297bf31c057e93ba2aa21">
         <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/Bazaar-react-native-vector-icons-unspecified_292162d3cb7b60d5dff508a8124303811a8c7c74.jar" />
     </item>
     <item
-        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/9.4.0/jars/classes.jar"
+        jar="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/exploded-aar/com.crashlytics.sdk.android/beta/1.1.4/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
-        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gass-9.4.0_ccb30d2b137cf9de8f1f68f4494b7570a0a8f305.jar" />
+        sha1="ad5bb101ced4d3939225c9b57e5a3d81547c1fbb">
+        <dex dex="/Users/Alek/Developer/Bazaar/android/app/build/intermediates/pre-dexed/debug/com.crashlytics.sdk.android-beta-1.1.4_0ece493961694f9e4188e79f167f81e92e9808ac.jar" />
     </item>
 
 </items>

@@ -2243,6 +2243,7 @@ containing a value of this type.
         public static final int catalyst_remotedbg_message=0x7f07003a;
         public static final int catalyst_settings=0x7f07003b;
         public static final int catalyst_settings_title=0x7f07003c;
+        public static final int com_crashlytics_android_build_id=0x7f07003d;
         public static final int common_google_play_services_enable_button=0x7f070011;
         public static final int common_google_play_services_enable_text=0x7f070012;
         public static final int common_google_play_services_enable_title=0x7f070013;
@@ -2263,17 +2264,17 @@ containing a value of this type.
         public static final int common_open_on_phone=0x7f070022;
         public static final int common_signin_button_text=0x7f070023;
         public static final int common_signin_button_text_long=0x7f070024;
-        public static final int create_calendar_message=0x7f07003d;
-        public static final int create_calendar_title=0x7f07003e;
-        public static final int decline=0x7f07003f;
-        public static final int default_web_client_id=0x7f070040;
-        public static final int gcm_defaultSenderId=0x7f070041;
-        public static final int google_api_key=0x7f070042;
-        public static final int google_app_id=0x7f070043;
-        public static final int google_crash_reporting_api_key=0x7f070044;
+        public static final int create_calendar_message=0x7f07003e;
+        public static final int create_calendar_title=0x7f07003f;
+        public static final int decline=0x7f070040;
+        public static final int default_web_client_id=0x7f070041;
+        public static final int gcm_defaultSenderId=0x7f070042;
+        public static final int google_api_key=0x7f070043;
+        public static final int google_app_id=0x7f070044;
+        public static final int google_crash_reporting_api_key=0x7f070045;
         public static final int status_bar_notification_info_overflow=0x7f070025;
-        public static final int store_picture_message=0x7f070045;
-        public static final int store_picture_title=0x7f070046;
+        public static final int store_picture_message=0x7f070046;
+        public static final int store_picture_title=0x7f070047;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007a;

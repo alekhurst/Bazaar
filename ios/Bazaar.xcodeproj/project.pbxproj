@@ -25,6 +25,8 @@
 		4816F40EB2B849B1BB709B82 /* libRNLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8E639B719426A82A6F2B9 /* libRNLocation.a */; };
 		4D2ABE1170604504B702EA7A /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5E67AA7F2F432BB001CE5C /* libRNVectorIcons.a */; };
 		743A70231D5CCE9E00CA8D27 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743A70221D5CCE9E00CA8D27 /* GoogleMobileAds.framework */; };
+		74403BB51D7924D10030B8CE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74403BB31D7924D10030B8CE /* Fabric.framework */; };
+		74403BB61D7924D10030B8CE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74403BB41D7924D10030B8CE /* Crashlytics.framework */; };
 		74804DA01D3B2EF00083627D /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 74804D9B1D3B2EF00083627D /* GoogleSignIn.bundle */; };
 		74804DA11D3B2EF00083627D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74804D9C1D3B2EF00083627D /* GoogleSignIn.framework */; };
 		74804DA21D3B2EF00083627D /* RNGoogleSignin.m in Sources */ = {isa = PBXBuildFile; fileRef = 74804D9E1D3B2EF00083627D /* RNGoogleSignin.m */; };
@@ -180,6 +182,8 @@
 		58B9AF07A89541F782AB646E /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 0; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		6AB5B765550641F9826C98ED /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 0; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		743A70221D5CCE9E00CA8D27 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		74403BB31D7924D10030B8CE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		74403BB41D7924D10030B8CE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		74804D9B1D3B2EF00083627D /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		74804D9C1D3B2EF00083627D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		74804D9D1D3B2EF00083627D /* RNGoogleSignin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGoogleSignin.h; sourceTree = "<group>"; };
@@ -227,10 +231,12 @@
 				74804DA11D3B2EF00083627D /* GoogleSignIn.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				74403BB61D7924D10030B8CE /* Crashlytics.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				74403BB51D7924D10030B8CE /* Fabric.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				4D2ABE1170604504B702EA7A /* libRNVectorIcons.a in Frameworks */,
@@ -450,6 +456,8 @@
 		F0FEA5BE102245E89B7B4837 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				74403BB31D7924D10030B8CE /* Fabric.framework */,
+				74403BB41D7924D10030B8CE /* Crashlytics.framework */,
 				3A1E3D3C85CB45E1A1EE945B /* Entypo.ttf */,
 				25BF56583F294FB8BAEB7EB7 /* EvilIcons.ttf */,
 				C4692144A36F4A249A2E9656 /* FontAwesome.ttf */,
@@ -491,6 +499,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				74403BA41D7924A20030B8CE /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -739,6 +748,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		74403BA41D7924A20030B8CE /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 2d13ee5045c3e83248fcee1816a7f2280b197c70 3217ae31c2f84649cfa6d132c0ac3d421833aeff982c65fc7445978fa065ec0c";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -8,6 +8,7 @@ import Relay, {
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Firebase from 'firebase';
+import {Crashlytics} from 'react-native-fabric';
 
 import FeedTab from 'screens/FeedTab';
 import MeTab from 'screens/MeTab';
@@ -50,6 +51,11 @@ const AuthenticatedRoot = React.createClass({
     );
 
     RelayNetworkDebug.init();
+  },
+
+  componentDidMount() {
+    Crashlytics.setUserEmail(this.props.userCredentials.userEmail);
+    Crashlytics.setUserIdentifier(this.props.userCredentials.userId);
   },
 
   render() {

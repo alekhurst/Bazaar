@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
-import Firebase from 'firebase';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import GoogleIcon from 'react-native-vector-icons/MaterialIcons';
 
@@ -16,6 +15,7 @@ import ListingRoute from 'routes/ListingRoute';
 import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import {openChatScreen} from 'actions/chat/chatScreenActions';
 
+import FirebaseApp from 'hammer/FirebaseApp';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import PokemonImage from 'components/pokemon/PokemonImage';
@@ -40,17 +40,17 @@ var ListingDetailsInner = React.createClass({
       newChatTitle = this.props.listing.user.displayName
     }
 
-    Firebase.database().ref(`/chats/oneToOne/${newChatId}`).set({
+    FirebaseApp.ref(`/chats/oneToOne/${newChatId}`).set({
       createdAt: new Date().getTime()
     })
 
-    Firebase.database().ref(`/users/${otherUser}/chats/${newChatId}`).set(true)
-    Firebase.database().ref(`/users/${user}/chats/${newChatId}`).set(true)
+    FirebaseApp.ref(`/users/${otherUser}/chats/${newChatId}`).set(true)
+    FirebaseApp.ref(`/users/${user}/chats/${newChatId}`).set(true)
 
     var firebaseChatMembersDataToSet = {};
     firebaseChatMembersDataToSet[user] = true;
     firebaseChatMembersDataToSet[otherUser] = true;
-    Firebase.database().ref(`/chatMembers/${newChatId}`).set(firebaseChatMembersDataToSet)
+    FirebaseApp.ref(`/chatMembers/${newChatId}`).set(firebaseChatMembersDataToSet)
 
     this.props.dispatch(closeListingDetailsScreen());
     this.props.dispatch(openChatScreen(newChatId, newChatTitle));

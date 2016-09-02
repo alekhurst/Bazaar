@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
-import Firebase from 'firebase';
 import {get} from 'lodash';
 
 import {openChatScreen} from 'actions/chat/chatScreenActions';
@@ -10,6 +9,7 @@ import {incrementUnreadCount} from 'actions/chat/unreadCountActions';
 import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
 import UserRoute from 'routes/UserRoute';
 
+import FirebaseApp from 'hammer/FirebaseApp';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import {white, whiteSmoke, base, matterhorn, primaryColor} from 'hammer/colors';
@@ -32,7 +32,7 @@ class ChatListRow extends React.Component {
   }
 
   componentWillMount() {
-    this._firebaseChatRef = Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}`)
+    this._firebaseChatRef = FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}`)
     this._firebaseChatRef.on('value', this.onFirebaseChatValueChange);
   }
 
@@ -69,13 +69,13 @@ class ChatListRow extends React.Component {
   }
 
   onPressOpenChat(chatTitle) {
-    if (!this.state.haveReadLatestMessage) {
-      this.props.dispatch(decrementUnreadCount())
-    }
-
-    Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
-      [this.props.userId]: new Date().getTime()
-    });
+    // if (!this.state.haveReadLatestMessage) {
+    //   this.props.dispatch(decrementUnreadCount())
+    // }
+    //
+    // Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
+    //   [this.props.userId]: new Date().getTime()
+    // });
 
     this.props.dispatch(openChatScreen(this.props.chatId, chatTitle));
   }
@@ -142,7 +142,7 @@ class ChatListRowWrapper extends React.Component {
   }
 
   componentWillMount() {
-    this._firebaseChatMembersRef = Firebase.database().ref(`/chatMembers/${this.props.chatId}`)
+    this._firebaseChatMembersRef = FirebaseApp.ref(`/chatMembers/${this.props.chatId}`)
     this._firebaseChatMembersRef.once('value', this.onFirebaseChatMembersValueChange);
   }
 

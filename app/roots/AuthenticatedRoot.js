@@ -7,7 +7,6 @@ import Relay, {
 } from 'react-relay';
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import Firebase from 'firebase';
 import {Crashlytics} from 'react-native-fabric';
 
 import FeedTab from 'screens/FeedTab';
@@ -31,13 +30,6 @@ const AuthenticatedRoot = React.createClass({
     var {bazaarAccessToken, userEmail} = this.props.userCredentials;
     // console.log('access token: ', bazaarAccessToken);
     // console.log('user email: ', userEmail);
-
-    var config = {
-      apiKey: "AIzaSyBC9CfCfZ4Br-P-XK27QTLv2hfQGMTOVqc",
-      authDomain: "fir-bazaar.firebaseapp.com",
-      databaseURL: "https://fir-bazaar.firebaseio.com",
-      storageBucket: "firebase-bazaar.appspot.com",
-    };
 
     Relay.injectNetworkLayer(
       new Relay.DefaultNetworkLayer(`${serverUrl}/api/graph`, {

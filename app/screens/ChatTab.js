@@ -11,12 +11,12 @@ import {
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Firebase from 'firebase';
 import {get} from 'lodash';
 
 import MeRoute from 'routes/MeRoute';
 import UpdateMeMutation from 'mutations/UpdateMeMutation';
 
+import FirebaseApp from 'hammer/FirebaseApp';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import NavigationBar from 'components/misc/NavigationBar';
@@ -38,7 +38,7 @@ var ChatTab = React.createClass({
   },
 
   componentWillMount() {
-    this._firebaseUserRef = Firebase.database().ref(`/users/${this.props.me.id}`)
+    this._firebaseUserRef = FirebaseApp.ref(`/users/${this.props.me.id}`)
     this._firebaseUserRef.on('value', this.onFirebaseUserValueChange);
   },
 

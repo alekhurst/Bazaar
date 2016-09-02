@@ -51,7 +51,11 @@ var MeTab = React.createClass({
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>
           <Text style={styles.title}>My Listings</Text>
-          <TouchableOpacity style={styles.addIcon} onPress={() => this.props.dispatch(openEditListingScreen())}>
+          <TouchableOpacity
+            style={styles.addIcon}
+            onPress={() => this.props.dispatch(openEditListingScreen())}
+            hitSlop={{top: 20, bottom: 20, left: 30, right: 20}}
+          >
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
         </NavigationBar>

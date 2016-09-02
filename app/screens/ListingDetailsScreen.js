@@ -200,7 +200,7 @@ ListingDetailsScreen = React.createClass({
         <StatusBarBackground />
         <NavigationBar>
           <Text style={styles.title}>{this.props.pokemonName}</Text>
-          <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose}>
+          <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose} hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}>
             <IonIcon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>

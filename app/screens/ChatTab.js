@@ -126,7 +126,11 @@ var ChatTab = React.createClass({
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>
           <Text style={styles.title}>Messages</Text>
-          <TouchableOpacity style={styles.addIcon} onPress={this.showCreateChatAlert}>
+          <TouchableOpacity
+            style={styles.addIcon}
+            onPress={this.showCreateChatAlert}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
+          >
             <Icon name='md-add-circle' size={26} color={white} />
           </TouchableOpacity>
         </NavigationBar>

@@ -146,11 +146,19 @@ var EditListingScreenInner = React.createClass({
         <StatusBarBackground />
         <NavigationBar>
           <Text style={styles.title}>{this.props.listing ? 'Edit Pokemon' : 'Create Pokemon'}</Text>
-          <TouchableOpacity style={styles.backButton} onPress={() => this.props.dispatch(closeEditListingScreen())}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => this.props.dispatch(closeEditListingScreen())}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
+          >
             <IonIcon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
           {renderIf(!this.state.mutating)(
-            <TouchableOpacity style={styles.nextButton} onPress={() => this.onPressFinish()}>
+            <TouchableOpacity
+              style={styles.nextButton}
+              onPress={() => this.onPressFinish()}
+              hitSlop={{top: 20, bottom: 20, left: 30, right: 20}}
+            >
               <IonIcon name='md-checkmark' size={32} color={white} />
             </TouchableOpacity>
           )}

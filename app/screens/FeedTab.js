@@ -34,7 +34,11 @@ const DEFAULT_FIRST_N = 12;
 
 var FeedTab = React.createClass({
   componentWillMount() {
-    this.setState({manualRefreshing: true})
+    // can assume location is in redux because wrapper won't
+    // let us in otherwise
+    this.props.dispatch(setFeedReflectingCurrentLocation());
+
+    this.setState({manualRefreshing: true});
     this.props.relay.setVariables({
       latitude: this.props.reduxLocation.latitude,
       longitude: this.props.reduxLocation.longitude,
@@ -74,7 +78,11 @@ var FeedTab = React.createClass({
     this.setState({endReachedCount: 0}); // for edge case: accumulated enough
      // endReaches for endReachedCount % 2 === 0. Now pulling to refresh, and it
      // will another ad (when it shouldn't) if we don't do this
-    this.props.relay.forceFetch({}, ({ready, done, error}) => {
+    this.props.relay.forceFetch({
+      firstN: DEFAULT_FIRST_N,
+      latitude: this.props.reduxLocation.latitude,
+      longitude: this.props.reduxLocation.longitude,
+    }, ({ready, done, error}) => {
       if(error) {
         Alert.alert(
           `Feed Refresh Failed`,
@@ -96,6 +104,8 @@ var FeedTab = React.createClass({
   },
 
   onSubmitSearchQuery() {
+    this.props.dispatch(setFeedReflectingCurrentLocation());
+    this.setState({endReachedCount: 0});
     /**
      * Very weird behavior with updating this search text... if you change the minimum
      * length to >= 1, you get 'performUpdateIfNecessary: Unexpected batch number(current 24, pending 23)'.
@@ -103,7 +113,11 @@ var FeedTab = React.createClass({
      */
     if (this.state.searchText.length > 1 || this.state.searchText === "") {
       this.setState({manualRefreshing: true})
-      this.props.relay.setVariables({searchText: this.state.searchText}, ({done, error}) => {
+      this.props.relay.setVariables({
+        searchText: this.state.searchText,
+        latitude: this.props.reduxLocation.latitude,
+        longitude: this.props.reduxLocation.longitude,
+      }, ({done, error}) => {
         if (done) {
           this.setState({manualRefreshing: false})
         } else if (error) {
@@ -129,7 +143,7 @@ var FeedTab = React.createClass({
 
   onEndReached() {
     this.setState({endReachedFetching: true})
-    this.props.relay.forceFetch(
+    this.props.relay.setVariables(
       {firstN: this.props.relay.variables.firstN + DEFAULT_FIRST_N},
       ({done, error}) => {
         if (done) {
@@ -193,7 +207,7 @@ var FeedTab = React.createClass({
         </NavigationBar>
         {content}
         {renderIf(!this.props.reduxLocation.feedReflectingCurrentLocation)(
-          <LocationUpdatedBanner onPress={this.onRefresh}/>
+          <LocationUpdatedBanner onPressRefresh={this.onManualRefresh}/>
         )}
       </View>
     );

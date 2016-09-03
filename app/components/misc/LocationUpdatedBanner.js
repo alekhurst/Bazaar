@@ -9,10 +9,10 @@ import {
 import {white, ghost, matterhorn, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 
-var LocationUpdatedBanner = ({onPress}) => (
+var LocationUpdatedBanner = ({onPressRefresh}) => (
   <View style={styles.container}>
     <Text style={styles.plainText}>Your location was updated!</Text>
-    <TouchableOpacity style={styles.refreshButton} onPress={onPress}>
+    <TouchableOpacity style={styles.refreshButton} onPress={onPressRefresh}>
       <Text style={styles.refreshButtonText}>Refresh Feed</Text>
     </TouchableOpacity>
   </View>
@@ -25,11 +25,10 @@ var styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 50,
     position: 'absolute',
-    bottom: 10,
-    left: 10,
-    borderRadius: 5,
-    width: vw(100) - 20,
-    backgroundColor: ghost,
+    top: 43,
+    left: 0,
+    width: vw(100),
+    backgroundColor: 'rgba(250, 250, 250, 0.80)',
   },
 
   plainText: {

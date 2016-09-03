@@ -14,16 +14,13 @@ import {white, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 var ZeroResultsPlaceholder = ({dispatch, onManualRefresh, searchText}) => (
   <View style={styles.container}>
     <Text style={styles.infoText}>
-      This could be an error! Try this:
+      There are no pokemon {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ''}for trade in your area :(
     </Text>
-    <TouchableOpacity style={styles.button} onPress={onManualRefresh}>
-      <Text style={styles.buttonText}>Reload feed</Text>
+    <TouchableOpacity style={styles.button} onPress={() => dispatch(openEditListingScreen())}>
+      <Text style={styles.buttonText}>Be the first!</Text>
     </TouchableOpacity>
-    <Text style={[styles.infoText, {marginTop: 30}]}>
-      If not, there are no pokemon {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ''}for trade in your area :(
-    </Text>
-    <TouchableOpacity style={[styles.button, styles.beTheFirstButton]} onPress={() => dispatch(openEditListingScreen())}>
-      <Text style={{color: primaryBlue}}>Be the first!</Text>
+    <TouchableOpacity style={[styles.button, styles.reloadButton]} onPress={onManualRefresh}>
+      <Text style={{color: primaryBlue}}>Reload feed</Text>
     </TouchableOpacity>
   </View>
 )
@@ -60,10 +57,11 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  beTheFirstButton: {
+  reloadButton: {
     borderColor: primaryBlue,
     borderWidth: 1,
     backgroundColor: white,
+    marginTop: 10,
   },
 
   buttonText: {

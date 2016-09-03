@@ -5,3 +5,9 @@ export const setLocation = (latitude, longitude) => {
     longitude,
   }
 }
+
+export const setFeedReflectingCurrentLocation = () => {
+  return {
+    type: "SET_FEED_REFLECTING_CURRENT_LOCATION"
+  }
+}

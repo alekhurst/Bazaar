@@ -35,7 +35,7 @@ class LocationManager extends React.Component {
     this.onLocationUpdate = this.onLocationUpdate.bind(this);
     this.commitUpdateMeMutation = this.commitUpdateMeMutation.bind(this);
 
-    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 60000);
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 3000);
   }
 
   componentWillMount() {

@@ -20,7 +20,7 @@ import {openEditListingScreen} from 'actions/editListingScreenActions';
 
 import PokemonImage from 'components/pokemon/PokemonImage';
 import EnergyBar from 'components/pokemon/EnergyBar';
-import {white, whiteSmoke, gainsboro, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
+import {white, whiteSmoke, iron, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
 import noop from 'hammer/noop';
@@ -62,7 +62,7 @@ var ListingListItem = React.createClass({
     }
 
     // TODO: figure out the root of this... for now just return null
-    // what's happening is there is only 1 move on a listing that's 
+    // what's happening is there is only 1 move on a listing that's
     // being returned from listing search
     if (!this.props.listing.moves[1]) {
       console.log('this.props.losting: ', this.props.listing)
@@ -193,7 +193,7 @@ var styles = StyleSheet.create({
   },
 
   moveName: {
-    color: gainsboro,
+    color: iron,
     fontSize: 12,
     fontWeight: '300',
   },
@@ -203,7 +203,7 @@ var styles = StyleSheet.create({
   },
 
   damage: {
-    color: gainsboro,
+    color: iron,
     fontSize: 14,
     fontWeight: '300',
   },
@@ -241,7 +241,7 @@ var styles = StyleSheet.create({
   distanceText: {
     alignSelf: 'flex-end',
     fontSize: 11,
-    color: gainsboro
+    color: iron
   },
 })
 

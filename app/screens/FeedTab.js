@@ -14,11 +14,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {get, isNumber, isEmpty, debounce} from 'lodash';
 
 import ViewerRoute from 'routes/ViewerRoute';
+import {setFeedReflectingCurrentLocation} from 'actions/locationActions';
 
 import F8StyleSheet from 'hammer/F8StyleSheet';
 import NavigationBar from 'components/misc/NavigationBar';
 import ListingList from 'components/listing/ListingList';
 import ZeroResultsPlaceholder from 'components/listing/ZeroResultsPlaceholder';
+import LocationUpdatedBanner from 'components/misc/LocationUpdatedBanner';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
@@ -32,6 +34,18 @@ const DEFAULT_FIRST_N = 12;
 
 var FeedTab = React.createClass({
   componentWillMount() {
+    this.setState({manualRefreshing: true})
+    this.props.relay.setVariables({
+      latitude: this.props.reduxLocation.latitude,
+      longitude: this.props.reduxLocation.longitude,
+    }, ({done, error}) => {
+      if (done) {
+        this.setState({manualRefreshing: false})
+      } else if (error) {
+        networkRequestFailedAlert();
+      }
+    })
+
     debouncedOnSubmitSearchQuery = debounce(this.onSubmitSearchQuery, 300);
   },
 
@@ -56,10 +70,11 @@ var FeedTab = React.createClass({
   },
 
   onRefresh() {
+    this.props.dispatch(setFeedReflectingCurrentLocation());
     this.setState({endReachedCount: 0}); // for edge case: accumulated enough
      // endReaches for endReachedCount % 2 === 0. Now pulling to refresh, and it
      // will another ad (when it shouldn't) if we don't do this
-    this.props.relay.forceFetch({firstN: DEFAULT_FIRST_N}, ({ready, done, error}) => {
+    this.props.relay.forceFetch({}, ({ready, done, error}) => {
       if(error) {
         Alert.alert(
           `Feed Refresh Failed`,
@@ -131,14 +146,9 @@ var FeedTab = React.createClass({
 
   render() {
     var searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
-    var latitude = get(this.props, 'location.latitude', null);
-    var longitude = get(this.props, 'location.longitude', null);
-    var locationIsEmpty = !isNumber(latitude) || !isNumber(longitude);
     var content = null;
 
     if (this.state.manualRefreshing) {
-      content = <GenericLoadingScreen />
-    } else if (locationIsEmpty) {
       content = <GenericLoadingScreen />
     } else if (!searchResultsLength) {
       content = (
@@ -182,13 +192,16 @@ var FeedTab = React.createClass({
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
         </NavigationBar>
         {content}
+        {renderIf(!this.props.reduxLocation.feedReflectingCurrentLocation)(
+          <LocationUpdatedBanner onPress={this.onRefresh}/>
+        )}
       </View>
     );
   }
 });
 
 function mapStateToProps(state) {
-  return {location: state.location}
+  return {reduxLocation: state.location}
 }
 
 FeedTab = connect(mapStateToProps)(FeedTab);
@@ -197,13 +210,15 @@ FeedTab = Relay.createContainer(FeedTab, {
   initialVariables: {
     searchText: DEFAULT_SEARCH_TEXT,
     firstN: DEFAULT_FIRST_N,
+    latitude: null,
+    longitude: null,
   },
 
   fragments: {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(first: $firstN, q: $searchText, radius: 10) {
+          listingsSearch(first: $firstN, q: $searchText, radius: 10, latitude: $latitude, longitude: $longitude) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -218,6 +233,14 @@ FeedTab = Relay.createContainer(FeedTab, {
 
 var FeedTabWrapper = React.createClass({
   render() {
+    var latitude = get(this.props, 'reduxLocation.latitude', null);
+    var longitude = get(this.props, 'reduxLocation.longitude', null);
+    var locationIsEmpty = !latitude || !longitude;
+
+    if (locationIsEmpty) {
+      return <GenericLoadingScreen />
+    }
+
     return (
       <Relay.Renderer
         Container={FeedTab}
@@ -238,7 +261,7 @@ var FeedTabWrapper = React.createClass({
 });
 
 function mapStateToProps(state) {
-  return {location: state.location}
+  return {reduxLocation: state.location}
 }
 
 FeedTabWrapper = connect(mapStateToProps)(FeedTabWrapper);

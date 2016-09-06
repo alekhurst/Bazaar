@@ -261,7 +261,11 @@ var EditListingScreenPlaceholder = React.createClass({
         <StatusBarBackground />
         <NavigationBar>
           <Text style={styles.title}>Create Listing</Text>
-          <TouchableOpacity style={styles.backButton} onPress={() => this.props.dispatch(closeEditListingScreen())}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => this.props.dispatch(closeEditListingScreen())}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
+          >
             <IonIcon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>

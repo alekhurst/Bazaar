@@ -56,7 +56,7 @@ class ChatScreen extends React.Component {
     var lastChecked = get(data.lastChecked, this.props.userId, null)
     var haveReadLatestMessage;
 
-    if (updatedAt === 'none') {
+    if (updatedAt === null) {
       haveReadLatestMessage = true;
     } else if (!lastChecked || lastChecked < updatedAt) {
       haveReadLatestMessage = false;
@@ -143,7 +143,11 @@ class ChatScreen extends React.Component {
         <StatusBarBackground />
         <NavigationBar style={{justifyContent: 'center'}}>
           <Text style={styles.title}>{this.props.chatTitle}</Text>
-          <TouchableOpacity style={styles.backButton} onPress={() => this.props.dispatch(closeChatScreen())}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => this.props.dispatch(closeChatScreen())}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
+          >
             <Icon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
         </NavigationBar>

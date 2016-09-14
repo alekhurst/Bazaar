@@ -8,6 +8,7 @@ import Relay, {
 import RelayNetworkDebug from 'react-relay/lib/RelayNetworkDebug';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import {Crashlytics} from 'react-native-fabric';
+import FCM from 'react-native-fcm';
 
 import FeedTab from 'screens/FeedTab';
 import MeTab from 'screens/MeTab';
@@ -17,6 +18,7 @@ import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import EditListingScreen from 'screens/EditListingScreen';
 import ChatScreen from 'screens/ChatScreen';
 import TabBar from 'components/misc/TabBar';
+import PushNotificationManager from 'components/controllers/PushNotificationManager';
 import LocationManager from 'components/controllers/LocationManager';
 import AdManager from 'components/controllers/AdManager';
 import serverUrl from 'hammer/serverUrl';
@@ -55,6 +57,7 @@ const AuthenticatedRoot = React.createClass({
       <View style={{flex: 1}}>
         <LocationManager />
         <AdManager />
+        <PushNotificationManager />
         <ScrollableTabView
           renderTabBar={() => <TabBar activeTab={0} setAnimationValue={0}/>}
           tabBarPosition='bottom'

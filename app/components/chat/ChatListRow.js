@@ -6,7 +6,6 @@ import {get} from 'lodash';
 
 import {openChatScreen} from 'actions/chat/chatScreenActions';
 import {incrementUnreadCount} from 'actions/chat/unreadCountActions';
-import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
 import UserRoute from 'routes/UserRoute';
 
 import FirebaseApp from 'hammer/FirebaseApp';
@@ -69,14 +68,6 @@ class ChatListRow extends React.Component {
   }
 
   onPressOpenChat(chatTitle) {
-    // if (!this.state.haveReadLatestMessage) {
-    //   this.props.dispatch(decrementUnreadCount())
-    // }
-    //
-    // Firebase.database().ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
-    //   [this.props.userId]: new Date().getTime()
-    // });
-
     this.props.dispatch(openChatScreen(this.props.chatId, chatTitle));
   }
 

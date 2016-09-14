@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 
 #import "RNGoogleSignin.h"
+#import "Firebase.h" // if you are using Non Cocoapod approach
+#import "RNFIRMessaging.h"
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -23,6 +25,7 @@
   NSURL *jsCodeLocation;
   
   [Fabric with:@[[Crashlytics class]]];
+  [FIRApp configure];
 
   [[RCTBundleURLProvider sharedSettings] setDefaults];
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -45,6 +48,11 @@
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   
   return [RNGoogleSignin application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+  [[NSNotificationCenter defaultCenter] postNotificationName:FCMNotificationReceived object:self userInfo:notification];
+  handler(UIBackgroundFetchResultNewData);
 }
 
 @end

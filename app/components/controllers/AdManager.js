@@ -9,7 +9,7 @@ class AdManager extends React.Component {
 
   componentDidMount() {
     if (Platform.OS === 'ios') {
-      AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/2507833224');
+      AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/8772752421');
     } else if (Platform.OS === 'android') {
       AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/2726218823');
     }

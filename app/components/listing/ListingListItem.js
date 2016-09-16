@@ -220,7 +220,7 @@ var styles = StyleSheet.create({
     right: 5,
     top: 7,
     height: 15,
-    width: 34,
+    width: 36,
   },
 
   editModeRightDetailsContainer: {

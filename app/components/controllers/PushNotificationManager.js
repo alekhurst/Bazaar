@@ -1,13 +1,23 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, AppState} from 'react-native';
 import {connect} from 'react-redux';
 import FCM from 'react-native-fcm';
 
 import FirebaseApp from 'hammer/FirebaseApp';
 
+const ACTIVE = 'active';
+
 class PushNotificationManager extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  componentWillMount() {
+    AppState.addEventListener('change', (currentState) => {
+      if (currentState === ACTIVE) {
+        FCM.setBadgeNumber(0);
+      }
+    });
   }
 
   componentDidMount() {
@@ -23,9 +33,10 @@ class PushNotificationManager extends React.Component {
     });
 
     this.notificationUnsubscribe = FCM.on('notification', (notif) => {
-      // FCM.setBadgeNumber(10); doesn't work
-      // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+      // not sure we need to do anything here
     });
+
+    FCM.setBadgeNumber(0);
   }
 
   componentWillUnmount() {

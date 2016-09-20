@@ -38,7 +38,7 @@ var ChatTab = React.createClass({
   },
 
   componentWillMount() {
-    this._firebaseUserRef = FirebaseApp.ref(`/users/${this.props.me.id}`)
+    this._firebaseUserRef = FirebaseApp.ref(`/userChats/${this.props.me.id}`)
     this._firebaseUserRef.on('value', this.onFirebaseUserValueChange);
   },
 
@@ -48,7 +48,7 @@ var ChatTab = React.createClass({
 
   onFirebaseUserValueChange(snapshot) {
     var data = snapshot.val();
-    var keys = data ? Object.keys(data.chats) : [];
+    var keys = data ? Object.keys(data) : [];
 
     this.setState({
       loadingFirebaseUser: false,

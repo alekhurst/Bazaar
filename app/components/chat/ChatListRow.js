@@ -31,7 +31,7 @@ class ChatListRow extends React.Component {
   }
 
   componentWillMount() {
-    this._firebaseChatRef = FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}`)
+    this._firebaseChatRef = FirebaseApp.ref(`/chats/${this.props.chatId}`)
     this._firebaseChatRef.on('value', this.onFirebaseChatValueChange);
   }
 
@@ -41,6 +41,10 @@ class ChatListRow extends React.Component {
 
   onFirebaseChatValueChange(snapshot) {
     var data = snapshot.val();
+
+    if (!data)
+      return this.setState({lastMessage: 'none'});
+
     var lastMessage = data.lastMessage ? data.lastMessage : 'none';
     var updatedAt = data.updatedAt ? data.updatedAt : 'none';
     var lastChecked = get(data.lastChecked, this.props.userId, null)

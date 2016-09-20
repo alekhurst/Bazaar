@@ -40,12 +40,12 @@ var ListingDetailsInner = React.createClass({
       newChatTitle = this.props.listing.user.displayName
     }
 
-    FirebaseApp.ref(`/chats/oneToOne/${newChatId}`).set({
+    FirebaseApp.ref(`/chats/${newChatId}`).set({
       createdAt: new Date().getTime()
     })
 
-    FirebaseApp.ref(`/users/${otherUser}/chats/${newChatId}`).set(true)
-    FirebaseApp.ref(`/users/${user}/chats/${newChatId}`).set(true)
+    FirebaseApp.ref(`/userChats/${otherUser}/${newChatId}`).set(true)
+    FirebaseApp.ref(`/userChats/${user}/${newChatId}`).set(true)
 
     var firebaseChatMembersDataToSet = {};
     firebaseChatMembersDataToSet[user] = true;

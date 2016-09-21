@@ -4,7 +4,7 @@ import axios from 'axios';
 import {dispatch} from 'redux-thunk';
 import {assign} from 'lodash';
 
-import serverUrl from 'hammer/serverUrl';
+import {serverUrl} from 'hammer/environment';
 
 /* EXPORTED ACTIONS */
 

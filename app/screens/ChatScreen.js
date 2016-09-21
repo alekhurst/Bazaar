@@ -113,27 +113,27 @@ class ChatScreen extends React.Component {
 
   onSend(messages = []) {
     if (!messages.length) return;
+    var timestamp = SERVER_TIMESTAMP;
 
     // send to firebase database
     var snapshot = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`).push({
       sender: messages[0].user._id,
-      sentAt: SERVER_TIMESTAMP,
+      sentAt: timestamp,
       text: messages[0].text
     });
 
     // send to message queue for node worker to fire push notification
     FirebaseApp.ref(`/messagesQueue/tasks`).push({
-      senderDisplayName: this.props.chatTitle,
       messageId: snapshot.key,
       chatId: this.props.chatId,
     })
 
     FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update({
-      [this.props.userId]: SERVER_TIMESTAMP,
+      [this.props.userId]: timestamp,
     }, (err) => {
       FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
         lastMessage: messages[0].text,
-        updatedAt: SERVER_TIMESTAMP,
+        updatedAt: timestamp,
       })
     });
   }

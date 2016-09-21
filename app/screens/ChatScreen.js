@@ -113,7 +113,7 @@ class ChatScreen extends React.Component {
 
   onSend(messages = []) {
     if (!messages.length) return;
-    var timestamp = SERVER_TIMESTAMP;
+    var timestamp = Date.now();
 
     // send to firebase database
     var snapshot = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`).push({

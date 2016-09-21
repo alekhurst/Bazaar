@@ -21,7 +21,7 @@ import TabBar from 'components/misc/TabBar';
 import PushNotificationManager from 'components/controllers/PushNotificationManager';
 import LocationManager from 'components/controllers/LocationManager';
 import AdManager from 'components/controllers/AdManager';
-import serverUrl from 'hammer/serverUrl';
+import {serverUrl} from 'hammer/environment';
 
 const AuthenticatedRoot = React.createClass({
   getInitialState() {

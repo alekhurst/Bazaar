@@ -8,7 +8,7 @@ import {get} from 'lodash';
 import {closeChatScreen} from 'actions/chat/chatScreenActions';
 import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
 
-import FirebaseApp from 'hammer/FirebaseApp';
+import FirebaseApp, {SERVER_TIMESTAMP} from 'hammer/FirebaseApp';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen'
 import NavigationBar from 'components/misc/NavigationBar';
@@ -37,9 +37,9 @@ class ChatScreen extends React.Component {
   }
 
   componentWillMount() {
-    this._firebaseMessagesRef = FirebaseApp.ref(`/messages/${this.props.chatId}`)
+    this._firebaseMessagesRef = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`)
     this._firebaseMessagesRef.on('value', this.onFirebaseMessagesValueChange);
-    this._firebaseChatRef = FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}`)
+    this._firebaseChatRef = FirebaseApp.ref(`/chats/${this.props.chatId}`)
     this._firebaseChatRef.on('value', this.onFirebaseChatValueChange);
     updatingLastChecked = false;
   }
@@ -51,12 +51,15 @@ class ChatScreen extends React.Component {
 
   onFirebaseChatValueChange(snapshot) {
     var data = snapshot.val();
-    var lastMessage = data.lastMessage ? data.lastMessage : null;
-    var updatedAt = data.updatedAt ? data.updatedAt : null;
+
+    if (!data) return;
+
+    var lastMessage = data.lastMessage;
+    var updatedAt = data.updatedAt;
     var lastChecked = get(data.lastChecked, this.props.userId, null)
     var haveReadLatestMessage;
 
-    if (updatedAt === null) {
+    if (!updatedAt || lastChecked > updatedAt) {
       haveReadLatestMessage = true;
     } else if (!lastChecked || lastChecked < updatedAt) {
       haveReadLatestMessage = false;
@@ -66,17 +69,16 @@ class ChatScreen extends React.Component {
     }
 
     if (!haveReadLatestMessage && !this.updatingLastChecked) {
-      this.props.dispatch(decrementUnreadCount())
-
       this.updatingLastChecked = true;
-      FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update(
+      FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update(
         {
-          [this.props.userId]: new Date().getTime()
+          [this.props.userId]: SERVER_TIMESTAMP,
         },
-        () => {
-          this.updatingLastChecked = false;
-        }
-      );
+      )
+      .then(arg => {
+        this.props.dispatch(decrementUnreadCount())
+        this.updatingLastChecked = false;
+      })
     }
   }
 
@@ -111,10 +113,10 @@ class ChatScreen extends React.Component {
 
   onSend(messages = []) {
     if (!messages.length) return;
-    var timestamp = new Date().getTime();
+    var timestamp = Date.now();
 
     // send to firebase database
-    var snapshot = FirebaseApp.ref(`/messages/${this.props.chatId}`).push({
+    var snapshot = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`).push({
       sender: messages[0].user._id,
       sentAt: timestamp,
       text: messages[0].text
@@ -122,15 +124,14 @@ class ChatScreen extends React.Component {
 
     // send to message queue for node worker to fire push notification
     FirebaseApp.ref(`/messagesQueue/tasks`).push({
-      senderDisplayName: this.props.chatTitle,
       messageId: snapshot.key,
       chatId: this.props.chatId,
     })
 
-    FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}/lastChecked/`).update({
+    FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update({
       [this.props.userId]: timestamp,
     }, (err) => {
-      FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}`).update({
+      FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
         lastMessage: messages[0].text,
         updatedAt: timestamp,
       })

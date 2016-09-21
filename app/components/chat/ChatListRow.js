@@ -25,13 +25,12 @@ class ChatListRow extends React.Component {
 
     this.state = {
       lastMessage: null,
-      updatedAt: null,
       haveReadLatestMessage: true,
     }
   }
 
   componentWillMount() {
-    this._firebaseChatRef = FirebaseApp.ref(`/chats/oneToOne/${this.props.chatId}`)
+    this._firebaseChatRef = FirebaseApp.ref(`/chats/${this.props.chatId}`)
     this._firebaseChatRef.on('value', this.onFirebaseChatValueChange);
   }
 
@@ -41,12 +40,20 @@ class ChatListRow extends React.Component {
 
   onFirebaseChatValueChange(snapshot) {
     var data = snapshot.val();
-    var lastMessage = data.lastMessage ? data.lastMessage : 'none';
-    var updatedAt = data.updatedAt ? data.updatedAt : 'none';
+
+    if (!data) {
+      return this.setState({
+        lastMessage: 'none',
+        haveReadLatestMessage: true,
+      });
+    }
+
+    var lastMessage = data.lastMessage;
+    var updatedAt = data.updatedAt;
     var lastChecked = get(data.lastChecked, this.props.userId, null)
     var haveReadLatestMessage;
 
-    if (updatedAt === 'none') {
+    if (!updatedAt || lastChecked > updatedAt) {
       haveReadLatestMessage = true;
     } else if (!lastChecked || lastChecked < updatedAt) {
       haveReadLatestMessage = false;
@@ -62,8 +69,7 @@ class ChatListRow extends React.Component {
 
     this.setState({
       haveReadLatestMessage,
-      lastMessage,
-      updatedAt,
+      lastMessage: lastMessage ? lastMessage : 'none',
     })
   }
 

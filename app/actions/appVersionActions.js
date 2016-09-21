@@ -3,9 +3,7 @@ import {Platform} from 'react-native';
 import {dispatch} from 'redux-thunk';
 import semver from 'semver';
 
-import serverUrl from 'hammer/serverUrl';
-
-const APP_VERSION = '1.0.1';
+import {serverUrl, appVersion} from 'hammer/environment';
 
 export const checkMinimumSupportedAppVersion = () => {
   return function(dispatch) {
@@ -20,7 +18,7 @@ export const checkMinimumSupportedAppVersion = () => {
         minimumSupportedAppVersion = res.data.android;
       }
 
-      if (semver.satisfies(APP_VERSION, `>=${minimumSupportedAppVersion}`)) {
+      if (semver.satisfies(appVersion, `<=${minimumSupportedAppVersion}`)) {
         dispatch(appVersionSupported())
       } else {
         dispatch(appVersionNotSupported())

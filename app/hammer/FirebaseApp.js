@@ -7,4 +7,6 @@ var config = {
 };
 
 var firebaseApp = firebase.initializeApp(config);
+
+export const SERVER_TIMESTAMP = firebase.database.ServerValue.TIMESTAMP;
 export default firebaseApp.database();

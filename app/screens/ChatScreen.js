@@ -8,7 +8,7 @@ import {get} from 'lodash';
 import {closeChatScreen} from 'actions/chat/chatScreenActions';
 import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
 
-import FirebaseApp from 'hammer/FirebaseApp';
+import FirebaseApp, {SERVER_TIMESTAMP} from 'hammer/FirebaseApp';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen'
 import NavigationBar from 'components/misc/NavigationBar';
@@ -52,42 +52,34 @@ class ChatScreen extends React.Component {
   onFirebaseChatValueChange(snapshot) {
     var data = snapshot.val();
 
-    if (!data)
-      return;
+    if (!data) return;
 
-    var lastMessage = data.lastMessage ? data.lastMessage : null;
-    var updatedAt = data.updatedAt ? data.updatedAt : null;
+    var lastMessage = data.lastMessage;
+    var updatedAt = data.updatedAt;
     var lastChecked = get(data.lastChecked, this.props.userId, null)
     var haveReadLatestMessage;
 
-    alert(`lastChecked: ${lastChecked}
-      updatedAt: ${updatedAt}
-      lastChecked - updatedAt: ${lastChecked - updatedAt}
-      lastChecked < updatedAt: ${lastChecked < updatedAt}`)
-    if (updatedAt === null) {
+    // alert(`lastChecked: ${lastChecked}
+    //   updatedAt: ${updatedAt}
+    //   lastChecked - updatedAt: ${lastChecked - updatedAt}
+    //   lastChecked < updatedAt: ${lastChecked < updatedAt}`)
+    if (!updatedAt || lastChecked > updatedAt) {
       haveReadLatestMessage = true;
     } else if (!lastChecked || lastChecked < updatedAt) {
       haveReadLatestMessage = false;
     } else {
       // shouldn't get here, but if you do default to true
-      haveReadLatestMessage = false;
+      haveReadLatestMessage = true;
     }
 
     if (!haveReadLatestMessage && !this.updatingLastChecked) {
       this.updatingLastChecked = true;
-      FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update(
-        {
-          [this.props.userId]: Date.now(),
-        },
-      )
-      .then(arg => {
-        alert('logging argument ', arg)
-        this.props.dispatch(decrementUnreadCount())
-        this.updatingLastChecked = false;
-      })
-      .catch(err => {
-        alert('caught an error: ', err)
-      })
+      FirebaseApp.ref(`/chatReadReceipts/${this.props.chatId}/users/${this.props.userId}`)
+        .set(SERVER_TIMESTAMP)
+        .then(arg => {
+          this.props.dispatch(decrementUnreadCount())
+          this.updatingLastChecked = false;
+        })
     }
   }
 
@@ -122,12 +114,11 @@ class ChatScreen extends React.Component {
 
   onSend(messages = []) {
     if (!messages.length) return;
-    var timestamp = new Date().getTime();
 
     // send to firebase database
     var snapshot = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`).push({
       sender: messages[0].user._id,
-      sentAt: timestamp,
+      sentAt: SERVER_TIMESTAMP,
       text: messages[0].text
     });
 
@@ -138,14 +129,16 @@ class ChatScreen extends React.Component {
       chatId: this.props.chatId,
     })
 
-    FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update({
-      [this.props.userId]: timestamp,
-    }, (err) => {
-      FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
-        lastMessage: messages[0].text,
-        updatedAt: timestamp,
-      })
-    });
+    FirebaseApp.ref(`/chatReadReceipts/${this.props.chatId}/users/${this.props.userId}`)
+      .set(
+        SERVER_TIMESTAMP,
+        () => {
+          FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
+            lastMessage: messages[0].text,
+            updatedAt: SERVER_TIMESTAMP,
+          })
+        }
+      );
   }
 
   renderAvatar() {

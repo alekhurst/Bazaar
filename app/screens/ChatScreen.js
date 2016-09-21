@@ -59,10 +59,6 @@ class ChatScreen extends React.Component {
     var lastChecked = get(data.lastChecked, this.props.userId, null)
     var haveReadLatestMessage;
 
-    // alert(`lastChecked: ${lastChecked}
-    //   updatedAt: ${updatedAt}
-    //   lastChecked - updatedAt: ${lastChecked - updatedAt}
-    //   lastChecked < updatedAt: ${lastChecked < updatedAt}`)
     if (!updatedAt || lastChecked > updatedAt) {
       haveReadLatestMessage = true;
     } else if (!lastChecked || lastChecked < updatedAt) {

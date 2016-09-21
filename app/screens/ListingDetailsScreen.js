@@ -15,7 +15,7 @@ import ListingRoute from 'routes/ListingRoute';
 import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import {openChatScreen} from 'actions/chat/chatScreenActions';
 
-import FirebaseApp from 'hammer/FirebaseApp';
+import FirebaseApp, {SERVER_TIMESTAMP} from 'hammer/FirebaseApp';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import PokemonImage from 'components/pokemon/PokemonImage';
@@ -40,8 +40,8 @@ var ListingDetailsInner = React.createClass({
       newChatTitle = this.props.listing.user.displayName
     }
 
-    FirebaseApp.ref(`/chats/${newChatId}`).set({
-      createdAt: new Date().getTime()
+    FirebaseApp.ref(`/chats/${newChatId}`).update({
+      createdAt: SERVER_TIMESTAMP
     })
 
     FirebaseApp.ref(`/userChats/${otherUser}/${newChatId}`).set(true)

@@ -74,12 +74,15 @@ class ChatScreen extends React.Component {
 
     if (!haveReadLatestMessage && !this.updatingLastChecked) {
       this.updatingLastChecked = true;
-      FirebaseApp.ref(`/chatReadReceipts/${this.props.chatId}/users/${this.props.userId}`)
-        .set(SERVER_TIMESTAMP)
-        .then(arg => {
-          this.props.dispatch(decrementUnreadCount())
-          this.updatingLastChecked = false;
-        })
+      FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update(
+        {
+          [this.props.userId]: SERVER_TIMESTAMP,
+        },
+      )
+      .then(arg => {
+        this.props.dispatch(decrementUnreadCount())
+        this.updatingLastChecked = false;
+      })
     }
   }
 
@@ -129,16 +132,14 @@ class ChatScreen extends React.Component {
       chatId: this.props.chatId,
     })
 
-    FirebaseApp.ref(`/chatReadReceipts/${this.props.chatId}/users/${this.props.userId}`)
-      .set(
-        SERVER_TIMESTAMP,
-        () => {
-          FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
-            lastMessage: messages[0].text,
-            updatedAt: SERVER_TIMESTAMP,
-          })
-        }
-      );
+    FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update({
+      [this.props.userId]: SERVER_TIMESTAMP,
+    }, (err) => {
+      FirebaseApp.ref(`/chats/${this.props.chatId}`).update({
+        lastMessage: messages[0].text,
+        updatedAt: SERVER_TIMESTAMP,
+      })
+    });
   }
 
   renderAvatar() {

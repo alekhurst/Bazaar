@@ -24,7 +24,7 @@ class ChatListRow extends React.Component {
     this.onPressOpenChat = this.onPressOpenChat.bind(this);
 
     this.state = {
-      lastMessage: null,
+      lastMessage: '',
       haveReadLatestMessage: true,
     }
   }
@@ -43,7 +43,7 @@ class ChatListRow extends React.Component {
 
     if (!data) {
       return this.setState({
-        lastMessage: 'none',
+        lastMessage: null,
         haveReadLatestMessage: true,
       });
     }
@@ -69,7 +69,7 @@ class ChatListRow extends React.Component {
 
     this.setState({
       haveReadLatestMessage,
-      lastMessage: lastMessage ? lastMessage : 'none',
+      lastMessage: lastMessage ? lastMessage : null,
     })
   }
 
@@ -78,6 +78,12 @@ class ChatListRow extends React.Component {
   }
 
   render() {
+    if (this.state.lastMessage === null) {
+      // only null if there are actually no messages. If they are
+      // still loading, this.state.lastMessage will be undefined or ''
+      return null;
+    }
+
     var displayNameToShow;
     if (!this.props.user.displayName) {
       displayNameToShow = 'Anonymous'
@@ -100,7 +106,10 @@ class ChatListRow extends React.Component {
           </View>
           <View style={styles.detailsContainer}>
             <Text style={styles.name} numberOfLines={1}>{displayNameToShow}</Text>
-            <Text style={styles.lastMessage} numberOfLines={2}>{this.state.lastMessage ? this.state.lastMessage : 'loading...'}</Text>
+            <Text style={styles.lastMessage} numberOfLines={2}>
+              {/* initialized to '', which gets casted to false */}
+              {this.state.lastMessage ? this.state.lastMessage : 'loading...'}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>

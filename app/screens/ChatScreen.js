@@ -38,7 +38,10 @@ class ChatScreen extends React.Component {
 
   componentWillMount() {
     this._firebaseMessagesRef = FirebaseApp.ref(`/chatMessages/${this.props.chatId}`)
-    this._firebaseMessagesRef.on('value', this.onFirebaseMessagesValueChange);
+    this._firebaseMessagesRef
+      .orderByChild('sentAt')
+      .limitToLast(50)
+      .on('value', this.onFirebaseMessagesValueChange);
     this._firebaseChatRef = FirebaseApp.ref(`/chats/${this.props.chatId}`)
     this._firebaseChatRef.on('value', this.onFirebaseChatValueChange);
     updatingLastChecked = false;
@@ -103,7 +106,7 @@ class ChatScreen extends React.Component {
           _id: data[key].sender,
         }
       }
-    }).sort((a, b) => b.createdAt - a.createdAt);
+    }).reverse();
 
     this.setState({
       loadingMessages: false,

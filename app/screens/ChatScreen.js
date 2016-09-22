@@ -129,7 +129,8 @@ class ChatScreen extends React.Component {
     FirebaseApp.ref(`/messagesQueue/tasks`).push({
       messageId: snapshot.key,
       chatId: this.props.chatId,
-    })
+      sender: messages[0].user._id,
+    });
 
     FirebaseApp.ref(`/chats/${this.props.chatId}/lastChecked/`).update({
       [this.props.userId]: timestamp,

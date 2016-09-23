@@ -1,2 +1,2 @@
 # Bazaar
-The Pokemon Go Trading App
+The Trading App

@@ -19,7 +19,7 @@ var UnauthenticatedRoot = React.createClass({
           style={styles.logo}
         />
         <Text style={styles.title}>Bazaar</Text>
-        <Text style={styles.subtitle}>The Pokemon Go Trading App</Text>
+        <Text style={styles.subtitle}>The Trading App</Text>
         <GoogleSigninButton
           style={styles.signinButton}
           size={GoogleSigninButton.Size.Wide}

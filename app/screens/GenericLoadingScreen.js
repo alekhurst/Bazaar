@@ -15,7 +15,7 @@ var GenericLoadingScreen = React.createClass({
       <View style={[styles.container, this.props.style]} >
         <View style={styles.content}>
           <Image source={require('images/logo300px.png')} style={styles.logo} resizeMode={'contain'} />
-          <Spinner style={styles.spinner} isVisible size={35} type='Bounce' color='#ffc296'/>
+          <Spinner style={styles.spinner} isVisible size={37} type='Bounce' color='#ffc296'/>
         </View>
       </View>
     );
@@ -38,14 +38,14 @@ var styles = StyleSheet.create({
   },
 
   logo: {
-    width: 140,
-    height: 140,
+    width: 138,
+    height: 138,
   },
 
   spinner: {
     position: 'relative',
-    top: -87,
-    left: 0,
+    top: -88,
+    left: -0.5,
   }
 })
 

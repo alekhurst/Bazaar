@@ -185,7 +185,7 @@ var FeedTab = React.createClass({
         >
           <View style={styles.resultsHeaderContainer}>
             <View style={styles.resultesHeaderLine} />
-            <Text style={styles.resultsHeaderText}>Pokemon for trade near you</Text>
+            <Text style={styles.resultsHeaderText}>For trade near you</Text>
             <View style={styles.resultesHeaderLine} />
           </View>
         </ListingList>

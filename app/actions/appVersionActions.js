@@ -18,7 +18,7 @@ export const checkMinimumSupportedAppVersion = () => {
         minimumSupportedAppVersion = res.data.android;
       }
 
-      if (semver.satisfies(appVersion, `<=${minimumSupportedAppVersion}`)) {
+      if (semver.satisfies(appVersion, `>=${minimumSupportedAppVersion}`)) {
         dispatch(appVersionSupported())
       } else {
         dispatch(appVersionNotSupported())

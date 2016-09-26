@@ -145,7 +145,7 @@ var EditListingScreenInner = React.createClass({
       <View style={{flex: 1}}>
         <StatusBarBackground />
         <NavigationBar>
-          <Text style={styles.title}>{this.props.listing ? 'Edit Pokemon' : 'Create Pokemon'}</Text>
+          <Text style={styles.title}>{this.props.listing ? 'Edit Listing' : 'Create Listing'}</Text>
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => this.props.dispatch(closeEditListingScreen())}
@@ -170,7 +170,7 @@ var EditListingScreenInner = React.createClass({
           <View style={[styles.modalPickerWrapper, {flex: 3}]}>
             <ModalPicker
               data={this.pokemonModalData}
-              initValue={isEmpty(this.state.pokemonName) ? "Pokemon" : this.state.pokemonName}
+              initValue={isEmpty(this.state.pokemonName) ? "Species" : this.state.pokemonName}
               onChange={(option) => this.setState({pokemonName: option.label})}
             />
           </View>

@@ -10,7 +10,7 @@ import {white, matterhorn, primaryBlue} from 'hammer/colors';
 
 var ZeroMyListingsPlaceholder = ({dispatch}) => (
   <View style={styles.container}>
-    <Text style={styles.reloadText}>You haven't listed any pokemon for trade yet.</Text>
+    <Text style={styles.reloadText}>You haven't created any trade listings yet.</Text>
     <TouchableOpacity style={styles.createButton} onPress={() => dispatch(openEditListingScreen())}>
       <Text style={styles.createButtonText}>Create Listing</Text>
     </TouchableOpacity>

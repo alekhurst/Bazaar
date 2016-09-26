@@ -14,7 +14,7 @@ import {white, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 var ZeroResultsPlaceholder = ({dispatch, onManualRefresh, searchText}) => (
   <View style={styles.container}>
     <Text style={styles.infoText}>
-      There are no pokemon {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ''}for trade in your area :(
+      There are no listings {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ''} in your area :(
     </Text>
     <TouchableOpacity style={styles.button} onPress={() => dispatch(openEditListingScreen())}>
       <Text style={styles.buttonText}>Be the first!</Text>

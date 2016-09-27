@@ -14,7 +14,7 @@ var UnauthenticatedRoot = React.createClass({
     return (
       <View style={styles.container}>
         <Image
-          source={require('images/logo300px.png')}
+          source={require('images/Logo400px.png')}
           resizeMode='contain'
           style={styles.logo}
         />

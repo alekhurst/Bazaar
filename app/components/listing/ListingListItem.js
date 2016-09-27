@@ -18,7 +18,7 @@ import {get} from 'lodash';
 import {openListingDetailsScreen} from 'actions/listingDetailsScreenActions';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 
-import PokemonImage from 'components/pokemon/PokemonImage';
+import TypeIcon from 'components/pokemon/TypeIcon';
 import EnergyBar from 'components/pokemon/EnergyBar';
 import {white, whiteSmoke, iron, matterhorn, primaryColor, primaryBlue, primaryRed} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
@@ -74,9 +74,9 @@ var ListingListItem = React.createClass({
         onPress={this.onPressListing}
         style={styles.container}
       >
-        <PokemonImage
+        <TypeIcon
           style={smallDevice ? styles.pokemonThumbnailSmall : styles.pokemonThumbnail}
-          pokedexNumber={this.props.listing.pokemon.pokedexNumber}
+          elementType={this.props.listing.pokemon.elementTypes[0]}
           resizeMode='contain'
         />
         <View style={styles.leftDetailsContainer}>
@@ -135,6 +135,7 @@ ListingListItem = Relay.createContainer(ListingListItem, {
           pokemon {
             name,
             pokedexNumber,
+            elementTypes,
           },
           user {
             distanceFromMe

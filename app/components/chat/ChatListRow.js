@@ -102,7 +102,7 @@ class ChatListRow extends React.Component {
         </View>
         <View style={styles.chatRow}>
           <View style={[styles.circle, {backgroundColor: getColorFromUserId(this.props.user.id)}]}>
-            <Text style={styles.circleText}>{displayNameToShow.charAt(0)}</Text>
+            <Text style={styles.circleText}>{displayNameToShow.charAt(0).toUpperCase()}</Text>
           </View>
           <View style={styles.detailsContainer}>
             <Text style={styles.name} numberOfLines={1}>{displayNameToShow}</Text>

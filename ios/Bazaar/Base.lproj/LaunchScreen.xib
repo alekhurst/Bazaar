@@ -11,18 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="LogoAndName" translatesAutoresizingMaskIntoConstraints="NO" id="ETS-k2-CfO">
-                    <rect key="frame" x="156" y="117" width="169" height="246"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="LogoAndName" translatesAutoresizingMaskIntoConstraints="NO" id="3aY-Kv-mmy">
+                    <rect key="frame" x="156" y="113" width="169" height="254"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="246" id="eW6-L0-zGV"/>
-                        <constraint firstAttribute="width" constant="169" id="vIl-w1-eth"/>
+                        <constraint firstAttribute="width" constant="169" id="MQm-TI-2K8"/>
+                        <constraint firstAttribute="height" constant="254" id="tJE-iI-phO"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="ETS-k2-CfO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-50" id="Rm3-ca-zxJ"/>
-                <constraint firstItem="ETS-k2-CfO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cT9-0a-ZZK"/>
+                <constraint firstItem="3aY-Kv-mmy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jJI-Fp-MQh"/>
+                <constraint firstItem="3aY-Kv-mmy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-60" id="qzz-hP-myS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -30,6 +30,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LogoAndName" width="169" height="246"/>
+        <image name="LogoAndName" width="169" height="254"/>
     </resources>
 </document>

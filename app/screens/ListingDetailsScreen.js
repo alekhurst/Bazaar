@@ -5,6 +5,7 @@ import {
   Image,
   View,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
@@ -18,12 +19,13 @@ import {openChatScreen} from 'actions/chat/chatScreenActions';
 import FirebaseApp, {SERVER_TIMESTAMP} from 'hammer/FirebaseApp';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
-import PokemonImage from 'components/pokemon/PokemonImage';
+import TypeIcon from 'components/pokemon/TypeIcon';
 import EnergyBar from 'components/pokemon/EnergyBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
-import {white, ghost, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
+import {white, ghost, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
+import noop from 'hammer/noop';
 
 var ListingDetailsInner = React.createClass({
   onPressStartChat() {
@@ -54,6 +56,17 @@ var ListingDetailsInner = React.createClass({
 
     this.props.dispatch(closeListingDetailsScreen());
     this.props.dispatch(openChatScreen(newChatId, newChatTitle));
+  },
+
+  onPressReport() {
+    Alert.alert(
+      'Report this Listing',
+      'This listing is suspected to be fake, innapropriate, or otherwise against our Terms of Service.',
+      [
+        {text: 'Confirm', onPress: () => Alert.alert('Reported', 'Thank you! we\'re looking into it!')},
+        {text: 'Cancel', onPress: noop},
+      ]
+    );
   },
 
   render() {
@@ -102,13 +115,16 @@ var ListingDetailsInner = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.topDetailsContainer}>
+          <TouchableOpacity style={styles.reportButton} onPress={this.onPressReport} hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}>
+            <IonIcon name='md-warning' size={24} color={gainsboro}/>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.wantButton} onPress={this.onPressStartChat}>
             <Text style={styles.wantButtonText}>Chat</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.pokemonImageContainer}>
-          <PokemonImage
-            pokedexNumber={listing.pokemon.pokedexNumber}
+          <TypeIcon
+            elementType={listing.pokemon.elementTypes[0]}
             resizeMode='contain'
             style={styles.pokemonImage}
           />
@@ -287,6 +303,12 @@ const styles = StyleSheet.create({
 
   cpValue: {
     fontSize: 22,
+  },
+
+  reportButton: {
+    position: 'absolute',
+    left: 10,
+    top: 20,
   },
 
   wantButton: {

@@ -2,12 +2,14 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
+  TouchableOpacity,
   Image,
+  Linking,
   View
 } from 'react-native';
 import {GoogleSigninButton} from 'react-native-google-signin';
 
-import {white, ghost, primaryColor} from 'hammer/colors';
+import {white, ghost, steel, primaryColor} from 'hammer/colors';
 
 var UnauthenticatedRoot = React.createClass({
   render() {
@@ -26,6 +28,12 @@ var UnauthenticatedRoot = React.createClass({
           color={GoogleSigninButton.Color.Light}
           onPress={this.props.onPressLogin}
         />
+        <TouchableOpacity onPress={() => Linking.openURL('http://bazaartheapp.com/termsofservice.html')}>
+          <View style={styles.termsOfServiceContainer}>
+            <Text style={styles.termsOfService}>Before using this app you must</Text>
+            <Text style={styles.termsOfService}>agree to our <Text style={{textDecorationLine: 'underline'}}>Terms of Service</Text></Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -62,6 +70,17 @@ const styles = StyleSheet.create({
     marginTop: 80,
     backgroundColor: 'transparent'
   },
+
+  termsOfServiceContainer: {
+    marginVertical: 5,
+    width: 250,
+  },
+
+  termsOfService: {
+    fontSize: 11,
+    textAlign: 'center',
+    color: steel,
+  }
 });
 
 export default UnauthenticatedRoot;

@@ -8,4 +8,4 @@ export const firebaseConfig = {
   storageBucket: "firebase-bazaar.appspot.com",
 };
 
-export const appVersion = '1.0.15';
+export const appVersion = '1.0.17';

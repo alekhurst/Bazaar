@@ -3,8 +3,6 @@ import {
   Image,
 } from 'react-native';
 
-import {pokemonDictionary} from 'datasets/pokemon';
-
 var TypeIcon = React.createClass({
   render() {
     let typeIcons = {

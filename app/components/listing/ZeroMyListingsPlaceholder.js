@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 
 import {vh} from 'hammer/viewPercentages';
-import {white, matterhorn, primaryBlue} from 'hammer/colors';
+import {white, matterhorn, primaryLightOrange} from 'hammer/colors';
 
 
 var ZeroMyListingsPlaceholder = ({dispatch}) => (
@@ -25,7 +25,7 @@ var styles = StyleSheet.create({
   },
 
   createButton: {
-    backgroundColor: primaryBlue,
+    backgroundColor: primaryLightOrange,
     borderRadius: 5,
     paddingVertical: 10,
     width: 160,

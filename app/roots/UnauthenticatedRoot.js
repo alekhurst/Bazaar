@@ -30,7 +30,7 @@ var UnauthenticatedRoot = React.createClass({
         />
         <TouchableOpacity onPress={() => Linking.openURL('http://bazaartheapp.com/termsofservice.html')}>
           <View style={styles.termsOfServiceContainer}>
-            <Text style={styles.termsOfService}>Before using this app you must</Text>
+            <Text style={styles.termsOfService}>By using this app you aknowledge and</Text>
             <Text style={styles.termsOfService}>agree to our <Text style={{textDecorationLine: 'underline'}}>Terms of Service</Text></Text>
           </View>
         </TouchableOpacity>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: primaryColor,
+    marginTop: 5,
     fontSize: 54,
     fontWeight: '200',
   },
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   subtitle: {
     color: primaryColor,
     fontSize: 17,
+    lineHeight: 17,
     fontWeight: '300',
   },
 

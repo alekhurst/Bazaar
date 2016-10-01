@@ -36,7 +36,7 @@ class PushNotificationManager extends React.Component {
       // not sure we need to do anything here
     });
 
-    FCM.setBadgeNumber(0);
+    if (Platform.OS === 'ios') FCM.setBadgeNumber(0);
   }
 
   componentWillUnmount() {

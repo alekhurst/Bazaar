@@ -5,34 +5,36 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clear-dev-cache": "scripts/clear-dev-cache.sh",
-    "start-with-reset": "node node_modules/react-native/local-cli/cli.js start --reset-cache"
+    "start-with-reset": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "fresh-dev": "npm run clear-dev-cache && npm run start-with-reset"
   },
   "dependencies": {
-    "axios": "^0.13.1",
-    "firebase": "^3.2.1",
-    "react": "15.3.1",
-    "react-native": "0.32.0",
+    "axios": "^0.14.0",
+    "firebase": "^3.4.1",
+    "react": "15.3.2",
+    "react-native": "0.34.1",
     "react-native-admob": "^1.1.5",
     "react-native-fabric": "^0.3.0",
-    "react-native-fcm": "^2.0.2",
-    "react-native-gifted-chat": "0.0.7",
-    "react-native-google-signin": "^0.8.0",
+    "react-native-fcm": "^2.2.1",
+    "react-native-gifted-chat": "0.0.10",
+    "react-native-google-signin": "^0.8.1",
     "react-native-location": "^0.27.0",
     "react-native-modal-picker": "0.0.16",
-    "react-native-scrollable-tab-view": "^0.5.3",
-    "react-native-spinkit": "^0.1.2",
-    "react-native-vector-icons": "^2.0.3",
+    "react-native-scrollable-tab-view": "^0.6.0",
+    "react-native-spinkit": "^0.1.3",
+    "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
     "react-relay": "^0.9.3",
-    "redux": "^3.5.2",
+    "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "semver": "^5.3.0"
   },
   "devDependencies": {
-    "babel-core": "^6.14.0",
+    "babel-core": "^6.16.0",
+    "babel-plugin-transform-class-properties": "^6.16.0",
     "babel-preset-react-native": "^1.9.0",
     "babel-relay-plugin": "^0.9.3",
-    "graphql": "^0.6.2",
+    "graphql": "^0.7.1",
     "sync-request": "^3.0.1"
   }
 }

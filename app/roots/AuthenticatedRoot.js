@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Modal} from 'react-native';
+import { Text, View, Modal } from 'react-native';
 import {connect} from 'react-redux';
 import Relay, {
   DefaultNetworkLayer,

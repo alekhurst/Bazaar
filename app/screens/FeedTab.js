@@ -200,6 +200,7 @@ var FeedTab = React.createClass({
             onChangeText={this.onChangeSearchText}
             style={styles.searchInput}
             clearButtonMode='while-editing'
+            underlineColorAndroid='transparent'
             autoCorrect={false}
             returnKeyType='search'
           />

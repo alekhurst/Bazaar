@@ -14,7 +14,7 @@ class PushNotificationManager extends React.Component {
 
   componentWillMount() {
     AppState.addEventListener('change', (currentState) => {
-      if (currentState === ACTIVE) {
+      if (currentState === ACTIVE && Platform.OS === 'ios') {
         FCM.setBadgeNumber(0);
       }
     });

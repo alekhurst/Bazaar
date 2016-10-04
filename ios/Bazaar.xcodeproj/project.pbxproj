@@ -596,6 +596,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = R59E649L73;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -965,6 +966,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = R59E649L73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RNGoogleSignin",
@@ -991,7 +993,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "18aa39b5-20b6-4884-a02b-6e83b91c3f22";
+				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Development";
 			};
 			name = Debug;
 		};
@@ -1002,6 +1005,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bazaar/Bazaar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = R59E649L73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/RNGoogleSignin",
@@ -1028,7 +1032,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f62e9584-c046-4353-b5d0-fecd3b9b6cdf";
+				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Distribution";
 			};
 			name = Release;
 		};

@@ -22,6 +22,7 @@ import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import NavigationBar from 'components/misc/NavigationBar';
 import ChatListRow from 'components/chat/ChatListRow';
 import F8StyleSheet from 'hammer/F8StyleSheet';
+import getDisplayNamePlaceholderFromUserId from 'hammer/getDisplayNamePlaceholderFromUserId';
 import {white, ghost, whiteSmoke, matterhorn, primaryColor} from 'hammer/colors';
 import renderIf from 'hammer/renderIf';
 import {vw, vh} from 'hammer/viewPercentages';
@@ -122,6 +123,8 @@ var ChatTab = React.createClass({
       chatsContent = this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)
     }
 
+    let placeholder = getDisplayNamePlaceholderFromUserId(this.props.me.id);
+
     return (
       <View style={styles.container}>
         <NavigationBar style={{justifyContent: 'center'}}>
@@ -141,7 +144,7 @@ var ChatTab = React.createClass({
               <TextInput
                 onChangeText={(displayName) => this.setState({displayName})}
                 onSubmitEditing={() => this.onFinishEditingDisplayName()}
-                placeholder="Anonymous"
+                placeholder={placeholder}
                 value={this.state.displayName}
                 style={styles.displayNameTextInput}
                 returnKeyType='done'

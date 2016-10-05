@@ -81,7 +81,7 @@ var ListingListItem = React.createClass({
         />
         <View style={styles.leftDetailsContainer}>
           <Text style={styles.pokemonName}>{this.props.listing.pokemon.name}</Text>
-          <Text style={styles.cp}>CP {this.props.listing.cp}</Text>
+          {/*FUAPPLE: <Text style={styles.cp}>CP {this.props.listing.cp}</Text>*/}
         </View>
         {renderIf(!this.props.editMode)(
           <View style={styles.middleDetailsContainer}>

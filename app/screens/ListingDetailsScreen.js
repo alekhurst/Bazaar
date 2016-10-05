@@ -23,6 +23,7 @@ import TypeIcon from 'components/pokemon/TypeIcon';
 import EnergyBar from 'components/pokemon/EnergyBar';
 import NavigationBar from 'components/misc/NavigationBar';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
+import getDisplayNamePlaceholderFromUserId from 'hammer/getDisplayNamePlaceholderFromUserId';
 import {white, ghost, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
@@ -35,7 +36,7 @@ var ListingDetailsInner = React.createClass({
 
     var newChatTitle;
     if (!this.props.listing.user.displayName) {
-      newChatTitle = 'Anonymous'
+      newChatTitle = getDisplayNamePlaceholderFromUserId(this.props.listing.user.id)
     } else if (this.props.listing.user.id === this.props.userId) {
       newChatTitle = 'Yourself';
     } else { // display name present & it's not me
@@ -74,7 +75,7 @@ var ListingDetailsInner = React.createClass({
     var pokemon = this.props.listing.pokemon;
     var user = this.props.listing.user;
 
-    var userName = user.displayName ? user.displayName : 'anonymous';
+    var userName = user.displayName ? user.displayName : getDisplayNamePlaceholderFromUserId(this.props.listing.user.id);
     var userDistance = Math.round(user.distanceFromMe)
     if (user.distanceFromMe < 1) {
       userDistance = '<1';
@@ -131,14 +132,14 @@ var ListingDetailsInner = React.createClass({
         </View>
         <View style={styles.lowerDetailsContainer}>
           <View style={styles.attributesContainer}>
-            <View style={[styles.attribute]}>
+            {/*FUAPPLE: <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{listing.cp}</Text>
               <Text style={styles.attributeTitle}>CP</Text>
             </View>
             <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{listing.hp}</Text>
               <Text style={styles.attributeTitle}>HP</Text>
-            </View>
+            </View>*/}
             <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{pokemon.elementTypes[0]}</Text>
               <Text style={styles.attributeTitle}>TYPE</Text>

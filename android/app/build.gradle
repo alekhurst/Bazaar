@@ -116,7 +116,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "com.tubuc.Bazaar"
+        applicationId "com.bazaar"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 20

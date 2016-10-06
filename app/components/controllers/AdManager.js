@@ -2,18 +2,18 @@ import React from 'react';
 import {Platform} from 'react-native';
 import {AdMobInterstitial} from 'react-native-admob';
 
+if (Platform.OS === 'ios') {
+  AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/8772752421');
+} else if (Platform.OS === 'android') {
+  AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/2726218823');
+}
+
 class AdManager extends React.Component {
   constructor(props) {
     super(props)
   }
 
   componentDidMount() {
-    if (Platform.OS === 'ios') {
-      AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/8772752421');
-    } else if (Platform.OS === 'android') {
-      AdMobInterstitial.setAdUnitID('ca-app-pub-7832878148999755/2726218823');
-    }
-
     AdMobInterstitial.setTestDeviceID('EMULATOR');
 
     AdMobInterstitial.addEventListener('interstitialDidLoad',

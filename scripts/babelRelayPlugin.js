@@ -1,5 +1,5 @@
 'use strict'
-var serverUrl = 'https://powerful-plains-21017.herokuapp.com'
+var serverUrl = 'https://bazaar-api-stg.herokuapp.com'
 //var serverUrl = 'https://bazaar-api-prod.herokuapp.com'
 
 const getBabelRelayPlugin = require('babel-relay-plugin')
@@ -9,6 +9,10 @@ const request = require('sync-request')
 const url = `${serverUrl}/api/graph_schema?graphiql=true`;
 
 const response = request('GET', url, {
+  headers: {
+    'X-User-Email': 'graphiql@bazaar.net',
+    'X-User-Token': 'mWgX37qKmPl-UfaESZM9QZm7MYD9SlF7IVrHF68-QoM'
+  },
   qs: {
     query: introspectionQuery
   }

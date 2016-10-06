@@ -1,6 +1,6 @@
 'use strict'
-//var serverUrl = 'https://powerful-plains-21017.herokuapp.com'
-var serverUrl = 'https://bazaar-api-prod.herokuapp.com'
+var serverUrl = 'https://powerful-plains-21017.herokuapp.com'
+//var serverUrl = 'https://bazaar-api-prod.herokuapp.com'
 
 const getBabelRelayPlugin = require('babel-relay-plugin')
 const introspectionQuery = require('graphql/utilities').introspectionQuery

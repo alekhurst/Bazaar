@@ -10,6 +10,10 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import {Crashlytics} from 'react-native-fabric';
 import FCM from 'react-native-fcm';
 
+import {closeEditListingScreen} from 'actions/editListingScreenActions';
+import {closeListingDetailsScreen} from 'actions/listingDetailsScreenActions';
+import {closeChatScreen} from 'actions/chat/chatScreenActions';
+
 import FeedTab from 'screens/FeedTab';
 import MeTab from 'screens/MeTab';
 import ChatTab from 'screens/ChatTab';
@@ -73,7 +77,7 @@ const AuthenticatedRoot = React.createClass({
           animationType='slide'
           transparent={false}
           visible={this.props.listingDetailsScreen.visible}
-          onRequestClose={() => noop()}
+          onRequestClose={() => this.props.dispatch(closeListingDetailsScreen())}
         >
           <ListingDetailsScreen />
         </Modal>
@@ -81,7 +85,7 @@ const AuthenticatedRoot = React.createClass({
           animationType='slide'
           transparent={false}
           visible={this.props.editListingScreen.visible}
-          onRequestClose={() => noop()}
+          onRequestClose={() => this.props.dispatch(closeEditListingScreen())}
         >
           <EditListingScreen />
         </Modal>
@@ -89,7 +93,7 @@ const AuthenticatedRoot = React.createClass({
           animationType='slide'
           transparent={false}
           visible={this.props.chatScreen.visible}
-          onRequestClose={() => noop()}
+          onRequestClose={() => this.props.dispatch(closeChatScreen())}
         >
           <ChatScreen />
         </Modal>

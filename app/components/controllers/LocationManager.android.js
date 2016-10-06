@@ -25,16 +25,14 @@ class LocationManager extends React.Component {
       (position) => {
         this.onLocationUpdate(position)
       },
-      (error) => console.log('error getting initial position: ', error),
-      {enableHighAccuracy: false, timeout: 10000, maximumAge: 10000}
+      (error) => console.log('error getting initial position: ', error)
     )
 
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
         this.onLocationUpdate(position)
       },
-      (error) => console.log('error watching position : ', error),
-      {enableHighAccuracy: false, timeout: 10000, maximumAge: 10000}
+      (error) => console.log('error watching position : ', error)
     )
   }
 

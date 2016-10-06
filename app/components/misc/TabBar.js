@@ -82,8 +82,7 @@ const styles = F8StyleSheet.create({
     paddingTop: 14,
     backgroundColor: ghost,
     android: {
-      paddingTop: 3,
-      marginTop: 11,
+      paddingTop: 13,
       paddingHorizontal: 10,
     }
   },

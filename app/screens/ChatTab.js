@@ -264,6 +264,7 @@ var styles = F8StyleSheet.create({
     color: matterhorn,
     android: {
       paddingBottom: 0,
+      paddingTop: 0, // need this for some reason...
     }
   },
 

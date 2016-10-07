@@ -156,6 +156,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-permissions')
     compile project(':react-native-fcm')
     compile project(':react-native-fabric')
     compile project(':react-native-admob')

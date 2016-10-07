@@ -3,6 +3,7 @@ import {DeviceEventEmitter, AppState, Alert} from 'react-native';
 import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import {throttle, get} from 'lodash';
+import Permissions from 'react-native-permissions';
 
 import {setLocation} from 'actions/locationActions';
 
@@ -16,11 +17,47 @@ class LocationManager extends React.Component {
 
     this.onLocationUpdate = this.onLocationUpdate.bind(this);
     this.commitUpdateMeMutation = this.commitUpdateMeMutation.bind(this);
+    this.onPermissionDenied = this.onPermissionDenied.bind(this);
+    this.startTrackingLocation = this.startTrackingLocation.bind(this);
+    this.requestPermission = this.requestPermission.bind(this);
+    this.getDistanceFromLocation = this.getDistanceFromLocation.bind(this);
 
-    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 180000);
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 2000);
+  }
+
+  componentWillMount() {
+    AppState.addEventListener('change', (currentState) => {
+      if (currentState === 'active') {
+        this.requestPermission();
+      }
+    });
   }
 
   componentDidMount() {
+    this.requestPermission();
+  }
+
+  requestPermission() {
+    Permissions.requestPermission('location')
+      .then(response => {
+        // response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+        if (response === 'authorized') {
+          this.startTrackingLocation();
+        } else {
+          this.onPermissionDenied();
+        }
+      });
+  }
+
+  onPermissionDenied() {
+    Alert.alert(
+      'Location Denied',
+      'Bazaar uses your location to find nearby players, and cannot work without it. We do not expose your precise location to others. \n\nTo use this app:\n1. Open Settings\n2. Allow location while in use',
+      [{text: 'Open Settings', onPress: Permissions.openSettings}]
+    )
+  }
+
+  startTrackingLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.onLocationUpdate(position)
@@ -37,7 +74,35 @@ class LocationManager extends React.Component {
   }
 
   onLocationUpdate(location) {
+    let latitude = location.coords.latitude;
+    let longitude = location.coords.longitude;
+    if (this.getDistanceFromLocation(latitude, longitude) < 100) return;
+
     this.throttledCommitUpdateMeMutation(location)
+  }
+
+  // found this at http://www.movable-type.co.uk/scripts/latlong.html
+  getDistanceFromLocation(latitude, longitude) {
+    // new location
+    let lon2 = longitude;
+    let lat2 = latitude;
+
+    // current location
+    let lon1 = this.props.me.location.longitude;
+    let lat1 = this.props.me.location.latitude;
+
+    var R = 6371e3; // metres
+    var φ1 = lat1 * Math.PI / 180;
+    var φ2 = lat2 * Math.PI / 180;
+    var Δφ = (lat2-lat1) * Math.PI / 180;
+    var Δλ = (lon2-lon1) * Math.PI / 180;
+
+    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c;
   }
 
   commitUpdateMeMutation(location) {

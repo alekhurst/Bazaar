@@ -18,7 +18,6 @@
     "react-native-fcm": "^2.2.2",
     "react-native-gifted-chat": "0.0.10",
     "react-native-google-signin": "^0.8.1",
-    "react-native-location": "^0.27.0",
     "react-native-modal-picker": "0.0.16",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-spinkit": "^0.1.3",

@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StatusBar, Platform, Alert, NetInfo, AppState} from 'react-native';
 import {connect} from 'react-redux';
-import Location from 'react-native-location';
 import {GoogleSignin} from 'react-native-google-signin';
 
 import {checkMinimumSupportedAppVersion} from 'actions/appVersionActions';
@@ -21,12 +20,6 @@ var AppRoot = React.createClass({
 
     NetInfo.isConnected.addEventListener('change', this.checkNetworkConnection);
     AppState.addEventListener('change', this.handleAppStateChange);
-  },
-
-  componentDidMount() {
-    if (Platform.OS === 'ios') {
-      Location.requestWhenInUseAuthorization();
-    }
   },
 
   checkNetworkConnection(isConnected) {

@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">qJ9FihZOVkKcKdYNUVx-4xhCnEnbV1IQ7Mg0-</string>
     <string name="app_name">Bazaar</string>
 </resources>

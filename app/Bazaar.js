@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import codePush from "react-native-code-push";
 
 import bazaarStore from 'reducers/index';
 import AppRoot from 'roots/AppRoot';
@@ -17,5 +18,7 @@ class Bazaar extends Component {
     );
   }
 }
+
+Bazaar = codePush(Bazaar);
 
 export default Bazaar;

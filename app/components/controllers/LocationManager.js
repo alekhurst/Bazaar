@@ -21,8 +21,13 @@ class LocationManager extends React.Component {
     this.startTrackingLocation = this.startTrackingLocation.bind(this);
     this.requestPermission = this.requestPermission.bind(this);
     this.getDistanceFromLocation = this.getDistanceFromLocation.bind(this);
+    this.onLocationWatchError = this.onLocationWatchError.bind(this);
 
-    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 2000);
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 60000);
+
+    this.state = {
+      initialLocationSent: false
+    }
   }
 
   componentWillMount() {
@@ -57,18 +62,24 @@ class LocationManager extends React.Component {
     )
   }
 
+  onLocationWatchError() {
+    Alert.alert(
+      'Error Reading Location',
+      'Your device failed to provide a location.'
+    )
+  }
+
   startTrackingLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.onLocationUpdate(position)
+        this.setState({initialLocationSent: true})
       },
       (error) => console.log('error getting initial position: ', error)
     )
 
     this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        this.onLocationUpdate(position)
-      },
+      (position) => this.onLocationUpdate(position),
       (error) => console.log('error watching position : ', error)
     )
   }
@@ -76,7 +87,14 @@ class LocationManager extends React.Component {
   onLocationUpdate(location) {
     let latitude = location.coords.latitude;
     let longitude = location.coords.longitude;
-    if (this.getDistanceFromLocation(latitude, longitude) < 100) return;
+
+    if (this.getDistanceFromLocation(latitude, longitude) < 100
+      && this.state.initialLocationSent) return;
+
+    if (this.getDistanceFromLocation(latitude, longitude) < 100
+      && this.state.initialLocationSent) {
+      return;
+    }
 
     this.throttledCommitUpdateMeMutation(location)
   }

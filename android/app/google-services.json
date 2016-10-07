@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:655586204672:android:b335f11be69f1a9f",
         "android_client_info": {
-          "package_name": "com.bazaar"
+          "package_name": "com.tubuc.bazaar"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "655586204672-9heofn76l6vk021mvj9nt45n2io50grm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bazaar",
+            "package_name": "com.tubuc.bazaar",
             "certificate_hash": "A7500892D1DA7177D00AC10F43C3134D76C7FB65"
           }
         },

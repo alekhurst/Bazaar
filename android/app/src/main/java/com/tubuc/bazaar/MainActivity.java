@@ -1,11 +1,6 @@
-package com.bazaar;
+package com.tubuc.bazaar;
 
 import com.facebook.react.ReactActivity;
-import com.smixx.fabric.FabricPackage;
-import com.sbugert.rnadmob.RNAdMobPackage;
-import com.react.rnspinkit.RNSpinkitPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 public class MainActivity extends ReactActivity {
 

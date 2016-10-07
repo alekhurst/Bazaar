@@ -10,12 +10,82 @@
       "client_info": {
         "mobilesdk_app_id": "1:655586204672:android:b335f11be69f1a9f",
         "android_client_info": {
+          "package_name": "com.bazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655586204672-ehuo6ufo46nll8i5asdasih9mv36n7eu.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "655586204672-itvtoo5sfdgud1nfteqnrcavi9irotf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC36DN7R6ROapazut4MCI-mEV69w1kNsJI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655586204672:android:3c04303a7dab5a7b",
+        "android_client_info": {
+          "package_name": "com.tubuc.Bazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655586204672-ehuo6ufo46nll8i5asdasih9mv36n7eu.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "655586204672-itvtoo5sfdgud1nfteqnrcavi9irotf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC36DN7R6ROapazut4MCI-mEV69w1kNsJI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655586204672:android:43c67a21c25468cd",
+        "android_client_info": {
           "package_name": "com.tubuc.bazaar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "655586204672-9heofn76l6vk021mvj9nt45n2io50grm.apps.googleusercontent.com",
+          "client_id": "655586204672-gd43bkj3at2is5gffnasd9usugc6amjt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tubuc.bazaar",

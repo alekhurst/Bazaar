@@ -27,6 +27,7 @@ import getDisplayNamePlaceholderFromUserId from 'hammer/getDisplayNamePlaceholde
 import {white, ghost, gainsboro, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 import {vw} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
+import renderIf from 'hammer/renderIf';
 
 var ListingDetailsInner = React.createClass({
   onPressStartChat() {
@@ -132,14 +133,18 @@ var ListingDetailsInner = React.createClass({
         </View>
         <View style={styles.lowerDetailsContainer}>
           <View style={styles.attributesContainer}>
-            {/*FUAPPLE: <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{listing.cp}</Text>
-              <Text style={styles.attributeTitle}>CP</Text>
-            </View>
-            <View style={[styles.attribute]}>
-              <Text style={styles.attributeValue}>{listing.hp}</Text>
-              <Text style={styles.attributeTitle}>HP</Text>
-            </View>*/}
+            {renderIf(listing.cp)(
+              <View style={[styles.attribute]}>
+                <Text style={styles.attributeValue}>{listing.cp}</Text>
+                <Text style={styles.attributeTitle}>CP</Text>
+              </View>
+            )}
+            {renderIf(listing.hp)(
+              <View style={[styles.attribute]}>
+                <Text style={styles.attributeValue}>{listing.hp}</Text>
+                <Text style={styles.attributeTitle}>HP</Text>
+              </View>
+            )}
             <View style={[styles.attribute]}>
               <Text style={styles.attributeValue}>{pokemon.elementTypes[0]}</Text>
               <Text style={styles.attributeTitle}>TYPE</Text>

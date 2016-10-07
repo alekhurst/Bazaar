@@ -75,8 +75,8 @@ var EditListingScreenInner = React.createClass({
       me: this.props.me,
       pokedexNumber: indexOf(pokemonList, this.state.pokemonName) + 1,
       moves: [this.state.quickMove, this.state.specialMove],
-      //FUAPPLE: cp: Number(Number(this.state.cp).toFixed()),
-      //FUAPPLE: hp: Number(Number(this.state.hp).toFixed()),
+      cp: Number(Number(this.state.cp).toFixed()),
+      hp: Number(Number(this.state.hp).toFixed()),
     }
 
     if (!this.props.listing) {
@@ -88,8 +88,8 @@ var EditListingScreenInner = React.createClass({
 
   validInput() {
     if(isEmpty(this.state.pokemonName)
-      //FUAPPLE: || isEmpty(this.state.cp)
-      // || isEmpty(this.state.hp)
+      || isEmpty(this.state.cp)
+      || isEmpty(this.state.hp)
       || isEmpty(this.state.quickMove)
       || isEmpty(this.state.specialMove)
     ) {
@@ -99,8 +99,8 @@ var EditListingScreenInner = React.createClass({
 
     if(Number.isNaN(Number(this.state.cp))
       || Number.isNaN(Number(this.state.hp))
-      //FUAPPLE:  || Number(this.state.cp) > 9999
-      // || Number(this.state.hp) > 9999
+      || Number(this.state.cp) > 9999
+      || Number(this.state.hp) > 9999
     ) {
       this.setState({errorMessage: 'Invalid cp/hp input values'})
       return false;
@@ -190,7 +190,7 @@ var EditListingScreenInner = React.createClass({
             />
           </View>
         </View>
-        {/*FUAPPLE: <View style={styles.inputRow}>
+        <View style={styles.inputRow}>
           <View style={styles.textInputWrapper}>
             <TextInput
               style={styles.textInput}
@@ -211,7 +211,7 @@ var EditListingScreenInner = React.createClass({
               underlineColorAndroid='transparent'
             />
           </View>
-        </View>*/}
+        </View>
         {renderIf(!isEmpty(this.state.errorMessage))(
           <View style={styles.errorContainer}>
             <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>

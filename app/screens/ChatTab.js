@@ -116,9 +116,9 @@ var ChatTab = React.createClass({
     var chatsContent = null;
 
     if (this.state.chatIds === null) {
-      chatsContent = <Text style={{alignSelf: 'center', marginTop: vh(10)}}>Loading...</Text>
+      chatsContent = <Text style={{color: matterhorn, alignSelf: 'center', marginTop: vh(10)}}>Loading...</Text>
     } else if (this.state.chatIds.length === 0) {
-      chatsContent = <Text style={{alignSelf: 'center', marginTop: vh(5)}}>You don't have any chats</Text>
+      chatsContent = <Text style={{color: matterhorn, alignSelf: 'center', marginTop: vh(25)}}>(You don't have any chats)</Text>
     } else if (this.state.chatIds.length > 0) {
       chatsContent = this.state.chatIds.map((chatId) => <ChatListRow chatId={chatId} key={chatId} />)
     }

@@ -92,6 +92,8 @@ class LocationManager extends React.Component {
       return;
     } else {
       console.log('conditional was false')
+      console.log('distance: ', this.getDistanceFromLocation(latitude, longitude) < 200)
+      console.log('initialLocationSent: ', this.state.initialLocationSent)
       this.throttledCommitUpdateMeMutation(location)
     }
   }

@@ -38,7 +38,7 @@ var styles = StyleSheet.create({
 
   reloadText: {
     width: 180,
-    marginTop: vh(20),
+    marginTop: vh(25),
     color: matterhorn,
     textAlign: 'center',
     marginBottom: 20

@@ -12,7 +12,7 @@
     "axios": "^0.14.0",
     "firebase": "^3.4.1",
     "react": "15.3.2",
-    "react-native": "0.34.1",
+    "react-native": "0.35.0",
     "react-native-admob": "^1.1.5",
     "react-native-code-push": "^1.14.6-beta",
     "react-native-fabric": "^0.3.0",

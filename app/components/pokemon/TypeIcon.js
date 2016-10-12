@@ -21,6 +21,7 @@ var TypeIcon = React.createClass({
       ground: require('images/type_icons/Ground.png'),
       dragon: require('images/type_icons/Dragon.png'),
       flying: require('images/type_icons/Flying.png'),
+      fairy: require('images/type_icons/Fairy.png'),
     }
 
     return (

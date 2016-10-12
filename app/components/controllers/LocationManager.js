@@ -70,16 +70,11 @@ class LocationManager extends React.Component {
   }
 
   startTrackingLocation() {
-    navigator.geolocation.getCurrentPosition(
+    this.watchID = navigator.geolocation.watchPosition(
       (position) => {
-        this.onLocationUpdate(position)
+        this.onLocationUpdate(position);
         this.setState({initialLocationSent: true})
       },
-      (error) => console.log('error getting initial position: ', error)
-    )
-
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => this.onLocationUpdate(position),
       (error) => console.log('error watching position : ', error)
     )
   }
@@ -88,15 +83,17 @@ class LocationManager extends React.Component {
     let latitude = location.coords.latitude;
     let longitude = location.coords.longitude;
 
-    if (this.getDistanceFromLocation(latitude, longitude) < 100
-      && this.state.initialLocationSent) return;
-
+    console.log('current lat lng: ', this.props.me.location.latitude, ' ', this.props.me.location.longitude)
+    console.log('new lat lng: ', latitude, ' ', longitude)
+    console.log('difference: ', this.getDistanceFromLocation(latitude, longitude))
+    console.log('return conditional: ', this.getDistanceFromLocation(latitude, longitude) < 100 && this.state.initialLocationSent)
     if (this.getDistanceFromLocation(latitude, longitude) < 100
       && this.state.initialLocationSent) {
       return;
+    } else {
+      console.log('conditional was false')
+      this.throttledCommitUpdateMeMutation(location)
     }
-
-    this.throttledCommitUpdateMeMutation(location)
   }
 
   // found this at http://www.movable-type.co.uk/scripts/latlong.html

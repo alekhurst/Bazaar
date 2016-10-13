@@ -38,8 +38,6 @@ var ListingDetailsInner = React.createClass({
     var newChatTitle;
     if (!this.props.listing.user.displayName) {
       newChatTitle = getDisplayNamePlaceholderFromUserId(this.props.listing.user.id)
-    } else if (this.props.listing.user.id === this.props.userId) {
-      newChatTitle = 'Yourself';
     } else { // display name present & it's not me
       newChatTitle = this.props.listing.user.displayName
     }

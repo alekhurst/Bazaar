@@ -11,6 +11,7 @@ import UserRoute from 'routes/UserRoute';
 import FirebaseApp from 'hammer/FirebaseApp';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
+import getDisplayNamePlaceholderFromUserId from 'hammer/getDisplayNamePlaceholderFromUserId';
 import {white, whiteSmoke, base, matterhorn, primaryColor} from 'hammer/colors';
 import {vw, vh} from 'hammer/viewPercentages';
 import renderIf from 'hammer/renderIf';
@@ -86,9 +87,7 @@ class ChatListRow extends React.Component {
 
     var displayNameToShow;
     if (!this.props.user.displayName) {
-      displayNameToShow = 'Anonymous'
-    } else if (this.props.user.id === this.props.userId) {
-      displayNameToShow = 'Yourself';
+      displayNameToShow = getDisplayNamePlaceholderFromUserId(this.props.user.id);
     } else { // display name present & it's not me
       displayNameToShow = this.props.user.displayName
     }

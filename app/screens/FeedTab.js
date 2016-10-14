@@ -136,7 +136,7 @@ var FeedTab = React.createClass({
         // if we're midway through the most recently loaded listings
         // && max possible listings are showing
         this.setState({endReachedCount: 0})
-        AdMobInterstitial.showAd((error) => error && console.log(error));
+        AdMobInterstitial.showAd((error) => error && console.log('[ADMOB] Error showing ad: ', error));
       }
     }
   },

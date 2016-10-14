@@ -15,12 +15,12 @@ export const login = () => {
     return GoogleSignin.signIn()
     .then((user) => {
       // google signin worked, ping our sever
-      console.log('User returned from Google Signin API: ', user);
+      console.log('[AUTHENTICATION] User returned from Google Signin API: ', user);
       _authenticateAgainstBazaarApi(user, dispatch);
     })
     .catch((err) => {
       // google signin failed
-      console.log('Error signing into Google: ', err);
+      console.log('[AUTHENTICATION] Error signing into Google: ', err);
       dispatch(loginError())
     })
     .done();
@@ -38,7 +38,7 @@ export const currentUserAsync = () => {
       }
     })
     .catch((err) => {
-      console.log('Error singing in with GoogleSignin library: ', err)
+      console.log('[AUTHENTICATION] Error singing in with GoogleSignin library: ', err)
       dispatch(loginError());
     })
     .done();
@@ -63,12 +63,12 @@ function _authenticateAgainstBazaarApi(user, dispatch) {
     this.userId = res.data.id;
     this.userEmail = res.data.email;
 
-    console.log('User returned from Bazaar login API: ', res)
+    console.log('[AUTHENTICATION] User returned from Bazaar login API: ', res)
     var {bazaarAccessToken, userId, userEmail} = this;
     dispatch(loginSuccess(assign({}, {bazaarAccessToken, userId, userEmail})));
   })
   .catch(err => {
-    console.log('Error sending request to Bazaar login API: ', err)
+    console.log('[AUTHENTICATION] Error sending request to Bazaar login API: ', err)
     _signOut(dispatch);
     dispatch(loginError());
   })
@@ -81,7 +81,7 @@ function _signOut(dispatch) {
     dispatch(notLoggedIn()); // signed out successfully
   })
   .catch((err) => {
-    console.log('Error signing out of Google: ', err)
+    console.log('[AUTHENTICATION] Error signing out of Google: ', err)
     dispatch(loginError());
   });
 }

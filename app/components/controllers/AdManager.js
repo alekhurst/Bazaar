@@ -17,15 +17,15 @@ class AdManager extends React.Component {
     AdMobInterstitial.setTestDeviceID('EMULATOR');
 
     AdMobInterstitial.addEventListener('interstitialDidLoad',
-      () => console.log('interstitialDidLoad event'));
+      () => console.log('[ADMOB] interstitialDidLoad event'));
     AdMobInterstitial.addEventListener('interstitialDidClose',
       this.interstitialDidClose);
     AdMobInterstitial.addEventListener('interstitialDidFailToLoad',
-      () => console.log('interstitialDidFailToLoad event'));
+      () => console.log('[ADMOB] interstitialDidFailToLoad event'));
     AdMobInterstitial.addEventListener('interstitialDidOpen',
-      () => console.log('interstitialDidOpen event'));
+      () => console.log('[ADMOB] interstitialDidOpen event'));
     AdMobInterstitial.addEventListener('interstitialWillLeaveApplication',
-      () => console.log('interstitalWillLeaveApplication event'));
+      () => console.log('[ADMOB] interstitalWillLeaveApplication event'));
 
     AdMobInterstitial.requestAd((error) => error && console.log(error));
   }
@@ -35,7 +35,7 @@ class AdManager extends React.Component {
   }
 
   interstitialDidClose() {
-    console.log('interstitialDidClose event');
+    console.log('[ADMOB] interstitialDidClose event');
     AdMobInterstitial.requestAd((error) => error && console.log(error));
   }
 

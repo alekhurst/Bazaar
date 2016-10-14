@@ -65,7 +65,7 @@ var ListingListItem = React.createClass({
     // what's happening is there is only 1 move on a listing that's
     // being returned from listing search
     if (!this.props.listing.moves[1]) {
-      console.log('this.props.losting: ', this.props.listing)
+      console.log('[LISTING 1 MOVE] this.props.losting: ', this.props.listing)
       return null
     }
 

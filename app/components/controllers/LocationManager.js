@@ -6,6 +6,7 @@ import {throttle, get} from 'lodash';
 import Permissions from 'react-native-permissions';
 
 import {setLocation} from 'actions/locationActions';
+import {setFeedReflectingCurrentLocation} from 'actions/locationActions';
 
 import MeRoute from 'routes/MeRoute';
 import UpdateMeMutation from 'mutations/UpdateMeMutation';
@@ -20,14 +21,10 @@ class LocationManager extends React.Component {
     this.onPermissionDenied = this.onPermissionDenied.bind(this);
     this.startTrackingLocation = this.startTrackingLocation.bind(this);
     this.requestPermission = this.requestPermission.bind(this);
-    this.getDistanceFromLocation = this.getDistanceFromLocation.bind(this);
+    this.getDistanceFromCurrentLocation = this.getDistanceFromCurrentLocation.bind(this);
     this.onLocationWatchError = this.onLocationWatchError.bind(this);
 
-    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 60000);
-
-    this.state = {
-      initialLocationSent: false
-    }
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 5000);
   }
 
   componentWillMount() {
@@ -73,9 +70,8 @@ class LocationManager extends React.Component {
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
         this.onLocationUpdate(position);
-        this.setState({initialLocationSent: true})
       },
-      (error) => console.log('error watching position : ', error)
+      (error) => console.log('[LOCATION] error watching position : ', error)
     )
   }
 
@@ -83,23 +79,41 @@ class LocationManager extends React.Component {
     let latitude = location.coords.latitude;
     let longitude = location.coords.longitude;
 
-    console.log('current lat lng: ', this.props.me.location.latitude, ' ', this.props.me.location.longitude)
-    console.log('new lat lng: ', latitude, ' ', longitude)
-    console.log('difference: ', this.getDistanceFromLocation(latitude, longitude))
-    console.log('return conditional: ', this.getDistanceFromLocation(latitude, longitude) < 100 && this.state.initialLocationSent)
-    if (this.getDistanceFromLocation(latitude, longitude) < 100
-      && this.state.initialLocationSent) {
+    var reduxLatitude = get(this.props, 'reduxLocation.latitude', null);
+    var reduxLongitude = get(this.props, 'reduxLocation.longitude', null);
+    var reduxLocationIsEmpty = !reduxLongitude || !reduxLatitude;
+
+    console.log('[LOCATION] Location received. Distance from last sent location: ',
+      this.getDistanceFromCurrentLocation(latitude, longitude));
+    console.log('[LOCATION] Redux location empty? ', reduxLocationIsEmpty);
+
+    if (reduxLocationIsEmpty) {
+      if (this.getDistanceFromCurrentLocation(latitude, longitude) < 100) {
+        // app was just started, but we're near the last location we submitted.
+        // we need to set a redux location, but the feed tab will take care
+        // of reflecting it
+        this.props.dispatch(setLocation(latitude, longitude));
+        this.props.dispatch(setFeedReflectingCurrentLocation());
+      } else {
+        // app just started, and we're far enough away from our last location.
+        // set the redux location, but the feed tab will take care of reflecting
+        // it, so on success setFeedReflectingCurrentLocation to true
+        this.throttledCommitUpdateMeMutation(location, () => {
+          this.props.dispatch(setFeedReflectingCurrentLocation());
+        })
+      }
+    } else if (this.getDistanceFromCurrentLocation(latitude, longitude) < 100) {
+      // the app was not just started, and we're already at a location
+      // close enough this one
       return;
     } else {
-      console.log('conditional was false')
-      console.log('distance: ', this.getDistanceFromLocation(latitude, longitude) < 200)
-      console.log('initialLocationSent: ', this.state.initialLocationSent)
+      // the app was not just started, and we're >100 meters from where we were previously
       this.throttledCommitUpdateMeMutation(location)
     }
   }
 
   // found this at http://www.movable-type.co.uk/scripts/latlong.html
-  getDistanceFromLocation(latitude, longitude) {
+  getDistanceFromCurrentLocation(latitude, longitude) {
     // new location
     let lon2 = longitude;
     let lat2 = latitude;
@@ -122,7 +136,7 @@ class LocationManager extends React.Component {
     return R * c;
   }
 
-  commitUpdateMeMutation(location) {
+  commitUpdateMeMutation(location, optionalSuccessCallback) {
     var {latitude, longitude} = location.coords;
 
     var updateMeInput = {
@@ -134,7 +148,10 @@ class LocationManager extends React.Component {
     Relay.Store.commitUpdate(
       new UpdateMeMutation(updateMeInput),
       {
-        onSuccess: () => this.props.dispatch(setLocation(latitude, longitude)),
+        onSuccess: () => {
+          this.props.dispatch(setLocation(latitude, longitude));
+          if (optionalSuccessCallback) optionalSuccessCallback();
+        },
         onFailure: this.onMutationFailure,
       }
     )
@@ -149,7 +166,11 @@ class LocationManager extends React.Component {
   }
 }
 
-LocationManager = connect()(LocationManager);
+function mapStateToProps(state) {
+  return {reduxLocation: state.location}
+}
+
+LocationManager = connect(mapStateToProps)(LocationManager);
 
 LocationManager = Relay.createContainer(LocationManager, {
   fragments: {

@@ -45,7 +45,7 @@ var AppRoot = React.createClass({
       });
     })
     .catch((err) => {
-      console.log("Play services error", err.code, err.message);
+      console.log("[PLAY SERVICES] Play services error", err.code, err.message);
     })
   },
 
@@ -103,7 +103,7 @@ var AppRoot = React.createClass({
     } else if (!this.props.userCredentials.loggedIn) {
       content = <UnauthenticatedRoot onPressLogin={this.onPressLogin} />
     } else {
-      console.log('If you\'re here, you have magic powers');
+      console.log('[?] If you\'re here, you have magic powers');
     }
 
     return this.wrapContent(content);

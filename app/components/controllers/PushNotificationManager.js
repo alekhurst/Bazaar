@@ -23,12 +23,12 @@ class PushNotificationManager extends React.Component {
   componentDidMount() {
     FCM.requestPermissions(); // for iOS
     FCM.getFCMToken().then(token => {
-      console.log('Got FCM token: ', token)
+      console.log('[FCM] Got FCM token: ', token)
       FirebaseApp.ref(`/userPushTokens/${this.props.userId}/${token}`).set(true)
     })
 
     this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-      console.log('Refreshed FCM token: ', token)
+      console.log('[FCM] Refreshed FCM token: ', token)
       FirebaseApp.ref(`/userPushTokens/${this.props.userId}/${token}`).set(true)
     });
 

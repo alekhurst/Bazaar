@@ -1,5 +1,5 @@
-export const serverUrl = "https://bazaar-api-stg.herokuapp.com";
-//export const serverUrl = "https://bazaar-api-prod.herokuapp.com";
+//export const serverUrl = "https://bazaar-api-stg.herokuapp.com";
+export const serverUrl = "https://bazaar-api-prod.herokuapp.com";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBC9CfCfZ4Br-P-XK27QTLv2hfQGMTOVqc",

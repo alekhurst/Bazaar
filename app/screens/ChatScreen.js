@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {GiftedChat} from 'react-native-gifted-chat';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -35,6 +35,7 @@ class ChatScreen extends React.Component {
     this.onSend = this.onSend.bind(this);
     this.renderAvatar = this.renderAvatar.bind(this);
     this.onFirebaseChatValueChange = this.onFirebaseChatValueChange.bind(this);
+    this.onPressReport = this.onPressReport.bind(this);
   }
 
   componentWillMount() {
@@ -151,6 +152,17 @@ class ChatScreen extends React.Component {
     )
   }
 
+  onPressReport() {
+    Alert.alert(
+      'Report this User',
+      'This user is suspected to be fake, innapropriate, or otherwise against our Terms of Service.',
+      [
+        {text: 'Confirm', onPress: () => Alert.alert('Reported', 'Thank you! we\'re looking into it!')},
+        {text: 'Cancel', onPress: noop},
+      ]
+    );
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -163,6 +175,9 @@ class ChatScreen extends React.Component {
             hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
           >
             <Icon name='ios-arrow-back' size={32} color={white} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.reportButton} onPress={this.onPressReport} hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}>
+            <Icon name='md-warning' size={22} color={'white'}/>
           </TouchableOpacity>
         </NavigationBar>
         {renderIf(this.state.loadingMessages)(
@@ -198,6 +213,12 @@ var styles = StyleSheet.create({
     position: 'absolute',
     top: 5,
     left: 10,
+  },
+
+  reportButton: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
   },
 
   title: {

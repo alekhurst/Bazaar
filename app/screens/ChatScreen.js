@@ -7,6 +7,7 @@ import {get} from 'lodash';
 
 import {closeChatScreen} from 'actions/chat/chatScreenActions';
 import {decrementUnreadCount} from 'actions/chat/unreadCountActions';
+import {startChatScreen} from 'actions/startChatScreenActions';
 
 import FirebaseApp, {SERVER_TIMESTAMP} from 'hammer/FirebaseApp';
 import StatusBarBackground from 'components/misc/StatusBarBackground';

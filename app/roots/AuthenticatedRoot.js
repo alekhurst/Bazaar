@@ -20,6 +20,7 @@ import ChatTab from 'screens/ChatTab';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import ListingDetailsScreen from 'screens/ListingDetailsScreen';
 import EditListingScreen from 'screens/EditListingScreen';
+import StartChatScreen from 'screens/StartChatScreen';
 import ChatScreen from 'screens/ChatScreen';
 import TabBar from 'components/misc/TabBar';
 import PushNotificationManager from 'components/controllers/PushNotificationManager';
@@ -97,6 +98,14 @@ const AuthenticatedRoot = React.createClass({
         >
           <ChatScreen />
         </Modal>
+        <Modal
+          animationType='slide'
+          transparent={false}
+          visible={this.props.startChatScreen.visible}
+          onRequestClose={() => this.props.dispatch(closeStartChatScreen())}
+        >
+          <StartChatScreen />
+        </Modal>
       </View>
     )
   },
@@ -108,6 +117,7 @@ function mapStateToProps(state) {
     listingDetailsScreen: state.listingDetailsScreen,
     editListingScreen: state.editListingScreen,
     chatScreen: state.chatScreen,
+    startChatScreen: state.startChatScreen,
   }
 }
 

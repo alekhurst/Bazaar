@@ -13,7 +13,10 @@ import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {get} from 'lodash';
 
+import {openStartChatScreen} from 'actions/startChatScreenActions';
+
 import MeRoute from 'routes/MeRoute';
+import ViewerRoute from 'routes/ViewerRoute';
 import UpdateMeMutation from 'mutations/UpdateMeMutation';
 
 import FirebaseApp from 'hammer/FirebaseApp';
@@ -112,6 +115,10 @@ var ChatTab = React.createClass({
     )
   },
 
+  onPressStartChat() {
+    this.props.dispatch(openStartChatScreen());
+  },
+
   render() {
     var chatsContent = null;
 
@@ -131,7 +138,7 @@ var ChatTab = React.createClass({
           <Text style={styles.title}>Messages</Text>
           <TouchableOpacity
             style={styles.addIcon}
-            onPress={this.showCreateChatAlert}
+            onPress={this.onPressStartChat}
             hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}
           >
             <Icon name='md-add-circle' size={26} color={white} />

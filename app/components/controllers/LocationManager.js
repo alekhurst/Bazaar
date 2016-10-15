@@ -24,7 +24,7 @@ class LocationManager extends React.Component {
     this.getDistanceFromCurrentLocation = this.getDistanceFromCurrentLocation.bind(this);
     this.onLocationWatchError = this.onLocationWatchError.bind(this);
 
-    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 5000);
+    this.throttledCommitUpdateMeMutation = throttle(this.commitUpdateMeMutation, 60000);
   }
 
   componentWillMount() {

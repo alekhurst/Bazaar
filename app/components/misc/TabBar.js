@@ -20,7 +20,7 @@ const TabBar = React.createClass({
 
   getInitialState() {
     return {
-      tabs: ['md-list-box', 'md-person', 'md-chatboxes']
+      tabs: [/*APPSTORE: 'md-list-box', 'md-person',*/ 'md-chatboxes']
     }
   },
 

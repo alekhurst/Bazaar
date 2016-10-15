@@ -69,8 +69,8 @@ const AuthenticatedRoot = React.createClass({
           prerenderingSiblingsNumber={2}
           scrollWithoutAnimation
         >
-          <FeedTab />
-          <MeTab />
+          {/*APPSTORE:<FeedTab />
+          <MeTab />*/}
           <ChatTab />
         </ScrollableTabView>
         <Modal

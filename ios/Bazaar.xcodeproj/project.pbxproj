@@ -650,7 +650,7 @@
 								enabled = 0;
 							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -1041,7 +1041,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Bazaar/Bazaar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = R59E649L73;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1071,8 +1071,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "f62e9584-c046-4353-b5d0-fecd3b9b6cdf";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Distribution";
+				PROVISIONING_PROFILE = "d73aeac1-1e9a-4241-8a94-a10eba48bda5";
+				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Development";
 			};
 			name = Debug;
 		};
@@ -1111,8 +1111,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "dfb2df07-11b8-4911-ab3d-4de91928f903";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Distribution";
+				PROVISIONING_PROFILE = "63f235d8-a09a-4919-8269-db52f8b95604";
+				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Distribution 2";
 			};
 			name = Release;
 		};
@@ -1170,7 +1170,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Bazaar/Bazaar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R59E649L73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1200,8 +1200,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "aa2473ba-f02e-44ca-bed0-b69e40728118";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar AdHoc";
+				PROVISIONING_PROFILE = "d73aeac1-1e9a-4241-8a94-a10eba48bda5";
+				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Development";
 			};
 			name = Staging;
 		};

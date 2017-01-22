@@ -1075,8 +1075,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "d73aeac1-1e9a-4241-8a94-a10eba48bda5";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Development";
+				PROVISIONING_PROFILE = "b7702512-0bc1-40c5-9fe8-6c8bcf614311";
+				PROVISIONING_PROFILE_SPECIFIER = Development;
 			};
 			name = Debug;
 		};
@@ -1115,8 +1115,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "63f235d8-a09a-4919-8269-db52f8b95604";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Distribution 2";
+				PROVISIONING_PROFILE = "8446400f-bf94-469b-82d6-15cdb52ecc45";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution;
 			};
 			name = Release;
 		};
@@ -1174,7 +1174,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Bazaar/Bazaar.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = R59E649L73;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1204,8 +1204,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tubuc.Bazaar;
 				PRODUCT_NAME = Bazaar;
-				PROVISIONING_PROFILE = "d73aeac1-1e9a-4241-8a94-a10eba48bda5";
-				PROVISIONING_PROFILE_SPECIFIER = "Bazaar Development";
+				PROVISIONING_PROFILE = "8446400f-bf94-469b-82d6-15cdb52ecc45";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution;
 			};
 			name = Staging;
 		};

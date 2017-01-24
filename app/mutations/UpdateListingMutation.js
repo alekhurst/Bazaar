@@ -16,6 +16,7 @@ class UpdateListingMutation extends Relay.Mutation {
       moves: this.props.moves,
       cp: this.props.cp,
       hp: this.props.hp,
+      game: this.props.game,
     };
   }
 
@@ -29,6 +30,7 @@ class UpdateListingMutation extends Relay.Mutation {
           moves,
           cp,
           hp,
+          game,
           pokemon {
             pokedexNumber
           }

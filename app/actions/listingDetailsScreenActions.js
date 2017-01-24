@@ -4,14 +4,16 @@ export const closeListingDetailsScreen = () => {
     visible: false,
     listingId: null,
     pokemonName: null,
+    pokemonGame: null,
   }
 }
 
-export const openListingDetailsScreen = (listingId, pokemonName) => {
+export const openListingDetailsScreen = (listingId, pokemonName, pokemonGame) => {
   return {
     type: "CHANGE_LISTING_DETAILS_SCREEN_VISIBILITY",
     visible: true,
     listingId,
     pokemonName,
+    pokemonGame
   }
 }

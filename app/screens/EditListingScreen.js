@@ -20,6 +20,7 @@ import UpdateListingMutation from 'mutations/UpdateListingMutation';
 import MeAndListingRoute from 'routes/MeAndListingRoute';
 
 import {pokemonList, pokemonDictionary} from 'datasets/pokemon';
+import games from 'datasets/games';
 import {quickMoves, specialMoves} from 'datasets/moves';
 
 import F8StyleSheet from 'hammer/F8StyleSheet';
@@ -28,7 +29,7 @@ import GenericErrorScreen from 'screens/GenericErrorScreen';
 import StatusBarBackground from 'components/misc/StatusBarBackground';
 import NavigationBar from 'components/misc/NavigationBar';
 import {vw} from 'hammer/viewPercentages';
-import {matterhorn, white, primaryColor, primaryRed} from 'hammer/colors';
+import {base, matterhorn, white, primaryColor, primaryRed} from 'hammer/colors';
 import renderIf from 'hammer/renderIf';
 import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 
@@ -37,6 +38,12 @@ var EditListingScreenInner = React.createClass({
     this.pokemonModalData = pokemonList.slice().sort().map((pokemon, i) => {return {key: i, label: pokemon}})
     this.quickMoveModalData = quickMoves.slice().sort().map((move, i) => {return {key: i, label: move}});
     this.specialMoveModalData = specialMoves.slice().sort().map((move, i) => {return {key: i, label: move}});
+    this.games = games.slice().map((game, i) => {
+      if (game === 'Pokemon Go (coming soon!)') {
+        return {key: i, label: game, section: true};
+      }
+      return {key: i, label: game}
+    });
   },
 
   getInitialState() {
@@ -44,6 +51,7 @@ var EditListingScreenInner = React.createClass({
       return {
         errorMessage: '',
         mutating: false,
+        game: '',
         pokemonName: '',
         cp: '',
         hp: '',
@@ -56,6 +64,7 @@ var EditListingScreenInner = React.createClass({
       errorMessage: '',
       mutating: false,
       pokemonName: this.props.listing.pokemon.name,
+      game: this.props.listing.game,
       cp: String(this.props.listing.cp),
       hp: String(this.props.listing.hp),
       quickMove: this.props.listing.moves[0].name,
@@ -77,6 +86,7 @@ var EditListingScreenInner = React.createClass({
       moves: [this.state.quickMove, this.state.specialMove],
       cp: Number(Number(this.state.cp).toFixed()),
       hp: Number(Number(this.state.hp).toFixed()),
+      game: this.state.game,
     }
 
     if (!this.props.listing) {
@@ -99,10 +109,10 @@ var EditListingScreenInner = React.createClass({
 
     if(Number.isNaN(Number(this.state.cp))
       || Number.isNaN(Number(this.state.hp))
-      || Number(this.state.cp) > 9999
+      || Number(this.state.cp) > 100
       || Number(this.state.hp) > 9999
     ) {
-      this.setState({errorMessage: 'Invalid cp/hp input values'})
+      this.setState({errorMessage: 'Invalid level/hp input values'})
       return false;
     }
 
@@ -168,6 +178,17 @@ var EditListingScreenInner = React.createClass({
         <View style={styles.inputRow}>
           <View style={[styles.modalPickerWrapper, {flex: 3}]}>
             <ModalPicker
+              data={this.games}
+              initValue={isEmpty(this.state.game) ? "Game (none selected)" : this.state.game}
+              onChange={(option) => this.setState({game: option.label})}
+              sectionTextStyle={{color: base}}
+              sectionStyle={{paddingVertical: 10}}
+            />
+          </View>
+        </View>
+        <View style={styles.inputRow}>
+          <View style={[styles.modalPickerWrapper, {flex: 3}]}>
+            <ModalPicker
               data={this.pokemonModalData}
               initValue={isEmpty(this.state.pokemonName) ? "Species" : this.state.pokemonName}
               onChange={(option) => this.setState({pokemonName: option.label})}
@@ -195,7 +216,7 @@ var EditListingScreenInner = React.createClass({
             <TextInput
               style={styles.textInput}
               onChangeText={(cp) => this.setState({cp})}
-              placeholder="CP"
+              placeholder="Level"
               value={this.state.cp}
               keyboardType='numeric'
               underlineColorAndroid='transparent'
@@ -240,6 +261,7 @@ EditListingScreenInner = Relay.createContainer(EditListingScreenInner, {
           id,
           cp,
           hp,
+          game,
           pokemon {
             name,
           },

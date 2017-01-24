@@ -8,6 +8,7 @@ function listingDetailsScreen(state = {
       return {
         visible: action.visible,
         pokemonName: action.pokemonName,
+        pokemonGame: action.pokemonGame,
         listingId: action.listingId,
       }
     default:

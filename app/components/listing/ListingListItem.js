@@ -32,7 +32,11 @@ var ListingListItem = React.createClass({
   },
 
   onPressListing() {
-    this.props.dispatch(openListingDetailsScreen(this.props.listing.id, this.props.listing.pokemon.name))
+    this.props.dispatch(openListingDetailsScreen(
+      this.props.listing.id,
+      this.props.listing.pokemon.name,
+      this.props.listing.game
+    ));
   },
 
   onPressEdit() {
@@ -81,7 +85,7 @@ var ListingListItem = React.createClass({
         />
         <View style={styles.leftDetailsContainer}>
           <Text style={styles.pokemonName}>{this.props.listing.pokemon.name}</Text>
-          <Text style={styles.cp}>{this.props.listing.cp ? `CP ${this.props.listing.cp }` : ''}</Text>
+          <Text style={styles.cp}>{this.props.listing.cp ? `Level ${this.props.listing.cp }` : ''}</Text>
         </View>
         {renderIf(!this.props.editMode)(
           <View style={styles.middleDetailsContainer}>
@@ -127,6 +131,7 @@ ListingListItem = Relay.createContainer(ListingListItem, {
         fragment on Listing {
           id,
           cp,
+          game,
           moves {
             name,
             damage,

@@ -126,7 +126,7 @@ var FeedTab = React.createClass({
     });
 
     this.props.relay.setVariables({
-      game: item.label === 'None (Show All Results)' ? "" : item.label,
+      game: item.label === 'Clear (Show All Results)' ? "" : item.label,
     }, ({done, error}) => {
       if (done) {
         this.setState({manualRefreshing: false})
@@ -195,6 +195,7 @@ var FeedTab = React.createClass({
     var searchResultsLength = get(this.props.viewer, 'listingsSearch.edges.length', null);
     var content = null;
 
+    console.log('this.props.relay.variables: ', this.props.relay.variables)
     if (this.state.manualRefreshing) {
       content = <GenericLoadingScreen />
     } else if (!searchResultsLength) {
@@ -202,6 +203,7 @@ var FeedTab = React.createClass({
         <ZeroResultsPlaceholder
           onManualRefresh={this.onManualRefresh}
           searchText={this.props.relay.variables.searchText}
+          gameFilter={this.props.relay.variables.game}
         />
       )
     } else {

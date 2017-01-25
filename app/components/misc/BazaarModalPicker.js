@@ -144,7 +144,6 @@ export default class ModalPicker extends React.Component {
     }
 
     render() {
-      console.log('this.state.modalVisible: ', this.state.modalVisible)
         return (
           <Modal transparent={true} ref="modal" visible={this.props.modalVisible} onRequestClose={this.props.onPressClose} animationType={this.state.animationType}>
             {this.renderOptionList()}

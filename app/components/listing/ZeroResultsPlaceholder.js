@@ -11,19 +11,25 @@ import {isEmpty} from 'lodash';
 import {openEditListingScreen} from 'actions/editListingScreenActions';
 import {white, matterhorn, primaryColor, primaryBlue} from 'hammer/colors';
 
-var ZeroResultsPlaceholder = ({dispatch, onManualRefresh, searchText}) => (
-  <View style={styles.container}>
-    <Text style={styles.infoText}>
-      There are no listings {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ''} in your area :(
-    </Text>
-    <TouchableOpacity style={styles.button} onPress={() => dispatch(openEditListingScreen())}>
-      <Text style={styles.buttonText}>Be the first!</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={[styles.button, styles.reloadButton]} onPress={onManualRefresh}>
-      <Text style={{color: primaryBlue}}>Reload feed</Text>
-    </TouchableOpacity>
-  </View>
-)
+var ZeroResultsPlaceholder = ({dispatch, onManualRefresh, searchText, gameFilter}) => {
+  console.log("game filter: ", gameFilter)
+  return (
+    <View style={styles.container}>
+      <Text style={styles.infoText}>
+        {'There are no listings '}
+        {!isEmpty(searchText) ? `matching the query "${searchText}" ` : ' '}
+        {'in your area '}
+        {!isEmpty(gameFilter) ? `for ${gameFilter} 🙁... Try clearing the game filter` : '🙁'}
+      </Text>
+      <TouchableOpacity style={styles.button} onPress={() => dispatch(openEditListingScreen())}>
+        <Text style={styles.buttonText}>Be the first!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.button, styles.reloadButton]} onPress={onManualRefresh}>
+        <Text style={{color: primaryBlue}}>Reload feed</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 ZeroResultsPlaceholder = connect()(ZeroResultsPlaceholder)
 

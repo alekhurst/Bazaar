@@ -61,7 +61,7 @@ var FeedTab = React.createClass({
     });
     this.games.unshift({
       key: 11,
-      label: "None (Show All Results)",
+      label: "Clear (Show All Results)",
     });
 
     debouncedOnSubmitSearchQuery = debounce(this.onSubmitSearchQuery, 300);

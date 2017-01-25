@@ -26,10 +26,14 @@ import PushNotificationManager from 'components/controllers/PushNotificationMana
 import LocationManager from 'components/controllers/LocationManager';
 import AdManager from 'components/controllers/AdManager';
 import {serverUrl} from 'hammer/environment';
+import noop from 'hammer/noop';
 
 const AuthenticatedRoot = React.createClass({
   getInitialState() {
-    return { currentTabIndex: 0 }
+    return {
+      currentTabIndex: 0,
+      haveVisitedChatTab: false,
+    }
   },
 
   componentWillMount() {
@@ -61,12 +65,15 @@ const AuthenticatedRoot = React.createClass({
       <View style={{flex: 1}}>
         <LocationManager />
         <AdManager />
-        <PushNotificationManager />
+        {this.state.haveVisitedChatTab &&
+          <PushNotificationManager />
+        }
         <ScrollableTabView
           renderTabBar={() => <TabBar activeTab={0} setAnimationValue={0}/>}
           tabBarPosition='bottom'
           initialPage={0}
           prerenderingSiblingsNumber={2}
+          onChangeTab={({i, ref}) => i === 2 ? this.setState({ haveVisitedChatTab: true }) : noop}
           scrollWithoutAnimation
         >
           <FeedTab />

@@ -3,6 +3,7 @@ const PRODUCTION = 'PRODUCTION';
 
 /* ---- MODIFY THIS LINE ----------- */
 const CURRENT_ENVIRONMENT = STAGING;
+const APP_VERSION = '1.0.29';
 /* ----------------------------------*/
 
 let staging = {
@@ -14,7 +15,7 @@ let production = {
 }
 
 let both = {
-  appVersion: '1.0.29',
+  appVersion: APP_VERSION,
   firebaseConfig: {
     apiKey: "AIzaSyBC9CfCfZ4Br-P-XK27QTLv2hfQGMTOVqc",
     authDomain: "fir-bazaar.firebaseapp.com",

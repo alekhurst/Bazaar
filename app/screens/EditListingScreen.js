@@ -102,7 +102,7 @@ var EditListingScreenInner = React.createClass({
       || Number(this.state.cp) > 9999
       || Number(this.state.hp) > 9999
     ) {
-      this.setState({errorMessage: 'Invalid cp/hp input values'})
+      this.setState({errorMessage: 'Invalid cp/hp values'})
       return false;
     }
 

@@ -30,7 +30,7 @@ switch (CURRENT_ENVIRONMENT) {
     envConfig = Object.assign({}, staging, both);
     break;
   case PRODUCTION:
-    envConfig = Object.assing({}, production, both);
+    envConfig = Object.assign({}, production, both);
     break;
   default:
     envConfig = Object.assign({}, staging, both);

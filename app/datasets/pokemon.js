@@ -144,13 +144,13 @@ export const pokemonDictionary = {
   '141': {name: 'Kabutops', pokedexNumber: 141, imageUrl: require('images/pokemon/Kabutops.png')},
   '142': {name: 'Aerodactyl', pokedexNumber: 142, imageUrl: require('images/pokemon/Aerodactyl.png')},
   '143': {name: 'Snorlax', pokedexNumber: 143, imageUrl: require('images/pokemon/Snorlax.png')},
-  '144': {name: 'Articuno', pokedexNumber: 144, imageUrl: require('images/pokemon/Articuno.png')},
-  '145': {name: 'Zapdos', pokedexNumber: 145, imageUrl: require('images/pokemon/Zapdos.png')},
-  '146': {name: 'Moltres', pokedexNumber: 146, imageUrl: require('images/pokemon/Moltres.png')},
+  // '144': {name: 'Articuno', pokedexNumber: 144, imageUrl: require('images/pokemon/Articuno.png')},
+  // '145': {name: 'Zapdos', pokedexNumber: 145, imageUrl: require('images/pokemon/Zapdos.png')},
+  // '146': {name: 'Moltres', pokedexNumber: 146, imageUrl: require('images/pokemon/Moltres.png')},
   '147': {name: 'Dratini', pokedexNumber: 147, imageUrl: require('images/pokemon/Dratini.png')},
   '148': {name: 'Dragonair', pokedexNumber: 148, imageUrl: require('images/pokemon/Dragonair.png')},
   '149': {name: 'Dragonite', pokedexNumber: 149, imageUrl: require('images/pokemon/Dragonite.png')},
-  '150': {name: 'Mewtwo', pokedexNumber: 150, imageUrl: require('images/pokemon/Mewtwo.png')},
+  // '150': {name: 'Mewtwo', pokedexNumber: 150, imageUrl: require('images/pokemon/Mewtwo.png')},
   // '151': {name: 'Mew', pokedexNumber: 151, imageUrl: require('images/pokemon/Mew.png')},
 }
 

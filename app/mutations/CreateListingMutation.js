@@ -15,7 +15,6 @@ class CreateListingMutation extends Relay.Mutation {
       moves: this.props.moves,
       cp: this.props.cp,
       hp: this.props.hp,
-      game: this.props.game,
     };
   }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Text,
-  TouchableOpacity,
   Image,
   View,
   TextInput,
@@ -20,17 +19,15 @@ import {setFeedReflectingCurrentLocation} from 'actions/locationActions';
 import F8StyleSheet from 'hammer/F8StyleSheet';
 import NavigationBar from 'components/misc/NavigationBar';
 import ListingList from 'components/listing/ListingList';
-import BazaarModalPicker from 'components/misc/BazaarModalPicker';
 import ZeroResultsPlaceholder from 'components/listing/ZeroResultsPlaceholder';
 import LocationUpdatedBanner from 'components/misc/LocationUpdatedBanner';
 import GenericLoadingScreen from 'screens/GenericLoadingScreen';
 import GenericErrorScreen from 'screens/GenericErrorScreen';
-import {white, whiteSmoke, base, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
+import {white, whiteSmoke, gainsboro, matterhorn, primaryColor} from 'hammer/colors';
 import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 import renderIf from 'hammer/renderIf';
 import {vw, vh} from 'hammer/viewPercentages';
 import noop from 'hammer/noop';
-import games from 'datasets/games';
 
 const DEFAULT_SEARCH_TEXT = "";
 const DEFAULT_FIRST_N = 12;
@@ -53,17 +50,6 @@ var FeedTab = React.createClass({
       }
     })
 
-    this.games = games.slice().map((game, i) => {
-      if (game === 'Pokemon Go (coming soon!)') {
-        return {key: i, label: game, section: true};
-      }
-      return {key: i, label: game}
-    });
-    this.games.unshift({
-      key: 11,
-      label: "Clear (Show All Results)",
-    });
-
     debouncedOnSubmitSearchQuery = debounce(this.onSubmitSearchQuery, 300);
   },
 
@@ -74,7 +60,6 @@ var FeedTab = React.createClass({
       manualRefreshing: false,
       endReachedFetching: false,
       endReachedCount: 0,
-      showingGameFilter: false,
     }
   },
 
@@ -116,24 +101,6 @@ var FeedTab = React.createClass({
   onChangeSearchText(searchText) {
     this.setState({searchText});
     debouncedOnSubmitSearchQuery();
-  },
-
-  onChangeGameFilterSelection(item) {
-    this.props.dispatch(setFeedReflectingCurrentLocation());
-    this.setState({
-      endReachedCount: 0,
-      manualRefreshing: true
-    });
-
-    this.props.relay.setVariables({
-      game: item.label === 'None (Show All Results)' ? "" : item.label,
-    }, ({done, error}) => {
-      if (done) {
-        this.setState({manualRefreshing: false})
-      } else if (error) {
-        networkRequestFailedAlert();
-      }
-    });
   },
 
   onSubmitSearchQuery() {
@@ -227,7 +194,7 @@ var FeedTab = React.createClass({
 
     return (
       <View style={styles.container}>
-        <NavigationBar style={{flexDirection: 'row'}}>
+        <NavigationBar>
           <TextInput
             value={this.state.searchText}
             onChangeText={this.onChangeSearchText}
@@ -238,25 +205,11 @@ var FeedTab = React.createClass({
             returnKeyType='search'
           />
           <Icon name='md-search' size={20} color={gainsboro} style={styles.searchIcon} />
-          <TouchableOpacity
-            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-            onPress={() => this.setState({ showingGameFilter: true })}
-          >
-            <Icon name='ios-game-controller-b' size={24} color={white} style={styles.gameIcon} />
-          </TouchableOpacity>
         </NavigationBar>
         {content}
         {renderIf(!this.props.reduxLocation.feedReflectingCurrentLocation)(
           <LocationUpdatedBanner onPressRefresh={this.onManualRefresh}/>
         )}
-        <BazaarModalPicker
-          data={this.games}
-          modalVisible={this.state.showingGameFilter}
-          onPressClose={() => this.setState({ showingGameFilter: false })}
-          sectionTextStyle={{color: base}}
-          sectionStyle={{paddingVertical: 10}}
-          onChange={this.onChangeGameFilterSelection}
-        />
       </View>
     );
   }
@@ -274,21 +227,13 @@ FeedTab = Relay.createContainer(FeedTab, {
     firstN: DEFAULT_FIRST_N,
     latitude: null,
     longitude: null,
-    game: "",
   },
 
   fragments: {
     viewer() {
       return Relay.QL`
         fragment on Viewer {
-          listingsSearch(
-            first: $firstN,
-            q: $searchText,
-            radius: 10,
-            latitude: $latitude,
-            longitude: $longitude,
-            game: $game,
-          ) {
+          listingsSearch(first: $firstN, q: $searchText, radius: 10, latitude: $latitude, longitude: $longitude) {
             edges {
               node {
                 ${ListingList.getFragment('listings')}
@@ -365,11 +310,6 @@ const styles = F8StyleSheet.create({
     left: 16,
     top: 10,
     backgroundColor: 'transparent',
-  },
-
-  gameIcon: {
-    marginTop: 7,
-    marginRight: 8,
   },
 
   resultsHeaderContainer: {

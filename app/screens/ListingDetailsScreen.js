@@ -134,7 +134,7 @@ var ListingDetailsInner = React.createClass({
             {renderIf(listing.cp)(
               <View style={[styles.attribute]}>
                 <Text style={styles.attributeValue}>{listing.cp}</Text>
-                <Text style={styles.attributeTitle}>LEVEL</Text>
+                <Text style={styles.attributeTitle}>CP</Text>
               </View>
             )}
             {renderIf(listing.hp)(
@@ -190,7 +190,6 @@ ListingDetailsInner = Relay.createContainer(ListingDetailsInner, {
           id,
           cp,
           hp,
-          game,
           moves {
             name,
             energy,
@@ -220,10 +219,7 @@ ListingDetailsScreen = React.createClass({
       <View style={styles.container}>
         <StatusBarBackground />
         <NavigationBar>
-          <Text style={[styles.title, { marginTop: this.props.pokemonGame ? 3 : 10 }]}>
-            {this.props.pokemonName}
-          </Text>
-          <Text style={styles.subtitle}>{this.props.pokemonGame}</Text>
+          <Text style={styles.title}>{this.props.pokemonName}</Text>
           <TouchableOpacity style={styles.backButton} onPress={this.props.onPressClose} hitSlop={{top: 20, bottom: 20, left: 20, right: 30}}>
             <IonIcon name='ios-arrow-back' size={32} color={white} />
           </TouchableOpacity>
@@ -248,7 +244,6 @@ var ListingDetailsScreenWrapper = React.createClass({
             return (
               <ListingDetailsScreen
                 pokemonName={this.props.listingDetailsScreen.pokemonName}
-                pokemonGame={this.props.listingDetailsScreen.pokemonGame}
                 onPressClose={() => this.props.dispatch(closeListingDetailsScreen())}>
                 <ListingDetailsInner {...props} />
               </ListingDetailsScreen>
@@ -257,7 +252,6 @@ var ListingDetailsScreenWrapper = React.createClass({
             return (
               <ListingDetailsScreen
                 pokemonName={this.props.listingDetailsScreen.pokemonName}
-                pokemonGame={this.props.listingDetailsScreen.pokemonGame}
                 onPressClose={() => this.props.dispatch(closeListingDetailsScreen())}>
                 <GenericLoadingScreen />
               </ListingDetailsScreen>
@@ -293,14 +287,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: white,
     fontSize: 16,
-    marginTop: 3,
+    marginTop: 10,
     fontWeight: '600',
-  },
-
-  subtitle: {
-    textAlign: 'center',
-    color: white,
-    fontSize: 11,
   },
 
   topDetailsContainer: {

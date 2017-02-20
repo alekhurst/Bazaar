@@ -2,7 +2,7 @@ const STAGING = 'STAGING';
 const PRODUCTION = 'PRODUCTION';
 
 /* ---- MODIFY THIS LINE ----------- */
-const CURRENT_ENVIRONMENT = STAGING;
+const CURRENT_ENVIRONMENT = PRODUCTION;
 const APP_VERSION = '1.0.29';
 /* ----------------------------------*/
 

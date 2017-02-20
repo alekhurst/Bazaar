@@ -12,7 +12,7 @@ import Relay from 'react-relay';
 import {connect} from 'react-redux';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import ModalPicker from 'react-native-modal-picker';
-import {isEmpty, indexOf} from 'lodash';
+import {isEmpty, find, sortBy} from 'lodash';
 
 import {closeEditListingScreen} from 'actions/editListingScreenActions';
 import CreateListingMutation from 'mutations/CreateListingMutation';
@@ -34,9 +34,12 @@ import networkRequestFailedAlert from 'hammer/networkRequestFailedAlert';
 
 var EditListingScreenInner = React.createClass({
   componentWillMount() {
-    this.pokemonModalData = pokemonList.slice().sort().map((pokemon, i) => {return {key: i, label: pokemon}})
-    this.quickMoveModalData = quickMoves.slice().sort().map((move, i) => {return {key: i, label: move}});
-    this.specialMoveModalData = specialMoves.slice().sort().map((move, i) => {return {key: i, label: move}});
+    this.pokemonModalData = sortBy(pokemonList.slice(), 'name')
+      .map((pokemon, i) => {return {key: i, label: pokemon.name}});
+    this.quickMoveModalData = quickMoves.slice().sort()
+      .map((move, i) => {return {key: i, label: move}});
+    this.specialMoveModalData = specialMoves.slice().sort()
+      .map((move, i) => {return {key: i, label: move}});
   },
 
   getInitialState() {
@@ -70,10 +73,12 @@ var EditListingScreenInner = React.createClass({
 
     this.setState({mutating: true, errorMessage: ''})
 
+    console.log('pokemon: ', find(pokemonList, {name: this.state.pokemonName}));
+
     var mutationInput = {
       listing: this.props.listing,
       me: this.props.me,
-      pokedexNumber: indexOf(pokemonList, this.state.pokemonName) + 1,
+      pokedexNumber: find(pokemonList, {name: this.state.pokemonName}).pokedexNumber,
       moves: [this.state.quickMove, this.state.specialMove],
       cp: Number(Number(this.state.cp).toFixed()),
       hp: Number(Number(this.state.hp).toFixed()),
